@@ -1,5 +1,6 @@
 package jv.Player;
 
+import jv.Entities.Entity;
 import jv.Mechanics.GameEngine;
 import jv.Room.Room;
 
@@ -66,8 +67,13 @@ public class Player{
         }else if(getInput().equals("context of room")){
             System.out.println(getGlobalLocation().getContext().toString());
         }else{
-            System.out.println("that isn't an allowed command try again. Try typing 'instructions' to get available commands");
+            System.out.println("that isn't an allowed command try again. Try typing 'instructions' to get available commands\n");
         }
+    }
+
+    public void attack(Entity e){
+
+
     }
 
     public String getInput() {

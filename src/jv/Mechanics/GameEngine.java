@@ -20,7 +20,7 @@ public class GameEngine {
         //creation of everything else in the game
 
         //creating enemies
-        Troll troll = new Troll();
+        Troll troll = new Troll("Troll", "The troll has a somewhat recognizable face but you can't seem to remember where from\nHis skin is a pale grey and his breath Stinks of rotting flesh");
 
         //creating friendlies
         Henry henry = new Henry("Henry", "is a bright pink bunny wearing a tophat and a monocle.");
@@ -45,6 +45,7 @@ public class GameEngine {
         //adding entities to locations in the sR room
         sR.addEntity("N", sRExit1);
         sR.addEntity("C", henry);
+        sR.addEntity("E", troll);
 
         //adding entities to locations in the bR room
         bR.addEntity("S", bRExit1);
