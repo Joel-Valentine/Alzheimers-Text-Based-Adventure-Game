@@ -23,7 +23,7 @@ public class Room {
     }
 
     public void removeEntity(String i){
-//        pointsInRoom.remove(i);
+        pointsInRoom.remove(i);
         pointsInRoom.put(i, new Nothing());
     }
 

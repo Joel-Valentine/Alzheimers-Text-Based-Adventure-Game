@@ -35,6 +35,7 @@ public class Enemy extends Entity {
             }else if(p.getInput().equals("leave")){
                 System.out.println("You decide to not attack the " + getNameOfEntity() + " and move somewhere else\n");
                 p.move(ge);
+                break;
             }else if(p.getInput().equals("auto attack")){
                 System.out.println("");
                 while(isAlive()){
@@ -46,6 +47,7 @@ public class Enemy extends Entity {
             }
             if (!isAlive()) {
                 System.out.println("You have killed the " + getNameOfEntity() + " your health is now " + p.getHealth() + "\n");
+                p.getGlobalLocation().getPointsInRoom().containsValue(this);
             }
         }
     }

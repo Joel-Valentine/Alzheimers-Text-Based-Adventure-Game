@@ -41,28 +41,10 @@ public class Player{
 
     public void move(GameEngine ge){
         input();
-        if(getInput().equals("NW")){
-            getGlobalLocation().getPointsInRoom().get(getInput()).encountered(this, ge);
-        }else if(getInput().equals("N")){
-            getGlobalLocation().getPointsInRoom().get(getInput()).encountered(this, ge);
-        }else if(getInput().equals("NE")){
-            getGlobalLocation().getPointsInRoom().get(getInput()).encountered(this, ge);
-        }else if(getInput().equals("W")){
-            getGlobalLocation().getPointsInRoom().get(getInput()).encountered(this, ge);
-        }else if(getInput().equals("C")){
-            getGlobalLocation().getPointsInRoom().get(getInput()).encountered(this, ge);
-        }else if(getInput().equals("E")){
-            getGlobalLocation().getPointsInRoom().get(getInput()).encountered(this, ge);
-        }else if(getInput().equals("SW")){
-            getGlobalLocation().getPointsInRoom().get(getInput()).encountered(this, ge);
-        }else if(getInput().equals("S")){
-            getGlobalLocation().getPointsInRoom().get(getInput()).encountered(this, ge);
-        }else if(getInput().equals("SE")){
+        if(getGlobalLocation().getPointsInRoom().get(getInput()) != null) {
             getGlobalLocation().getPointsInRoom().get(getInput()).encountered(this, ge);
         }else if(getInput().equals("instructions")){
             ge.instructions();
-        }else if(getInput().equals("context of room")){
-            System.out.println(getGlobalLocation().getContext().toString());
         }else{
             System.out.println("that isn't an allowed command try again. Try typing 'instructions' to get available commands\n");
         }
