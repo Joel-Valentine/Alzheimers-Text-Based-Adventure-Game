@@ -18,8 +18,6 @@ public abstract class Entity {
     public Entity(){
     }
 
-
-
     public Entity(String noe, String doe){
         setDescOfEntity(doe);
         setNameOfEntity(noe);
@@ -37,7 +35,7 @@ public abstract class Entity {
 
     public void encountered(Player p, GameEngine ge){
 //        System.out.println("\nThis is the: " + getNameOfEntity() + "\nIts description: " + getDescOfEntity());
-        System.out.println("There is nothing here\n");
+        System.out.println("There is nothing here.\n");
     }
 
     public String getInstructs() {

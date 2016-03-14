@@ -22,6 +22,11 @@ public class Room {
         return context;
     }
 
+    public void removeEntity(String i){
+//        pointsInRoom.remove(i);
+        pointsInRoom.put(i, new Nothing());
+    }
+
     public void addEntity(String i, Entity e){
         pointsInRoom.put(i,e);
     }

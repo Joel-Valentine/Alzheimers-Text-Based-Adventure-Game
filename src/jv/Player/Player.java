@@ -1,5 +1,6 @@
 package jv.Player;
 
+import jv.Entities.Enemies.Enemy;
 import jv.Entities.Entity;
 import jv.Mechanics.GameEngine;
 import jv.Room.Room;
@@ -15,15 +16,15 @@ public class Player{
     private int health = 100;
     private String input;
     private Room globalLocation;
-    private GameEngine ge;
+    private int damage = 3;
     Scanner sc = new Scanner(System.in);
 
     public Player() {
     }
 
     public boolean isAlive() {
-        for(int i = 0; i<health; i++) {
-            if (health < 0 || energy < 0) {
+        for(int i = 0; i<getHealth(); i++) {
+            if (getHealth() < 0 || getEnergy() < 0) {
                 return true;
             }else {
                 return false;
@@ -33,13 +34,9 @@ public class Player{
     }
 
     public String input(){
-        System.out.println("what are you going to do?");
-        input = sc.nextLine();
-        return input;
-    }
-
-    public void setGe(GameEngine ge) {
-        this.ge = ge;
+        System.out.println("What are you going to do?");
+        setInput(sc.nextLine());
+        return getInput();
     }
 
     public void move(GameEngine ge){
@@ -71,13 +68,21 @@ public class Player{
         }
     }
 
-    public void attack(Entity e){
+    public void attack(Enemy e){
+        e.takeDamage(getDamage(), this);
+    }
 
-
+    public void takeDamage(int damage){
+        int result = getHealth() - damage;
+        setHealth(result);
     }
 
     public String getInput() {
         return input;
+    }
+
+    public void setInput(String input) {
+        this.input = input;
     }
 
     public void setGlobalLocation(Room globalLocation) {
@@ -98,6 +103,10 @@ public class Player{
 
     public void setEnergy(int energy) {
         this.energy = energy;
+    }
+
+    public int getDamage() {
+        return damage;
     }
 
     public void energyDepletion(){

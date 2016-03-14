@@ -12,14 +12,15 @@ public class Exits extends Entity{
         setTr(tr);
         setNameOfEntity(s);
         setDescOfEntity(s1);
+        setInstructs("yes OR no");
     }
 
     @Override
     public void encountered(Player p, GameEngine ge){
         System.out.println("\nThis is the: " + getNameOfEntity() + "\nIts description: " + getDescOfEntity());
         System.out.println("Type 'yes' to go through\nType 'no' to do something else\n");
-        p.input();
         while(!isAnswered()){
+        p.input();
             if (p.getInput().equals("yes")) {
                 System.out.println("You step through\n");
                 p.energyDepletion();
@@ -30,8 +31,7 @@ public class Exits extends Entity{
                 setAnswered(true);
                 System.out.println("You decide not to go through the door\n");
             } else {
-                System.out.println("yes OR no\n");
-                p.input();
+                System.out.println(getInstructs());
             }
         }
     }

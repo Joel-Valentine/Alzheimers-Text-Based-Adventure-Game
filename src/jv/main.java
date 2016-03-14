@@ -1,11 +1,7 @@
 package jv;
 
-import jv.Entities.Enemies.Troll;
-import jv.Entities.Friendlies.Henry;
 import jv.Player.Player;
-import jv.Entities.Exits;
 import jv.Mechanics.GameEngine;
-import jv.Room.Room;
 
 /**
  * Created by joelvalentine on 16/02/2016.

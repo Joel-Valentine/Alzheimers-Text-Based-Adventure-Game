@@ -9,19 +9,89 @@ import jv.Player.Player;
  */
 public class Enemy extends Entity {
 
-    public Enemy(String s, String s1){
+    private int health;
+    private int damage;
+    private String encounterText;
+
+    public Enemy(String s, String s1, int dam, int health, String encounterText){
         setNameOfEntity(s);
         setDescOfEntity(s1);
+        setDamage(dam);
+        setHealth(health);
+        setEncounterText(encounterText);
+        setInstructs("Type 'attack' to attack the " + getNameOfEntity() + "\n" + "Type 'leave' to move somewhere else\nType 'auto attack' if you feel confident enough that you will kill the " + getNameOfEntity() + " without dying\n");
     }
-
-    private int health = 100;
 
     @Override
     public void encountered(Player p, GameEngine ge){
-        System.out.println("You encounter a " + getNameOfEntity() + "!\n" + getDescOfEntity());
+        System.out.println("\nYou encounter a " + getNameOfEntity() + "!\n" + getDescOfEntity() + " the " + getNameOfEntity() + " will deal " + getDamage() + " damage\n\n" + getNameOfEntity() + ": " +getEncounterText() + "\n" + getInstructs());
+        while (isAlive()) {
+            p.input();
+            if (p.getInput().equals("attack")) {
+                p.attack(this);
+                System.out.println("\nYou hit the " + getNameOfEntity() + " for " + p.getDamage() + " his health is now " + getHealth());
+                attack(p);
+                System.out.println("The " + getNameOfEntity() + " hit you for " + getDamage() + " your health is now " + p.getHealth() + "\n");
+            }else if(p.getInput().equals("leave")){
+                System.out.println("You decide to not attack the " + getNameOfEntity() + " and move somewhere else\n");
+                p.move(ge);
+            }else if(p.getInput().equals("auto attack")){
+                System.out.println("");
+                while(isAlive()){
+                    p.attack(this);
+                    attack(p);
+                }
+            }else{
+                System.out.println(getInstructs());
+            }
+            if (!isAlive()) {
+                System.out.println("You have killed the " + getNameOfEntity() + " your health is now " + p.getHealth() + "\n");
+            }
+        }
     }
 
-    public void attack(){
+    public boolean isAlive(){
+        if(getHealth() < 0){
+            return false;
+        }else{
+            return true;
+        }
+    }
 
+    public void removeEnemy(){
+
+    }
+
+    public void attack(Player p){
+        p.takeDamage(getDamage());
+    }
+
+    public void takeDamage(int result, Player p){
+        result = getHealth() - p.getDamage();
+        setHealth(result);
+    }
+
+    public int getDamage() {
+        return damage;
+    }
+
+    public void setDamage(int damage) {
+        this.damage = damage;
+    }
+
+    public int getHealth() {
+        return health;
+    }
+
+    public void setHealth(int health) {
+        this.health = health;
+    }
+
+    public String getEncounterText() {
+        return encounterText;
+    }
+
+    public void setEncounterText(String encounterText) {
+        this.encounterText = encounterText;
     }
 }

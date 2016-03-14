@@ -1,4 +1,0 @@
-Manifest-Version: 1.0
-Class-Path: jv.main
-Main-Class: main
-
