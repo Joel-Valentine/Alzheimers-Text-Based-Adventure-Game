@@ -48,7 +48,7 @@ public class Enemy extends Entity {
             }
             if (!isAlive()) {
                 System.out.println("You have killed the " + getNameOfEntity() + " your health is now " + p.getHealth() + "\n");
-                p.getGlobalLocation().getPointsInRoom().containsValue(this);
+                removeEntityFromRoom(p);
             }
         }
     }
@@ -59,10 +59,6 @@ public class Enemy extends Entity {
         }else{
             return true;
         }
-    }
-
-    public void removeEnemy(){
-
     }
 
     public void attack(Player p){

@@ -12,6 +12,8 @@ public class Room {
 
     private HashMap<String, Entity> pointsInRoom = new HashMap<>(9);
     private String context;
+    private String[] allPossibleIndexs = {"NW", "N", "NE", "W", "C", "E", "SW", "S", "SE"};
+
 
     public Room(String s) {
         context = s;
@@ -23,7 +25,6 @@ public class Room {
     }
 
     public void removeEntity(String i){
-        pointsInRoom.remove(i);
         pointsInRoom.put(i, new Nothing());
     }
 
@@ -32,10 +33,17 @@ public class Room {
     }
 
     public void fillingHashmapWithNull(){
-        String[] allPossibleIndexs = {"NW", "N", "NE", "W", "C", "E", "SW", "S", "SE"};
-        for(int i = 0; i<allPossibleIndexs.length; i++){
-            pointsInRoom.put(allPossibleIndexs[i], new Nothing());
+        for(int i = 0; i<getAllPossibleIndexs().length; i++){
+            pointsInRoom.put(getAllPossibleIndexs()[i], new Nothing());
         }
+    }
+
+    public void setAllPossibleIndexs(String[] allPossibleIndexs) {
+        this.allPossibleIndexs = allPossibleIndexs;
+    }
+
+    public String[] getAllPossibleIndexs() {
+        return allPossibleIndexs;
     }
 
     public HashMap<String, Entity> getPointsInRoom() {
