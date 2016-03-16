@@ -30,11 +30,10 @@ public abstract class Entity {
     }
 
     public void removeEntityFromRoom(Player p){
-        String[] allPossibleIndexs = p.getGlobalLocation().getAllPossibleIndexs();
-        for(int i = 0; i<allPossibleIndexs.length; i++){
-            Entity val = p.getGlobalLocation().getPointsInRoom().get(allPossibleIndexs[i]);
+        for(int i = 0; i<p.getGlobalLocation().getAllPossibleIndexs().length; i++){
+            Entity val = p.getGlobalLocation().getPointsInRoom().get(p.getGlobalLocation().getAllPossibleIndexs()[i]);
             if(val.getNameOfEntity() == getNameOfEntity()){
-                p.getGlobalLocation().removeEntity(allPossibleIndexs[i]);
+                p.getGlobalLocation().removeEntity(p.getGlobalLocation().getAllPossibleIndexs()[i]);
             }
         }
     }

@@ -14,7 +14,6 @@ public class GameEngine {
     private Map<Integer, Room> allRooms = new HashMap<>();
 
     public GameEngine(Player player) {
-
     }
 
     public void instructions(){
