@@ -16,7 +16,7 @@ public class ScrollingText {
                 System.out.println();
             }
             try {
-                Thread.sleep(190);
+                Thread.sleep(210);
                 System.out.print(scrollingArray[i]);
             } catch (InterruptedException e) {
                 e.printStackTrace();

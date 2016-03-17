@@ -17,7 +17,7 @@ public class GameEngine {
     }
 
     public void instructions(){
-        System.out.println("T \n");
+        System.out.println("To move around rooms type any of the directions to a compass (e.g. 'N' 'E' 'SW')\nWhen you encounter an enemy you can type 'leave' to leave, 'attack' to attack the enemy and 'auto attack' to bypass manual attack\n");
     }
 
     public void addToRooms(Room tr){
@@ -31,7 +31,7 @@ public class GameEngine {
     public void run(Player player) {
         player.setGlobalLocation(allRooms.get(0));
         System.out.println(player.getGlobalLocation().getContext());
-//        player.getGlobalLocation().getPointsInRoom().get("C").encountered(player, this);
+        player.getGlobalLocation().getPointsInRoom().get("C").encountered(player, this);
         while(!player.isAlive()){
             player.move(this);
         }
