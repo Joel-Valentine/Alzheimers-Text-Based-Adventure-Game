@@ -1,9 +1,12 @@
 package anonymous.Player;
 
 import anonymous.Entities.Enemies.Enemy;
+import anonymous.Entities.Entity;
+import anonymous.Entities.Items.Item;
 import anonymous.Mechanics.GameEngine;
 import anonymous.Room.Room;
 
+import java.util.HashMap;
 import java.util.Scanner;
 
 /**
@@ -17,6 +20,8 @@ public class Player{
     private Room globalLocation;
     private int damage = 3;
     Scanner sc = new Scanner(System.in);
+    private HashMap<String, Entity> inventory = new HashMap<>();
+
 
     public Player() {
     }
@@ -44,6 +49,8 @@ public class Player{
             getGlobalLocation().getPointsInRoom().get(getInput()).encountered(this, ge);
         }else if(getInput().equals("instructions")){
             ge.instructions();
+        }else if(getInput().equals("inventory")){
+            viewInventoryItems();
         }else{
             System.out.println("that isn't an allowed command try again. Try typing 'instructions' to get available commands\n");
         }
@@ -56,6 +63,24 @@ public class Player{
     public void takeDamage(int damage){
         int result = getHealth() - damage;
         setHealth(result);
+    }
+
+    public void putItemInInventory(String key, Entity itm){
+        getInventory().put(key, itm);
+    }
+
+    public void viewInventoryItems(){
+        if(getInventory().isEmpty()){
+            System.out.println("\nYour inventory is empty!\n");
+        }else{
+            System.out.println("\nYour inventory items are:");
+            for(int i = 0; i<getInventory().size(); i++){
+                System.out.println(getInventory().keySet());
+                if(i == (getInventory().size() - 1)){
+                    System.out.println("");
+                }
+            }
+        }
     }
 
     public String getInput() {
@@ -74,8 +99,12 @@ public class Player{
         return globalLocation;
     }
 
-    public void myInventory(){
+    public HashMap<String, Entity> getInventory() {
+        return inventory;
+    }
 
+    public void setInventory(HashMap<String, Entity> inventory) {
+        this.inventory = inventory;
     }
 
     public int getEnergy() {
@@ -110,7 +139,9 @@ public class Player{
                 ", health=" + health +
                 ", input='" + input + '\'' +
                 ", globalLocation=" + globalLocation +
+                ", damage=" + damage +
                 ", sc=" + sc +
+                ", inventory=" + inventory +
                 '}';
     }
 }

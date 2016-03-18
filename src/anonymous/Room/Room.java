@@ -10,7 +10,7 @@ import java.util.HashMap;
  */
 public class Room {
 
-    private HashMap<String, Entity> pointsInRoom = new HashMap<>(9);
+    private HashMap<String, Entity> pointsInRoom = new HashMap<>();
     private String context;
     private String[] allPossibleIndexs = {"NW", "N", "NE", "W", "C", "E", "SW", "S", "SE"};
 

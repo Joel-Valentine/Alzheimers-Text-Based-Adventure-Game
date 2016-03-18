@@ -3,6 +3,7 @@ package anonymous;
 import anonymous.Entities.Enemies.Enemy;
 import anonymous.Entities.Exits;
 import anonymous.Entities.Friendlies.Henry;
+import anonymous.Entities.Items.Item;
 import anonymous.Player.Player;
 import anonymous.Mechanics.GameEngine;
 import anonymous.Room.Room;
@@ -27,6 +28,9 @@ public class main {
         //creating friendlies
         Henry henry = new Henry("Henry", "is a bright pink bunny wearing a tophat and a monocle.");
 
+        //creating items
+        Item candleStick = new Item("Candlestick", "This candlestick seems to be ble to talk.. it has a strange smile on its... face?", 0);
+
         //Creating rooms
         Room sR = new Room("You wake up on a smooth, clean floor. All you can see is a blinding white light.\nThere doesn't seem to be an end to the walls and a start to the ceiling or floor.\nYou see a small silhouette figure in the corner of the room wearing what seems to be a tophat..\n");
         Room bR = new Room("The room has strange flesh looking walls, ceiling and floor. Every time you take a step you hear a squelching noise.\nYou are faced with a huge flesh door to the north, with a sign above it that says 'Brain Entrance'\n");
@@ -49,6 +53,7 @@ public class main {
         sR.addEntity("C", henry);
         sR.addEntity("E", troll);
         sR.addEntity("S", potato);
+        sR.addEntity("W", candleStick);
 
         //adding entities to locations in the bR room
         bR.addEntity("S", bRExit1);
