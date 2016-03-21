@@ -8,22 +8,28 @@ import anonymous.Room.Room;
 
 import java.util.HashMap;
 import java.util.Scanner;
+import java.util.TreeMap;
+import java.util.Vector;
 
 /**
  * Created by joelvalentine on 01/03/2016.
  */
 
 public class Player{
-    private int energy = 10;
-    private int health = 100;
+    private int energy;
+    private int health;
     private String input;
     private Room globalLocation;
-    private int damage = 3;
+    private int damage;
     Scanner sc = new Scanner(System.in);
     private HashMap<String, Entity> inventory = new HashMap<>();
-
+    private boolean Answered;
+    private TreeMap<String, Entity> currentlyEquipped = new TreeMap<>();
 
     public Player() {
+        setDamage(3);
+        setHealth(100);
+        setEnergy(10);
     }
 
     public boolean isAlive() {
@@ -65,20 +71,38 @@ public class Player{
         setHealth(result);
     }
 
-    public void putItemInInventory(String key, Entity itm){
+    public void putItemInInventory(String key, Item itm){
         getInventory().put(key, itm);
     }
 
+    public void removeItemFromInventory(){
+
+    }
+
     public void viewInventoryItems(){
+        setAnswered(false);
+
         if(getInventory().isEmpty()){
             System.out.println("\nYour inventory is empty!\n");
         }else{
             System.out.println("\nYour inventory items are:");
-            for(int i = 0; i<getInventory().size(); i++){
-                System.out.println(getInventory().keySet());
-                if(i == (getInventory().size() - 1)){
-                    System.out.println("");
-                }
+            System.out.println(getInventory().keySet().toString().replaceAll("[\\[\\]]",""));
+            System.out.println();
+        }
+        while(!isAnswered()){
+            System.out.println("Type 'leave' to stop looking in your inventory\nType name of item as you see it to interact with item\n");
+            input();
+            if(getInput().equals("leave")){
+                System.out.println("\nYou decide to stop looking in your inventory\n");
+                setAnswered(true);
+            }else if(getInventory().containsKey(getInput())){
+//                System.out.println(getInventory().get(getInput()).getNameOfEntity());
+                Entity entityItem = getInventory().get(getInput());
+                Item item = (Item) entityItem;
+                item.interact(this);
+                setAnswered(true);
+            }else{
+                System.out.println("\nType 'leave' to stop looking in your inventory\nType name of item AS YOU SEE IT to interact with item\n");
             }
         }
     }
@@ -119,9 +143,21 @@ public class Player{
         return damage;
     }
 
+    public void setDamage(int damage) {
+        this.damage = damage;
+    }
+
     public void energyDepletion(){
         int depletion = getEnergy();
         energy = depletion - 1;
+    }
+
+    public boolean isAnswered() {
+        return Answered;
+    }
+
+    public void setAnswered(boolean answered) {
+        Answered = answered;
     }
 
     public int getHealth() {
@@ -130,6 +166,14 @@ public class Player{
 
     public void setHealth(int health) {
         this.health = health;
+    }
+
+    public TreeMap<String, Entity> getCurrentlyEquipped() {
+        return currentlyEquipped;
+    }
+
+    public void setCurrentlyEquipped(TreeMap<String, Entity> currentlyEquipped) {
+        this.currentlyEquipped = currentlyEquipped;
     }
 
     @Override

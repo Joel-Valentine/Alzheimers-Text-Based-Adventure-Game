@@ -29,7 +29,8 @@ public class main {
         Henry henry = new Henry("Henry", "is a bright pink bunny wearing a tophat and a monocle.");
 
         //creating items
-        Item candleStick = new Item("Candlestick", "This candlestick seems to be ble to talk.. it has a strange smile on its... face?", 0);
+        Item candleStick = new Item("Candlestick", "This candlestick seems to be ble to talk.. it has a strange smile on its... face?", 0, 10);
+        Item fork = new Item("Fork", "this is an fork", 0, 2);
 
         //Creating rooms
         Room sR = new Room("You wake up on a smooth, clean floor. All you can see is a blinding white light.\nThere doesn't seem to be an end to the walls and a start to the ceiling or floor.\nYou see a small silhouette figure in the corner of the room wearing what seems to be a tophat..\n");
@@ -54,6 +55,7 @@ public class main {
         sR.addEntity("E", troll);
         sR.addEntity("S", potato);
         sR.addEntity("W", candleStick);
+        sR.addEntity("SE", fork);
 
         //adding entities to locations in the bR room
         bR.addEntity("S", bRExit1);
