@@ -75,8 +75,8 @@ public class Player{
         getInventory().put(key, itm);
     }
 
-    public void removeItemFromInventory(){
-
+    public void removeItemFromInventory(String key){
+        getInventory().remove(key);
     }
 
     public void viewInventoryItems(){
@@ -84,19 +84,19 @@ public class Player{
 
         if(getInventory().isEmpty()){
             System.out.println("\nYour inventory is empty!\n");
+            setAnswered(true);
         }else{
             System.out.println("\nYour inventory items are:");
             System.out.println(getInventory().keySet().toString().replaceAll("[\\[\\]]",""));
             System.out.println();
         }
         while(!isAnswered()){
-            System.out.println("Type 'leave' to stop looking in your inventory\nType name of item as you see it to interact with item\n");
+            System.out.println("Type 'leave' to stop looking in your inventory\nType the name of the item as you see it to interact with it\n");
             input();
             if(getInput().equals("leave")){
                 System.out.println("\nYou decide to stop looking in your inventory\n");
                 setAnswered(true);
             }else if(getInventory().containsKey(getInput())){
-//                System.out.println(getInventory().get(getInput()).getNameOfEntity());
                 Entity entityItem = getInventory().get(getInput());
                 Item item = (Item) entityItem;
                 item.interact(this);
@@ -148,8 +148,7 @@ public class Player{
     }
 
     public void energyDepletion(){
-        int depletion = getEnergy();
-        energy = depletion - 1;
+        setEnergy(getEnergy() - 1);
     }
 
     public boolean isAnswered() {

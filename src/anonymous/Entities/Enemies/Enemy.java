@@ -54,7 +54,7 @@ public class Enemy extends Entity {
     }
 
     public boolean isAlive(){
-        if(getHealth() < 0){
+        if(getHealth() <= 0){
             return false;
         }else{
             return true;

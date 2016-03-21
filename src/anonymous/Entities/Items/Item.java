@@ -31,7 +31,7 @@ public class Item extends Entity {
                 setAnswered(true);
                 p.putItemInInventory(getNameOfEntity(), this);
                 removeEntityFromRoom(p);
-                System.out.println("You decide to pickup the " + getNameOfEntity() + "\n");
+                System.out.println("\nYou decide to pickup the " + getNameOfEntity() + "\n");
             } else if (p.getInput().equals("leave")) {
                 setAnswered(true);
                 System.out.println("\nYou decide to leave the item and go somewhere else\n");
@@ -42,7 +42,7 @@ public class Item extends Entity {
         }
     }
 
-
+    //Bear with me on this method... it gets hairy
     public void interact(Player p) {
         setAnswered(false);
         while(!isAnswered()){
@@ -60,24 +60,39 @@ public class Item extends Entity {
                     System.out.println("\nBefore equipping this " + getNameOfEntity() + " you must first remove the " + p.getCurrentlyEquipped().keySet().toString().replaceAll("[\\[\\],]","") + "\nType 'remove' to remove the " + p.getCurrentlyEquipped().keySet().toString().replaceAll("[\\[\\],]","") + "\n");
                     p.input();
                     if (p.getInput().equals("remove")) {
-//                        p.setDamage(p.getDamage() - getDamage());
-                        setAnswered(true);
-                        System.out.println("You have removed the " + p.getCurrentlyEquipped().keySet().toString().replaceAll("[\\[\\],]",""));
+                        System.out.println("\nYou have removed the " + p.getCurrentlyEquipped().keySet().toString().replaceAll("[\\[\\],]",""));
                         String equippedItem = p.getCurrentlyEquipped().firstKey();
-                        Entity itm = p.getCurrentlyEquipped().get(p.getCurrentlyEquipped().firstKey());
+                        Entity itm = p.getCurrentlyEquipped().get(equippedItem);
                         Item item2 = (Item) itm;
                         p.setDamage(p.getDamage() - item2.getDamage());
-                        p.getCurrentlyEquipped().remove(p.getCurrentlyEquipped().firstKey());
-                        System.out.print(" your damage is now " + p.getDamage() + "\n");
-//                        System.out.println("Your damage is now " + p.getDamage() + "\n");
+                        p.getCurrentlyEquipped().remove(equippedItem);
+                        System.out.print("Your damage is now " + p.getDamage() + "\n");
                     }
                 }
             }else {
-                System.out.println("Type 'eat' to eat this " + getNameOfEntity() + "\n");
+                System.out.println("\nType 'eat' to eat this " + getNameOfEntity() + "\n");
                 p.input();
                 if(p.getInput().equals("eat")){
-                    p.setHealth(getHealthRegen());
-                    System.out.println("You eat the " + getNameOfEntity() + " your health is now " + p.getHealth() + "\n");
+                    if(p.getHealth() + getHealthRegen() >= 100){
+                        System.out.println("\nYour current health is " + p.getHealth() + " if you eat this " + getNameOfEntity() + " you will be wasting " + ((p.getHealth() + getHealthRegen()) - 100) + " points of health as the max health is 100\nAre you sure you want to eat it?\n'yes' or 'no'\n");
+                        p.input();
+                        if(p.getInput().equals("yes")){
+                            p.setHealth(100);
+                            System.out.println("\nYou eat the " + getNameOfEntity() + " your health is now " + p.getHealth() + "\n");
+                            p.removeItemFromInventory(getNameOfEntity());
+                            setAnswered(true);
+                        }else if(p.getInput().equals("no")){
+                            System.out.println("\nYou decide not to waste the health points for no reason. Good job.\n");
+                            setAnswered(true);
+                        }else{
+                            System.out.println("Type 'yes' or 'no'");
+                        }
+                    }else{
+                        p.setHealth(p.getHealth() + getHealthRegen());
+                        System.out.println("\nYou eat the " + getNameOfEntity() + " your health is now " + p.getHealth() + "\n");
+                        p.removeItemFromInventory(getNameOfEntity());
+                        setAnswered(true);
+                    }
                 }
             }
         }
