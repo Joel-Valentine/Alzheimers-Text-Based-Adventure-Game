@@ -57,27 +57,33 @@ public class Item extends Entity {
                         System.out.println("your damage is now " + p.getDamage() + "\n");
                     }
                 }else if(!p.getCurrentlyEquipped().isEmpty()) {
-                    System.out.println("\nBefore equipping this " + getNameOfEntity() + " you must first remove the " + p.getCurrentlyEquipped().keySet().toString().replaceAll("[\\[\\],]","") + "\nType 'remove' to remove the " + p.getCurrentlyEquipped().keySet().toString().replaceAll("[\\[\\],]","") + "\n");
-                    p.input();
-                    if (p.getInput().equals("remove")) {
-                        System.out.println("\nYou have removed the " + p.getCurrentlyEquipped().keySet().toString().replaceAll("[\\[\\],]",""));
-                        String equippedItem = p.getCurrentlyEquipped().firstKey();
-                        Entity itm = p.getCurrentlyEquipped().get(equippedItem);
-                        Item item2 = (Item) itm;
-                        p.setDamage(p.getDamage() - item2.getDamage());
-                        p.getCurrentlyEquipped().remove(equippedItem);
-                        System.out.print("Your damage is now " + p.getDamage() + "\n");
+                    if(p.getCurrentlyEquipped().firstKey().equals(getNameOfEntity())){
+                        System.out.println("\nYou are already equipping this " + getNameOfEntity() + " would you like to remove it?\nType 'yes' or 'no'\n");
+                        p.input();
+                        if(p.getInput().equals("yes")){
+                            removeFromEquipped(p);
+                            setAnswered(true);
+                        }else if(p.getInput().equals("no")){
+                            System.out.println("\nYou decide not to remove the " + getNameOfEntity() + "\n");
+                            setAnswered(true);
+                        }
+                    }else{
+                        System.out.println("\nBefore equipping this " + getNameOfEntity() + " you must first remove the " + p.getCurrentlyEquipped().keySet().toString().replaceAll("[\\[\\],]","") + "\nType 'remove' to remove the " + p.getCurrentlyEquipped().keySet().toString().replaceAll("[\\[\\],]","") + "\n");
+                        p.input();
+                        if (p.getInput().equals("remove")) {
+                            removeFromEquipped(p);
+                        }
                     }
                 }
             }else {
                 System.out.println("\nType 'eat' to eat this " + getNameOfEntity() + "\n");
                 p.input();
                 if(p.getInput().equals("eat")){
-                    if(p.getHealth() + getHealthRegen() >= 100){
-                        System.out.println("\nYour current health is " + p.getHealth() + " if you eat this " + getNameOfEntity() + " you will be wasting " + ((p.getHealth() + getHealthRegen()) - 100) + " points of health as the max health is 100\nAre you sure you want to eat it?\n'yes' or 'no'\n");
+                    if(p.getHealth() + getHealthRegen() >= p.getStandardHealth()){
+                        System.out.println("\nYour current health is " + p.getHealth() + " if you eat this " + getNameOfEntity() + " you will be wasting " + ((p.getHealth() + getHealthRegen()) - p.getStandardHealth()) + " points of health as the max health is 100\nAre you sure you want to eat it?\n'yes' or 'no'\n");
                         p.input();
                         if(p.getInput().equals("yes")){
-                            p.setHealth(100);
+                            p.setHealth(p.getStandardHealth());
                             System.out.println("\nYou eat the " + getNameOfEntity() + " your health is now " + p.getHealth() + "\n");
                             p.removeItemFromInventory(getNameOfEntity());
                             setAnswered(true);
@@ -96,6 +102,14 @@ public class Item extends Entity {
                 }
             }
         }
+    }
+
+    public void removeFromEquipped(Player p){
+        System.out.println("\nYou have removed the " + p.getCurrentlyEquipped().keySet().toString().replaceAll("[\\[\\],]",""));
+        String equippedItem = p.getCurrentlyEquipped().firstKey();
+        p.setDamage(p.getStandardDamage());
+        p.getCurrentlyEquipped().remove(equippedItem);
+        System.out.println("Your damage is now " + p.getDamage() + "\n");
     }
 
     public int getDamage() {

@@ -18,6 +18,9 @@ import java.util.Vector;
 public class Player{
     private int energy;
     private int health;
+    private int standardHealth;
+    private int standardDamage;
+    private int standardEnergy;
     private String input;
     private Room globalLocation;
     private int damage;
@@ -27,9 +30,12 @@ public class Player{
     private TreeMap<String, Entity> currentlyEquipped = new TreeMap<>();
 
     public Player() {
-        setDamage(3);
-        setHealth(100);
-        setEnergy(10);
+        setStandardHealth(100);
+        setStandardDamage(3);
+        setStandardEnergy(10);
+        setDamage(getStandardDamage());
+        setHealth(getStandardHealth());
+        setEnergy(getStandardEnergy());
     }
 
     public boolean isAlive() {
@@ -173,6 +179,30 @@ public class Player{
 
     public void setCurrentlyEquipped(TreeMap<String, Entity> currentlyEquipped) {
         this.currentlyEquipped = currentlyEquipped;
+    }
+
+    public int getStandardHealth() {
+        return standardHealth;
+    }
+
+    public void setStandardHealth(int standardHealth) {
+        this.standardHealth = standardHealth;
+    }
+
+    public int getStandardDamage() {
+        return standardDamage;
+    }
+
+    public void setStandardDamage(int standardDamage) {
+        this.standardDamage = standardDamage;
+    }
+
+    public int getStandardEnergy() {
+        return standardEnergy;
+    }
+
+    public void setStandardEnergy(int standardEnergy) {
+        this.standardEnergy = standardEnergy;
     }
 
     @Override
