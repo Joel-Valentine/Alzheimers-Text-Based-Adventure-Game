@@ -87,7 +87,6 @@ public class Player{
 
     public void viewInventoryItems(){
         setAnswered(false);
-
         if(getInventory().isEmpty()){
             System.out.println("\nYour inventory is empty!\n");
             setAnswered(true);
@@ -133,10 +132,6 @@ public class Player{
         return inventory;
     }
 
-    public void setInventory(HashMap<String, Entity> inventory) {
-        this.inventory = inventory;
-    }
-
     public int getEnergy() {
         return energy;
     }
@@ -177,9 +172,6 @@ public class Player{
         return currentlyEquipped;
     }
 
-    public void setCurrentlyEquipped(TreeMap<String, Entity> currentlyEquipped) {
-        this.currentlyEquipped = currentlyEquipped;
-    }
 
     public int getStandardHealth() {
         return standardHealth;
