@@ -64,7 +64,7 @@ public class Player{
         }else if(getInput().equals("inventory")){
             viewInventoryItems();
         }else{
-            System.out.println("that isn't an allowed command try again. Try typing 'instructions' to get available commands\n");
+            System.out.println("\nThat isn't an allowed command try again. Try typing 'instructions' to get available commands\n");
         }
     }
 
@@ -88,15 +88,15 @@ public class Player{
     public void viewInventoryItems(){
         setAnswered(false);
         if(getInventory().isEmpty()){
-            System.out.println("\nYour inventory is empty!\n");
+            System.out.println("\nYour inventory is empty! You return to whatever you were doing\n");
             setAnswered(true);
         }else{
             System.out.println("\nYour inventory items are:");
             System.out.println(getInventory().keySet().toString().replaceAll("[\\[\\]]",""));
             System.out.println();
         }
-        System.out.println("Type 'leave' to stop looking in your inventory\nType the name of the item as you see it to interact with it\n");
         while(!isAnswered()){
+            System.out.println("Type 'leave' to stop looking in your inventory\nType the name of the item as you see it to interact with it\n");
             input();
             if(getInput().equals("leave")){
                 System.out.println("\nYou decide to stop looking in your inventory\n");

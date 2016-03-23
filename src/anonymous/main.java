@@ -23,14 +23,15 @@ public class main {
         //creation of everything else in the game
 
         //creating enemies
-        Enemy troll = new Enemy("Troll", "The troll has a somewhat recognizable face but you can't seem to remember where from.\nHis skin is pale grey and his breath stinks of rotting flesh.\nHe looks aggressive and as if he will attack you", 8, 20, "ME NO LIKE LOOK OF YOU\n");
+        Enemy troll = new Enemy("Troll", "The troll has a somewhat recognizable face but you can't seem to remember where from.\nHis skin is pale grey and his breath stinks of rotting flesh.\nHe looks aggressive and as if he will attack you", 8, 20, "ME NO LIKE LOOK OF YOU");
         Enemy potato = new Enemy("Potato", "This is just some random potato BUT YOU MUST KILLS IT", 1, 10, "WHAT ARE YOU DOING HERE HOOMAN");
 
         //creating friendlies
         Henry henry = new Henry("Henry", "is a bright pink bunny wearing a tophat and a monocle.");
 
         //creating furniture
-
+        Furniture draws = new Furniture("chest of draws", "This chest of draws looks like it has a mouth");
+        Furniture plop = new Furniture("noicee", "test");
 
         //creating items
         Item candleStick = new Item("candlestick", "This candlestick seems to be ble to talk.. it has a strange smile on its... face?", 0, 10);
@@ -62,10 +63,16 @@ public class main {
         sR.addEntity("w", candleStick);
         sR.addEntity("se", fork);
         sR.addEntity("ne", apple);
+        sR.addEntity("sw", draws);
+        sR.addEntity("nw", plop);
 
         //adding entities to locations in the bR room
         bR.addEntity("s", bRExit1);
         bR.addEntity("n", bRExit2);
+
+        //adding items to furniture
+        draws.putItemsInFurniture(fork);
+        draws.putItemsInFurniture(candleStick);
 
         //running the Game Engine
         ge.run(player);

@@ -19,13 +19,13 @@ public class Enemy extends Entity {
         setDamage(dam);
         setHealth(health);
         setEncounterText(encounterText);
-        setInstructs("Type 'attack' to attack the " + getNameOfEntity() + "\n" + "Type 'leave' to move somewhere else\nType 'auto attack' if you feel confident enough that you will kill the " + getNameOfEntity() + " without dying\n");
+        setInstructs("\nType 'attack' to attack the " + getNameOfEntity() + "\n" + "Type 'leave' to move somewhere else\nType 'auto attack' if you feel confident enough that you will kill the " + getNameOfEntity() + " without dying\n");
     }
 
     @Override
     public void encountered(Player p, GameEngine ge){
         setAnswered(false);
-        System.out.println("\nYou encounter a " + getNameOfEntity() + "!\n" + getDescOfEntity() + "\nThe " + getNameOfEntity() + " will deal " + getDamage() + " damage and has "  + getHealth() +" health\n\n" + getNameOfEntity() + ": " +getEncounterText() + "\n" + getInstructs());
+        System.out.println("\nYou encounter a " + getNameOfEntity() + "!\n" + getDescOfEntity() + "\nThe " + getNameOfEntity() + " will deal " + getDamage() + " damage and has "  + getHealth() +" health\n\n" + getNameOfEntity() + ": " + getEncounterText() + "\n" + getInstructs());
         while (isAlive() && !isAnswered()) {
             p.input();
             if (p.getInput().equals("attack")) {
@@ -37,12 +37,15 @@ public class Enemy extends Entity {
                 setAnswered(true);
                 System.out.println("\nYou decide to not attack the " + getNameOfEntity() + " and move somewhere else\n");
                 p.move(ge);
-            }else if(p.getInput().equals("auto attack")){
+            }else if(p.getInput().equals("auto attack")) {
                 System.out.println("");
-                while(isAlive()){
+                while (isAlive()) {
                     p.attack(this);
                     attack(p);
                 }
+            }else if(p.getInput().equals("inventory")){
+                p.viewInventoryItems();
+                setAnswered(false);
             }else{
                 System.out.println(getInstructs());
             }
