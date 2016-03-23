@@ -3,6 +3,7 @@ package anonymous;
 import anonymous.Entities.Enemies.Enemy;
 import anonymous.Entities.Exits;
 import anonymous.Entities.Friendlies.Henry;
+import anonymous.Entities.Furniture.Furniture;
 import anonymous.Entities.Items.Item;
 import anonymous.Player.Player;
 import anonymous.Mechanics.GameEngine;
@@ -28,9 +29,12 @@ public class main {
         //creating friendlies
         Henry henry = new Henry("Henry", "is a bright pink bunny wearing a tophat and a monocle.");
 
+        //creating furniture
+
+
         //creating items
-        Item candleStick = new Item("Candlestick", "This candlestick seems to be ble to talk.. it has a strange smile on its... face?", 0, 10);
-        Item fork = new Item("Fork", "this is an fork", 0, 2);
+        Item candleStick = new Item("candlestick", "This candlestick seems to be ble to talk.. it has a strange smile on its... face?", 0, 10);
+        Item fork = new Item("fork", "this is an fork", 0, 2);
         Item apple = new Item("apple", "this is a scrumptious apple", 10, 0);
 
         //Creating rooms
@@ -51,17 +55,17 @@ public class main {
         ge.addToRooms(cR);
 
         //adding entities to locations in the sR room
-        sR.addEntity("N", sRExit1);
-        sR.addEntity("C", henry);
-        sR.addEntity("E", troll);
-        sR.addEntity("S", potato);
-        sR.addEntity("W", candleStick);
-        sR.addEntity("SE", fork);
-        sR.addEntity("NE", apple);
+        sR.addEntity("n", sRExit1);
+        sR.addEntity("c", henry);
+        sR.addEntity("e", troll);
+        sR.addEntity("s", potato);
+        sR.addEntity("w", candleStick);
+        sR.addEntity("se", fork);
+        sR.addEntity("ne", apple);
 
         //adding entities to locations in the bR room
-        bR.addEntity("S", bRExit1);
-        bR.addEntity("N", bRExit2);
+        bR.addEntity("s", bRExit1);
+        bR.addEntity("n", bRExit2);
 
         //running the Game Engine
         ge.run(player);

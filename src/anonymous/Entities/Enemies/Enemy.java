@@ -35,7 +35,7 @@ public class Enemy extends Entity {
                 System.out.println("The " + getNameOfEntity() + " hit you for " + getDamage() + " your health is now " + p.getHealth() + "\n");
             }else if(p.getInput().equals("leave")){
                 setAnswered(true);
-                System.out.println("You decide to not attack the " + getNameOfEntity() + " and move somewhere else\n");
+                System.out.println("\nYou decide to not attack the " + getNameOfEntity() + " and move somewhere else\n");
                 p.move(ge);
             }else if(p.getInput().equals("auto attack")){
                 System.out.println("");

@@ -12,7 +12,7 @@ public class Room {
 
     private HashMap<String, Entity> pointsInRoom = new HashMap<>();
     private String context;
-    private String[] allPossibleIndexs = {"NW", "N", "NE", "W", "C", "E", "SW", "S", "SE"};
+    private String[] allPossibleIndexs = {"nw", "n", "ne", "w", "c", "e", "sw", "s", "se"};
 
 
     public Room(String s) {

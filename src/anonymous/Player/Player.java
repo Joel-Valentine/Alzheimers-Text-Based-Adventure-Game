@@ -95,8 +95,8 @@ public class Player{
             System.out.println(getInventory().keySet().toString().replaceAll("[\\[\\]]",""));
             System.out.println();
         }
+        System.out.println("Type 'leave' to stop looking in your inventory\nType the name of the item as you see it to interact with it\n");
         while(!isAnswered()){
-            System.out.println("Type 'leave' to stop looking in your inventory\nType the name of the item as you see it to interact with it\n");
             input();
             if(getInput().equals("leave")){
                 System.out.println("\nYou decide to stop looking in your inventory\n");

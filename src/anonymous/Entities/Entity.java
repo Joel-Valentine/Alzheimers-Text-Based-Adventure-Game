@@ -55,16 +55,8 @@ public abstract class Entity {
         this.instructs = instructs;
     }
 
-    public String getQuestion() {
-        return question;
-    }
-
-    public void setQuestion(String question) {
-        this.question = question;
-    }
-
     public void setNameOfEntity(String noe) {
-        this.nameOfEntity = noe;
+        this.nameOfEntity = noe.toLowerCase();
     }
 
     public void setDescOfEntity(String doe) {

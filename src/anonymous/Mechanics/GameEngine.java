@@ -16,7 +16,7 @@ public class GameEngine {
     }
 
     public void instructions(){
-        System.out.println("\nTo move around rooms type any of the directions to a compass (e.g. 'N' 'E' 'SW')\nWhen you encounter an enemy you can type 'leave' to leave, 'attack' to attack the enemy and 'auto attack' to bypass manual attack\nTo access your inventory type 'inventory' once in your inventory you can type the name of the item to interact with it or type 'leave' to leave the inventory\n");
+        System.out.println("\nTo move around rooms type any of the directions to a compass (e.g. 'n' 'e' 'swn')\nWhen you encounter an enemy you can type 'leave' to leave, 'attack' to attack the enemy and 'auto attack' to bypass manual attack\nTo access your inventory type 'inventory' once in your inventory you can type the name of the item to interact with it or type 'leave' to leave the inventory\n");
     }
 
     public void addToRooms(Room tr){
