@@ -31,8 +31,12 @@ public class Furniture extends Entity{
             p.input();
             if(p.getInput().equals("search")){
                 System.out.println("\nYou decide to search the " + getNameOfEntity() + " this may take some time...\n");
-                searchItemsInFurniture();
-                pickupAnitem(p);
+                if(checkIfEmpty()){
+                    setAnswered(true);
+                }else{
+                    searchItemsInFurniture();
+                    pickupAnitem(p);
+                }
             }else if(p.getInput().equals("leave")){
                 System.out.println("\nYou decide to leave and go somewhere else\n");
                 setAnswered(true);
@@ -41,9 +45,24 @@ public class Furniture extends Entity{
             }
         }
     }
-
+    
+    private boolean checkIfEmpty() {
+        if(getItemsInFurniture().isEmpty()){
+            try {
+                Thread.sleep(2000);
+                System.out.println("There are no items in this " + getNameOfEntity() + " you decide to leave and move somewhere else\n");
+                return true;
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }else {
+            return false;
+        }
+        return false;
+    }
+    
     private void pickupAnitem(Player p) {
-        System.out.println("type the item you wish to pickup or type 'leave' when you have finished picking items up or want to go somewhere else\n");
+        System.out.println("type the item you wish to pickup or type 'leave' when you have finished picking up items/want to go somewhere else\n");
         while(!isAnswered()){
             p.input();
             if(getItemsInFurniture().containsKey(p.getInput())){
@@ -58,7 +77,7 @@ public class Furniture extends Entity{
                 System.out.println("\nYou decide to leave and go somewhere else\n");
                 setAnswered(true);
             }else{
-                System.out.println("type the item you wish to pickup or type 'leave' when you have finished picking items up or want to go somewhere else\n");
+                System.out.println("type the item you wish to pickup or type 'leave' when you have finished picking up items/want to go somewhere else\n");
             }
         }
     }
@@ -79,27 +98,16 @@ public class Furniture extends Entity{
     }
 
     public void searchItemsInFurniture(){
-        System.out.println();
-        if(getItemsInFurniture().isEmpty()){
-            try {
-                Thread.sleep(2000);
-                System.out.println("There are no items in this " + getNameOfEntity() + " you can now move somewhere else\n");
-                setAnswered(true);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }else{
             int randomNum = (int)(Math.random() * 7000 + 3000);
             try {
                 Thread.sleep(randomNum);
-                System.out.println("You have found: ");
+                System.out.println("You have found these items : ");
                 System.out.println(getItemsInFurniture().keySet().toString().replaceAll("[\\[\\]]",""));
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
             System.out.println();
         }
-    }
 
     public HashMap<String, Entity> getItemsInFurniture() {
         return itemsInFurniture;
