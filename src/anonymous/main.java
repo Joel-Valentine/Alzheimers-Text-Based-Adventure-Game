@@ -37,6 +37,7 @@ public class main {
         Item candleStick = new Item("candlestick", "This candlestick seems to be ble to talk.. it has a strange smile on its... face?", 0, 10);
         Item fork = new Item("fork", "this is an fork", 0, 2);
         Item apple = new Item("apple", "this is a scrumptious apple", 10, 0);
+        Item potatop = new Item("potato", "this is a silly little potato", 20, 0);
 
         //Creating rooms
         Room sR = new Room("You wake up on a smooth, clean floor. All you can see is a blinding white light.\nThere doesn't seem to be an end to the walls and a start to the ceiling or floor.\nYou see a small silhouette figure in the corner of the room wearing what seems to be a tophat..\n");
@@ -58,17 +59,18 @@ public class main {
         //adding entities to locations in the sR room
 //        sR.addEntity("n", sRExit1);
 //        sR.addEntity("c", henry);
-//        sR.addEntity("e", troll);
+//        sR.addEntity("n", troll);
 //        sR.addEntity("s", potato);
 //        sR.addEntity("w", candleStick);
 //        sR.addEntity("se", fork);
 //        sR.addEntity("ne", apple);
         sR.addEntity("s", draws);
-        sR.addEntity("n", plop);
+//        sR.addEntity("n", plop);
 
         //adding entities to locations in the bR room
         bR.addEntity("s", bRExit1);
         bR.addEntity("n", bRExit2);
+        bR.addEntity("e", potatop);
 
         //adding items to furniture
         draws.putItemsInFurniture(fork);

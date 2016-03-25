@@ -24,7 +24,7 @@ public class Player{
     private String input;
     private Room globalLocation;
     private int damage;
-    Scanner sc = new Scanner(System.in);
+    private Scanner sc = new Scanner(System.in);
     private HashMap<String, Entity> inventory = new HashMap<>();
     private boolean Answered;
     private TreeMap<String, Entity> currentlyEquipped = new TreeMap<>();
@@ -171,7 +171,6 @@ public class Player{
     public TreeMap<String, Entity> getCurrentlyEquipped() {
         return currentlyEquipped;
     }
-
 
     public int getStandardHealth() {
         return standardHealth;

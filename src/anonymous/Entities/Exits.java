@@ -23,8 +23,9 @@ public class Exits extends Entity{
         while(!isAnswered()){
         p.input();
             if (p.getInput().equals("yes")) {
-                System.out.println("\nYou step through the " + getNameOfEntity() + "\n");
+                System.out.println("\nYou step through the " + getNameOfEntity());
                 p.energyDepletion();
+                System.out.println("Your energy is now " + p.getEnergy() + "\n");
                 p.setGlobalLocation(ge.getAllRooms().get(getTr()));
                 System.out.println(p.getGlobalLocation().getContext().toString());
                 setAnswered(true);

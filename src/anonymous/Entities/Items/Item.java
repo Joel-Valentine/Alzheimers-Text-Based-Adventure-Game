@@ -47,7 +47,6 @@ public class Item extends Entity {
         }
     }
 
-    //Bear with me on this method... it gets hairy
     public void interact(Player p) {
         setAnswered(false);
         while(!isAnswered()){

@@ -5,9 +5,7 @@ import anonymous.Entities.Items.Item;
 import anonymous.Mechanics.GameEngine;
 import anonymous.Player.Player;
 
-import javax.swing.plaf.synth.SynthEditorPaneUI;
 import java.util.HashMap;
-import java.util.Vector;
 
 /**
  * Created by joelvalentine on 22/03/2016.
@@ -111,10 +109,6 @@ public class Furniture extends Entity{
 
     public HashMap<String, Entity> getItemsInFurniture() {
         return itemsInFurniture;
-    }
-
-    public void setItemsInFurniture(HashMap<String, Entity> itemsInFurniture) {
-        this.itemsInFurniture = itemsInFurniture;
     }
 
 }

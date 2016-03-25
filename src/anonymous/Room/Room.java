@@ -16,7 +16,7 @@ public class Room {
 
 
     public Room(String s) {
-        context = s;
+        setContext(s);
         fillingHashmapWithNull();
     }
 
@@ -29,17 +29,13 @@ public class Room {
     }
 
     public void addEntity(String i, Entity e){
-        pointsInRoom.put(i,e);
+        getPointsInRoom().put(i,e);
     }
 
     public void fillingHashmapWithNull(){
         for(int i = 0; i<getAllPossibleIndexs().length; i++){
             pointsInRoom.put(getAllPossibleIndexs()[i], new Nothing());
         }
-    }
-
-    public void setAllPossibleIndexs(String[] allPossibleIndexs) {
-        this.allPossibleIndexs = allPossibleIndexs;
     }
 
     public String[] getAllPossibleIndexs() {
@@ -49,11 +45,12 @@ public class Room {
     public HashMap<String, Entity> getPointsInRoom() {
         return pointsInRoom;
     }
-
-    public void setPointsInRoom(String s, Entity e) {
-        pointsInRoom.put(s, e);
+    
+    public void setContext(String context) {
+        this.context = context;
     }
-
+    
+    
     @Override
     public String toString() {
         return "Room{" +
