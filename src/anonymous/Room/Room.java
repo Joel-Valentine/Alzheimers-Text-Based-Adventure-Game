@@ -25,7 +25,7 @@ public class Room {
     }
 
     public void removeEntity(String i){
-        pointsInRoom.put(i, new Nothing());
+        getPointsInRoom().put(i, new Nothing());
     }
 
     public void addEntity(String i, Entity e){

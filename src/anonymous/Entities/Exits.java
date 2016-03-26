@@ -30,8 +30,7 @@ public class Exits extends Entity{
                 System.out.println(p.getGlobalLocation().getContext().toString());
                 setAnswered(true);
             } else if (p.getInput().equals("no")) {
-                setAnswered(true);
-                System.out.println("\nYou decide not to go through the " + getNameOfEntity() + "\n");
+                leave();
             } else {
                 System.out.println(getInstructs());
             }

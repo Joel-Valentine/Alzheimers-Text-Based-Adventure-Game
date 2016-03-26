@@ -79,8 +79,7 @@ public class Item extends Entity {
             p.getCurrentlyEquipped().put(getNameOfEntity(), this);
             System.out.println("your damage is now " + p.getDamage() + "\n");
         }else if(p.getInput().equals("leave")){
-            setAnswered(true);
-            System.out.println("\nYou decide to leave your inventory\n");
+            leave();
         }
     }
 

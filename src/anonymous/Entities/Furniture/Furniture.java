@@ -36,8 +36,7 @@ public class Furniture extends Entity{
                     pickupAnitem(p);
                 }
             }else if(p.getInput().equals("leave")){
-                System.out.println("\nYou decide to leave and go somewhere else\n");
-                setAnswered(true);
+                leave();
             }else{
                 System.out.println(getInstructs());
             }

@@ -47,6 +47,11 @@ public abstract class Entity {
         System.out.println("There is nothing here.\n");
     }
 
+    public void leave(){
+        System.out.println("\nYou decide to leave the " + getNameOfEntity() + " and go somewhere else\n");
+        setAnswered(true);
+    }
+
     public String getInstructs() {
         return instructs;
     }

@@ -18,6 +18,7 @@ import java.util.Vector;
 public class Player{
     private int energy;
     private int health;
+    private int questPoints;
     private int standardHealth;
     private int standardDamage;
     private int standardEnergy;
@@ -33,6 +34,7 @@ public class Player{
         setStandardHealth(100);
         setStandardDamage(3);
         setStandardEnergy(10);
+        setQuestPoints(0);
         setDamage(getStandardDamage());
         setHealth(getStandardHealth());
         setEnergy(getStandardEnergy());
@@ -194,6 +196,14 @@ public class Player{
 
     public void setStandardEnergy(int standardEnergy) {
         this.standardEnergy = standardEnergy;
+    }
+
+    public int getQuestPoints() {
+        return questPoints;
+    }
+
+    public void setQuestPoints(int questPoints) {
+        this.questPoints = questPoints;
     }
 
     @Override

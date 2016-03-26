@@ -1,6 +1,8 @@
 package anonymous.Entities.Friendlies;
 
+import anonymous.Entities.Enemies.Enemy;
 import anonymous.Entities.Entity;
+import anonymous.Entities.Items.Item;
 import anonymous.Mechanics.GameEngine;
 import anonymous.Player.Player;
 
@@ -9,22 +11,87 @@ import anonymous.Player.Player;
  */
 public class Friendly extends Entity {
 
+    private String introductionText;
     private String encounterText;
-    private boolean interactable;
-    private String interactText;
+    private Entity questEntity;
+    private int questPointsRecieved;
+    private boolean questComplete;
+    private boolean questInProgress;
 
-    public Friendly(String nameOfEntity, String descOfEntity, String encounterText, boolean interact, String interactText){
+    public Friendly(String nameOfEntity, String descOfEntity, String introText, String encounterText, Entity quest, int questPointsRecieved){
         setNameOfEntity(nameOfEntity);
         setDescOfEntity(descOfEntity);
         setEncounterText(encounterText);
-        setInteractable(interact);
-        setInteractText(interactText);
+        setIntroductionText(introText);
+        setQuestEntity(quest);
+        setQuestPointsRecieved(questPointsRecieved);
     }
 
     @Override
     public void encountered(Player p, GameEngine ge){
+        System.out.println("\nYou encounter a " + getNameOfEntity() + "!\n" +  getDescOfEntity() + "\n\n" + getNameOfEntity() + ": " + getEncounterText());
+        setAnswered(false);
         while(!isAnswered()){
-            System.out.println(getEncounterText());
+            if(isQuestInProgress()){
+                questInvolvingEnemy(p);
+                setAnswered(true);
+            }else if(isQuestComplete()){
+                System.out.println("\nYou have already completed the " + getNameOfEntity() + "'s quest\n");
+                setAnswered(true);
+            }else if(isInteractable()){
+                interact(p);
+            }else{
+                p.input();
+                if(p.getInput().equals("leave")){
+                    leave();
+                }
+            }
+        }
+    }
+
+    private void interact(Player p) {
+        if(getQuestEntity().getClass().getName().contains("Enemy")){
+            System.out.println(getNameOfEntity() + ": If you kill the " + getQuestEntity().getNameOfEntity() + " in this room i shall tell you about everything in this room\n\nDo you accept type 'yes' or 'no'\n");
+            p.input();
+            if(p.getInput().equals("yes")){
+                questInvolvingEnemy(p);
+                setAnswered(true);
+                setQuestInProgress(true);
+            }else if(p.getInput().equals("no")){
+                System.out.println("\nYou decide not to take on this quest and go somewhere else\n");
+                setAnswered(true);
+            }
+        }else if(getQuestEntity().getClass().getName().contains("Item")){
+            p.input();
+            System.out.println("this be an Item");
+            setAnswered(true);
+        }
+    }
+
+    public void questInvolvingEnemy(Player p){
+        Entity castingToEnemy = getQuestEntity();
+        Enemy questEnemy = (Enemy) castingToEnemy;
+        if(!questEnemy.isAlive()){
+            setQuestComplete(true);
+            setQuestInProgress(false);
+            p.setQuestPoints(p.getQuestPoints() + getQuestPointsRecieved());
+            System.out.println("\nWell done you have slain the " + getQuestEntity().getNameOfEntity() + " you now have " + p.getQuestPoints() + " quest point/s\n");
+            setAnswered(true);
+        }else{
+            System.out.println("\nYou must kill the " + getQuestEntity().getNameOfEntity() + " once you have done this return to me for your reward.. Now go..\n");
+            setAnswered(true);
+        }
+    }
+
+    public void questInvolvingItem(Player p){
+
+    }
+
+    public boolean isInteractable(){
+        if(getQuestEntity() == null){
+            return false;
+        }else{
+            return true;
         }
     }
 
@@ -36,19 +103,43 @@ public class Friendly extends Entity {
         this.encounterText = encounterText;
     }
 
-    public boolean isInteractable() {
-        return interactable;
+    public String getIntroductionText() {
+        return introductionText;
     }
 
-    public void setInteractable(boolean interactable) {
-        this.interactable = interactable;
+    public void setIntroductionText(String introductionText) {
+        this.introductionText = introductionText;
     }
 
-    public String getInteractText() {
-        return interactText;
+    public Entity getQuestEntity() {
+        return questEntity;
     }
 
-    public void setInteractText(String interactText) {
-        this.interactText = interactText;
+    public void setQuestEntity(Entity questEntity) {
+        this.questEntity = questEntity;
+    }
+
+    public boolean isQuestComplete() {
+        return questComplete;
+    }
+
+    public void setQuestComplete(boolean questComplete) {
+        this.questComplete = questComplete;
+    }
+
+    public boolean isQuestInProgress() {
+        return questInProgress;
+    }
+
+    public void setQuestInProgress(boolean questInProgress) {
+        this.questInProgress = questInProgress;
+    }
+
+    public int getQuestPointsRecieved() {
+        return questPointsRecieved;
+    }
+
+    public void setQuestPointsRecieved(int questPointsRecieved) {
+        this.questPointsRecieved = questPointsRecieved;
     }
 }
