@@ -33,7 +33,7 @@ public class Player{
     public Player() {
         setStandardHealth(100);
         setStandardDamage(3);
-        setStandardEnergy(10);
+        setStandardEnergy(2);
         setQuestPoints(0);
         setDamage(getStandardDamage());
         setHealth(getStandardHealth());
@@ -42,7 +42,7 @@ public class Player{
 
     public boolean isAlive() {
         for(int i = 0; i<getHealth(); i++) {
-            if (getHealth() < 0 || getEnergy() < 0) {
+            if (getHealth() <= 0 || getEnergy() <= 0) {
                 return true;
             }else {
                 return false;

@@ -8,11 +8,10 @@ import anonymous.Mechanics.GameEngine;
  */
 public abstract class Entity {
 
-    private Integer tr;
+    private Integer room;
     private String nameOfEntity;
     private String descOfEntity;
     private String instructs;
-    private String question;
     private boolean answered;
 
     public Entity(){
@@ -26,7 +25,7 @@ public abstract class Entity {
     public Entity(String noe, String doe, int tr){
         setNameOfEntity(noe);
         setDescOfEntity(doe);
-        setTr(tr);
+        setRoom(tr);
     }
 
     public void removeEntityFromRoom(Player p){
@@ -72,12 +71,12 @@ public abstract class Entity {
         return nameOfEntity;
     }
 
-    public Integer getTr() {
-        return tr;
+    public Integer getRoom() {
+        return room;
     }
 
-    public void setTr(Integer tr) {
-        this.tr = tr;
+    public void setRoom(Integer tr) {
+        this.room = tr;
     }
 
     public String getDescOfEntity() {
@@ -95,7 +94,7 @@ public abstract class Entity {
     @Override
     public String toString() {
         return "Entity{" +
-                "tr=" + tr +
+                "tr=" + room +
                 ", nameOfEntity='" + nameOfEntity + '\'' +
                 ", descOfEntity='" + descOfEntity + '\'' +
                 ", instructs='" + instructs + '\'' +

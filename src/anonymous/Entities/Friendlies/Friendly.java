@@ -2,27 +2,41 @@ package anonymous.Entities.Friendlies;
 
 import anonymous.Entities.Enemies.Enemy;
 import anonymous.Entities.Entity;
+import anonymous.Entities.Items.Item;
 import anonymous.Mechanics.GameEngine;
 import anonymous.Player.Player;
+
+import java.util.Set;
+import java.util.Vector;
 
 /**
  * Created by joelvalentine on 16/03/2016.
  */
 public class Friendly extends Entity {
 
-    private String introductionText;
     private String encounterText;
     private Entity questEntity;
+    private String additionalText;
     private int questPointsRecieved;
     private boolean questComplete;
     private boolean questInProgress;
+    private Item rewardItem;
+    private String rewardString;
 
-    public Friendly(String nameOfEntity, String descOfEntity, String encounterText, Entity quest, int questPointsRecieved){
+    public Friendly(String nameOfEntity, String descOfEntity, String encounterText, String additionalText){
+        setNameOfEntity(nameOfEntity);
+        setDescOfEntity(descOfEntity);
+        setEncounterText(encounterText);
+        setAdditionalText(additionalText);
+    }
+
+    public Friendly(String nameOfEntity, String descOfEntity, String encounterText, Entity quest, int questPointsRecieved, Item rewardItem){
         setNameOfEntity(nameOfEntity);
         setDescOfEntity(descOfEntity);
         setEncounterText(encounterText);
         setQuestEntity(quest);
         setQuestPointsRecieved(questPointsRecieved);
+        setRewardItem(rewardItem);
     }
 
     @Override
@@ -42,10 +56,9 @@ public class Friendly extends Entity {
             }else if(isInteractable()){
                 interact(p);
             }else{
-                p.input();
-                if(p.getInput().equals("leave")){
-                    leave();
-                }
+                System.out.println(getNameOfEntity() + ": " + getAdditionalText());
+                System.out.println("\nThe " + getNameOfEntity() + " does not have any quests so you decide to leave and go somewhere else\n");
+                setAnswered(true);
             }
         }
     }
@@ -59,8 +72,7 @@ public class Friendly extends Entity {
                 setAnswered(true);
                 setQuestInProgress(true);
             }else if(p.getInput().equals("no")){
-                System.out.println("\nYou decide not to take on this quest and go somewhere else\n");
-                setAnswered(true);
+                leave();
             }
         }else if(getQuestEntity().getClass().getName().contains("Item")){
             System.out.println(getNameOfEntity() + ": If you give me a/an " + getQuestEntity().getNameOfEntity() + " i shall give you a reward\n\nDo you accept type 'yes' or 'no'\n");
@@ -70,8 +82,7 @@ public class Friendly extends Entity {
                 setQuestInProgress(true);
                 setAnswered(true);
             }else if(p.getInput().equals("no")){
-                System.out.println("\nYou decide not to take on this quest and go somewhere else\n");
-                setAnswered(true);
+                leave();
             }
         }
     }
@@ -81,9 +92,10 @@ public class Friendly extends Entity {
         Enemy questEnemy = (Enemy) castingToEnemy;
         if(!questEnemy.isAlive()){
             setQuestComplete(true);
+            p.putItemInInventory(getRewardItem().getNameOfEntity(), getRewardItem());
             setQuestInProgress(false);
             p.setQuestPoints(p.getQuestPoints() + getQuestPointsRecieved());
-            System.out.println("\nWell done you have slain the " + getQuestEntity().getNameOfEntity() + " you now have " + p.getQuestPoints() + " quest point/s\n");
+            System.out.println("\nWell done you have slain the " + getQuestEntity().getNameOfEntity() + ", the " + getNameOfEntity() + " rewards you with " + getQuestPointsRecieved() + " quest points!\nThe " + getNameOfEntity() + " also gives you an item: " + getRewardItem().getNameOfEntity() + "\nYou now have " + p.getQuestPoints() + " total quest points!\n");
             setAnswered(true);
         }else{
             System.out.println("\nYou must kill the " + getQuestEntity().getNameOfEntity() + " once you have done this return to me for your reward.. Now go..\n");
@@ -97,14 +109,14 @@ public class Friendly extends Entity {
             p.input();
             if(p.getInput().equals(getQuestEntity().getNameOfEntity())){
                 setQuestComplete(true);
+                p.putItemInInventory(getRewardItem().getNameOfEntity(), getRewardItem());
                 setQuestInProgress(false);
                 p.setQuestPoints(p.getQuestPoints() + getQuestPointsRecieved());
-                System.out.println("\nYou decide to give your " + getQuestEntity().getNameOfEntity() + " to the " + getNameOfEntity() + " you now have " + p.getQuestPoints() + " quest points\n");
+                System.out.println("\nYou decide to give your " + getQuestEntity().getNameOfEntity() + " to the " + getNameOfEntity() + ", the " + getNameOfEntity() + " rewards you with " + getQuestPointsRecieved() + " quest points!\nThe " + getNameOfEntity() + " also gives you an item: " + getRewardItem().getNameOfEntity() + "\nYou now have " + p.getQuestPoints() + " total quest points!\n");
                 p.removeItemFromInventory(getQuestEntity().getNameOfEntity());
                 setAnswered(true);
             }else if(p.getInput().equals("leave")){
-                System.out.println("\nYou decide not to give your " + getQuestEntity().getNameOfEntity() + " to the " + getNameOfEntity() + " and move somewhere else\n");
-                setAnswered(true);
+                leave();
             }
         }else{
             System.out.println("\nYou do not have a/an " + getQuestEntity().getNameOfEntity() + " in your inventory.. go find one and come back to complete the quest\n");
@@ -130,12 +142,12 @@ public class Friendly extends Entity {
         this.encounterText = encounterText;
     }
 
-    public String getIntroductionText() {
-        return introductionText;
+    public String getAdditionalText() {
+        return additionalText;
     }
 
-    public void setIntroductionText(String introductionText) {
-        this.introductionText = introductionText;
+    public void setAdditionalText(String additionalText) {
+        this.additionalText = additionalText;
     }
 
     public Entity getQuestEntity() {
@@ -148,6 +160,14 @@ public class Friendly extends Entity {
 
     public boolean isQuestComplete() {
         return questComplete;
+    }
+
+    public Item getRewardItem() {
+        return rewardItem;
+    }
+
+    public void setRewardItem(Item rewardItem) {
+        this.rewardItem = rewardItem;
     }
 
     public void setQuestComplete(boolean questComplete) {
@@ -168,5 +188,13 @@ public class Friendly extends Entity {
 
     public void setQuestPointsRecieved(int questPointsRecieved) {
         this.questPointsRecieved = questPointsRecieved;
+    }
+
+    public String getRewardString() {
+        return rewardString;
+    }
+
+    public void setRewardString(String rewardString) {
+        this.rewardString = rewardString;
     }
 }
