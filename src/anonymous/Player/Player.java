@@ -64,7 +64,7 @@ public class Player{
         }else if(getInput().equals("instructions")){
             ge.instructions();
         }else if(getInput().equals("inventory")){
-            viewInventoryItems();
+            viewInventoryItems(ge);
         }else{
             System.out.println("\nThat isn't an allowed command try again. Try typing 'instructions' to get available commands\n");
         }
@@ -87,7 +87,7 @@ public class Player{
         getInventory().remove(key);
     }
 
-    public void viewInventoryItems(){
+    public void viewInventoryItems(GameEngine ge){
         setAnswered(false);
         if(getInventory().isEmpty()){
             System.out.println("\nYour inventory is empty! You return to whatever you were doing\n");
@@ -106,7 +106,7 @@ public class Player{
             }else if(getInventory().containsKey(getInput())){
                 Entity entityItem = getInventory().get(getInput());
                 Item item = (Item) entityItem;
-                item.interact(this);
+                item.interact(this, ge);
                 setAnswered(true);
             }else{
                 System.out.println("\nType 'leave' to stop looking in your inventory\nType name of item AS YOU SEE IT to interact with item\n");

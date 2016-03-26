@@ -21,7 +21,6 @@ public class Friendly extends Entity {
     private boolean questComplete;
     private boolean questInProgress;
     private Item rewardItem;
-    private String rewardString;
 
     public Friendly(String nameOfEntity, String descOfEntity, String encounterText, String additionalText){
         setNameOfEntity(nameOfEntity);
@@ -188,13 +187,5 @@ public class Friendly extends Entity {
 
     public void setQuestPointsRecieved(int questPointsRecieved) {
         this.questPointsRecieved = questPointsRecieved;
-    }
-
-    public String getRewardString() {
-        return rewardString;
-    }
-
-    public void setRewardString(String rewardString) {
-        this.rewardString = rewardString;
     }
 }

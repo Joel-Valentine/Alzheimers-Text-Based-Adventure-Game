@@ -30,7 +30,6 @@ public class Room {
 
     public void addEntity(String i, Entity e){
         getPointsInRoom().put(i,e);
-
     }
 
     public void fillingHashmapWithNull(){

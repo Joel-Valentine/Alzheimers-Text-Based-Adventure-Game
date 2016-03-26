@@ -11,6 +11,14 @@ public class Item extends Entity {
 
     private int healthRegen;
     private int damage;
+    private String itemText;
+
+    public Item(String name, String descrip, int room){
+        setNameOfEntity(name);
+        setDescOfEntity(descrip);
+        setRoom(room);
+        setInstructs("\nType 'pickup' to pick the " + getNameOfEntity() + " up\nType 'leave' to go somewhere else\n");
+    }
 
     public Item(String name, String descrip, int healthRegen, int damage){
         setDamage(damage);
@@ -24,9 +32,9 @@ public class Item extends Entity {
     public void encountered(Player p, GameEngine ge) {
         setAnswered(false);
         System.out.println("\nYou have found a " + getNameOfEntity() + " " + getDescOfEntity());
-        if(getHealthRegen() == 0){
+        if(getDamage() > 0){
             System.out.println("This " + getNameOfEntity() + " will deal " + getDamage() + " damage");
-        }else{
+        }else if(getHealthRegen() > 0){
             System.out.println("This " + getNameOfEntity() + " will heal " + getHealthRegen() + " health points");
         }
         System.out.println(getInstructs());
@@ -47,10 +55,24 @@ public class Item extends Entity {
         }
     }
 
-    public void interact(Player p) {
+
+    private void mapItem(Player p, GameEngine ge) {
+        System.out.println();
+        for(int i = 0; i<ge.getAllRooms().get(getRoom()).getPointsInRoom().size(); i++){
+            if(ge.getAllRooms().get(getRoom()).getPointsInRoom().get(ge.getAllRooms().get(getRoom()).getAllPossibleIndexs()[i]).getNameOfEntity() != null){
+                System.out.println("to the " + ge.getAllRooms().get(getRoom()).getAllPossibleIndexs()[i] + " there is a/an " + ge.getAllRooms().get(getRoom()).getPointsInRoom().get(ge.getAllRooms().get(getRoom()).getAllPossibleIndexs()[i]).getNameOfEntity());
+            }
+        }
+        System.out.println();
+        setAnswered(true);
+    }
+
+    public void interact(Player p, GameEngine ge) {
         setAnswered(false);
         while(!isAnswered()){
-            if (getHealthRegen() == 0) {
+            if(getHealthRegen() == 0 && getDamage() == 0){
+                mapItem(p, ge);
+            }else if (getHealthRegen() == 0) {
                 if(p.getCurrentlyEquipped().isEmpty()){
                     equipItem(p);
                 }else if(!p.getCurrentlyEquipped().isEmpty()) {
@@ -146,4 +168,11 @@ public class Item extends Entity {
         this.healthRegen = healthRegen;
     }
 
+    public String getItemText() {
+        return itemText;
+    }
+
+    public void setItemText(String itemText) {
+        this.itemText = itemText;
+    }
 }

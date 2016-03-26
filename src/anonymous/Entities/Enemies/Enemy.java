@@ -1,8 +1,11 @@
 package anonymous.Entities.Enemies;
 
 import anonymous.Entities.Entity;
+import anonymous.Entities.Items.Item;
 import anonymous.Mechanics.GameEngine;
 import anonymous.Player.Player;
+
+import java.util.Vector;
 
 /**
  * Created by joelvalentine on 13/03/2016.
@@ -42,7 +45,7 @@ public class Enemy extends Entity {
                     attack(p);
                 }
             }else if(p.getInput().equals("inventory")){
-                p.viewInventoryItems();
+                p.viewInventoryItems(ge);
                 setAnswered(false);
             }else{
                 System.out.println(getInstructs());
@@ -50,8 +53,23 @@ public class Enemy extends Entity {
             if (!isAlive()) {
                 System.out.println("You have killed the " + getNameOfEntity() + " your health is now " + p.getHealth() + "\n");
                 removeEntityFromRoom(p);
+                randomDrop(ge, p);
             }
         }
+    }
+
+    private void randomDrop(GameEngine ge, Player p) {
+        Vector<Entity> itemsInGame = new Vector<>();
+        for(int k = 0; k<ge.getAllRooms().size(); k++){
+            for(int i = 0; i<ge.getAllRooms().get(k).getAllPossibleIndexs().length; i++){
+                if(ge.getAllRooms().get(k).getPointsInRoom().get(ge.getAllRooms().get(k).getAllPossibleIndexs()[i]).getClass().getName().contains("Item")) {
+                    itemsInGame.add(k, ge.getAllRooms().get(k).getPointsInRoom().get(ge.getAllRooms().get(k).getAllPossibleIndexs()[i]));
+                }
+            }
+        }
+        int randomNum = (int)(Math.random() * itemsInGame.size() + 0);
+        Item item = (Item) itemsInGame.get(randomNum);
+        p.putItemInInventory(item.getNameOfEntity(), item);
     }
 
     public boolean isAlive(){

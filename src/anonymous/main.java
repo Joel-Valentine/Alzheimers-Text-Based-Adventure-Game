@@ -40,6 +40,7 @@ public class main {
 
         //creating quest reward items
         Item excalibur = new Item("excalibur", "This sword is very mighty", 0, 100);
+        Item map = new Item("brain room map", "this map shows everything in the room", 0);
 
         //Creating rooms
         Room sR = new Room("You wake up on a smooth, clean floor. All you can see is a blinding white light.\nThere doesn't seem to be an end to the walls and a start to the ceiling or floor.\nYou see a small silhouette figure in the corner of the room wearing what seems to be a tophat..\n");
@@ -64,6 +65,7 @@ public class main {
         //adding entities to locations in the sR room
         sR.addEntity("n", sRExit1);
 //        sR.addEntity("c", henry);
+        sR.addEntity("c", map);
         sR.addEntity("w", troll);
 //        sR.addEntity("s", potato);
 //        sR.addEntity("w", candleStick);
