@@ -2,7 +2,6 @@ package anonymous.Entities.Friendlies;
 
 import anonymous.Entities.Enemies.Enemy;
 import anonymous.Entities.Entity;
-import anonymous.Entities.Items.Item;
 import anonymous.Mechanics.GameEngine;
 import anonymous.Player.Player;
 
@@ -18,11 +17,10 @@ public class Friendly extends Entity {
     private boolean questComplete;
     private boolean questInProgress;
 
-    public Friendly(String nameOfEntity, String descOfEntity, String introText, String encounterText, Entity quest, int questPointsRecieved){
+    public Friendly(String nameOfEntity, String descOfEntity, String encounterText, Entity quest, int questPointsRecieved){
         setNameOfEntity(nameOfEntity);
         setDescOfEntity(descOfEntity);
         setEncounterText(encounterText);
-        setIntroductionText(introText);
         setQuestEntity(quest);
         setQuestPointsRecieved(questPointsRecieved);
     }
@@ -32,8 +30,11 @@ public class Friendly extends Entity {
         System.out.println("\nYou encounter a " + getNameOfEntity() + "!\n" +  getDescOfEntity() + "\n\n" + getNameOfEntity() + ": " + getEncounterText());
         setAnswered(false);
         while(!isAnswered()){
-            if(isQuestInProgress()){
+            if(isQuestInProgress() && getQuestEntity().getClass().getName().contains("Enemy")){
                 questInvolvingEnemy(p);
+                setAnswered(true);
+            }else if(isQuestInProgress() && getQuestEntity().getClass().getName().contains("Item")){
+                questInvolvingItem(p);
                 setAnswered(true);
             }else if(isQuestComplete()){
                 System.out.println("\nYou have already completed the " + getNameOfEntity() + "'s quest\n");
@@ -51,7 +52,7 @@ public class Friendly extends Entity {
 
     private void interact(Player p) {
         if(getQuestEntity().getClass().getName().contains("Enemy")){
-            System.out.println(getNameOfEntity() + ": If you kill the " + getQuestEntity().getNameOfEntity() + " in this room i shall tell you about everything in this room\n\nDo you accept type 'yes' or 'no'\n");
+            System.out.println(getNameOfEntity() + ": If you kill the " + getQuestEntity().getNameOfEntity() + " i shall give you a reward\n\nDo you accept type 'yes' or 'no'\n");
             p.input();
             if(p.getInput().equals("yes")){
                 questInvolvingEnemy(p);
@@ -62,9 +63,16 @@ public class Friendly extends Entity {
                 setAnswered(true);
             }
         }else if(getQuestEntity().getClass().getName().contains("Item")){
+            System.out.println(getNameOfEntity() + ": If you give me a/an " + getQuestEntity().getNameOfEntity() + " i shall give you a reward\n\nDo you accept type 'yes' or 'no'\n");
             p.input();
-            System.out.println("this be an Item");
-            setAnswered(true);
+            if(p.getInput().equals("yes")) {
+                questInvolvingItem(p);
+                setQuestInProgress(true);
+                setAnswered(true);
+            }else if(p.getInput().equals("no")){
+                System.out.println("\nYou decide not to take on this quest and go somewhere else\n");
+                setAnswered(true);
+            }
         }
     }
 
@@ -84,6 +92,25 @@ public class Friendly extends Entity {
     }
 
     public void questInvolvingItem(Player p){
+        if(p.getInventory().containsKey(getQuestEntity().getNameOfEntity())){
+            System.out.println("\nYou do have a/an " + getQuestEntity().getNameOfEntity() + " in your inventory if you want to give the " + getNameOfEntity() + " your " + getQuestEntity().getNameOfEntity() + " type '" + getQuestEntity().getNameOfEntity()+ "'\nType 'leave' if you want to keep your " + getQuestEntity().getNameOfEntity() + " and go somewhere else\n");
+            p.input();
+            if(p.getInput().equals(getQuestEntity().getNameOfEntity())){
+                setQuestComplete(true);
+                setQuestInProgress(false);
+                p.setQuestPoints(p.getQuestPoints() + getQuestPointsRecieved());
+                System.out.println("\nYou decide to give your " + getQuestEntity().getNameOfEntity() + " to the " + getNameOfEntity() + " you now have " + p.getQuestPoints() + " quest points\n");
+                p.removeItemFromInventory(getQuestEntity().getNameOfEntity());
+                setAnswered(true);
+            }else if(p.getInput().equals("leave")){
+                System.out.println("\nYou decide not to give your " + getQuestEntity().getNameOfEntity() + " to the " + getNameOfEntity() + " and move somewhere else\n");
+                setAnswered(true);
+            }
+        }else{
+            System.out.println("\nYou do not have a/an " + getQuestEntity().getNameOfEntity() + " in your inventory.. go find one and come back to complete the quest\n");
+            setAnswered(true);
+            setQuestInProgress(true);
+        }
 
     }
 

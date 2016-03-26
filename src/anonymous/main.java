@@ -44,7 +44,7 @@ public class main {
         Room cR = new Room("The room has a huge staircase to the north.");
 
         //creating friendlies
-        Friendly asd = new Friendly("Wizard", "This is an ancient wizard trained in the dark arts", "Good to meet you i am", "Good evening peasant..", troll, 10);
+        Friendly asd = new Friendly("Wizard", "This is an ancient wizard trained in the dark arts", "Good evening peasant..", apple, 10);
 
         //Exits for sR
         Exits sRExit1 = new Exits("North Exit", "There doesn't seem to be an end to this exit but merely the absence of matter behind it.", 1);
@@ -65,7 +65,7 @@ public class main {
 //        sR.addEntity("s", potato);
 //        sR.addEntity("w", candleStick);
 //        sR.addEntity("se", fork);
-//        sR.addEntity("ne", apple);
+        sR.addEntity("ne", apple);
         sR.addEntity("s", draws);
         sR.addEntity("e", asd);
 //        sR.addEntity("n", plop);
