@@ -33,14 +33,14 @@ public class main {
         Furniture plop = new Furniture("noicee", "test");
 
         //creating items to go in rooms/furniture
-        Item candleStick = new Item("candlestick", "This candlestick seems to be ble to talk.. it has a strange smile on its... face?", 0, 10);
-        Item fork = new Item("fork", "this is an fork", 0, 2);
-        Item apple = new Item("apple", "this is a scrumptious apple", 10, 0);
-        Item potatop = new Item("potato", "this is a silly little potato", 20, 0);
+        Item candleStick = new Item("candlestick", "This candlestick seems to be ble to talk.. it has a strange smile on its... face?", 0, 10, ge);
+        Item fork = new Item("fork", "this is an fork", 0, 2, ge);
+        Item apple = new Item("apple", "this is a scrumptious apple", 10, 0, ge);
+        Item potatop = new Item("potato", "this is a silly little potato", 20, 0, ge);
 
         //creating quest reward items
-        Item excalibur = new Item("excalibur", "This sword is very mighty", 0, 100);
-        Item map = new Item("brain room map", "this map shows everything in the room", 0);
+        Item excalibur = new Item("excalibur", "This sword is very mighty", 0, 100, ge);
+        Item map = new Item("brain room map", "this map shows everything in the room", 0, ge);
 
         //Creating rooms
         Room sR = new Room("You wake up on a smooth, clean floor. All you can see is a blinding white light.\nThere doesn't seem to be an end to the walls and a start to the ceiling or floor.\nYou see a small silhouette figure in the corner of the room wearing what seems to be a tophat..\n");
@@ -83,6 +83,8 @@ public class main {
         //adding items to furniture
         draws.putItemsInFurniture(fork);
         draws.putItemsInFurniture(candleStick);
+
+        System.out.println(ge.getAllItemsInGame());
 
         //running the Game Engine
         ge.run(player);

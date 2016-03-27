@@ -13,19 +13,21 @@ public class Item extends Entity {
     private int damage;
     private String itemText;
 
-    public Item(String name, String descrip, int room){
+    public Item(String name, String descrip, int room, GameEngine ge){
         setNameOfEntity(name);
         setDescOfEntity(descrip);
         setRoom(room);
         setInstructs("\nType 'pickup' to pick the " + getNameOfEntity() + " up\nType 'leave' to go somewhere else\n");
+        ge.addItemToGame(this);
     }
 
-    public Item(String name, String descrip, int healthRegen, int damage){
+    public Item(String name, String descrip, int healthRegen, int damage, GameEngine ge){
         setDamage(damage);
         setHealthRegen(healthRegen);
         setNameOfEntity(name);
         setDescOfEntity(descrip);
         setInstructs("\nType 'pickup' to pick the " + getNameOfEntity() + " up\nType 'leave' to go somewhere else\n");
+        ge.addItemToGame(this);
     }
 
     @Override

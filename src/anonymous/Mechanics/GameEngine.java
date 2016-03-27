@@ -1,5 +1,6 @@
 package anonymous.Mechanics;
 
+import anonymous.Entities.Items.Item;
 import anonymous.Room.Room;
 import anonymous.Player.Player;
 
@@ -11,6 +12,7 @@ import java.util.HashMap;
 public class GameEngine {
 
     private HashMap<Integer, Room> allRooms = new HashMap<>();
+    private HashMap<Integer, Item> allItemsInGame = new HashMap<>();
 
     public GameEngine(Player player) {
     }
@@ -23,8 +25,16 @@ public class GameEngine {
         allRooms.put(allRooms.size(), tr);
     }
 
+    public void addItemToGame(Item item){
+        getAllItemsInGame().put(getAllItemsInGame().size(), item);
+    }
+
     public HashMap<Integer, Room> getAllRooms() {
         return allRooms;
+    }
+
+    public HashMap<Integer, Item> getAllItemsInGame() {
+        return allItemsInGame;
     }
 
     public void run(Player player) {
