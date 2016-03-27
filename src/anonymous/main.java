@@ -65,14 +65,19 @@ public class main {
         //adding entities to locations in the sR room
 //        sR.addEntity("n", sRExit1);
 //        sR.addEntity("c", henry);
-        sR.addEntity("c", map);
-        sR.addEntity("w", troll);
+//        sR.addEntity("c", map);
+//        sR.addEntity("w", troll);
 //        sR.addEntity("s", potato);
-//        sR.addEntity("w", candleStick);
+        sR.addEntity("se", candleStick);
+        sR.addEntity("sw", candleStick);
+        sR.addEntity("nw", candleStick);
+        sR.addEntity("ne", candleStick);
 //        sR.addEntity("se", fork);
+        sR.addEntity("w", apple);
+        sR.addEntity("e", apple);
         sR.addEntity("s", apple);
         sR.addEntity("n", apple);
-        sR.addEntity("sw", draws);
+//        sR.addEntity("sw", draws);
 //        sR.addEntity("e", wizzy);
 //        sR.addEntity("n", plop);
 

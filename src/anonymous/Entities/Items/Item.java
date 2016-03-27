@@ -32,7 +32,7 @@ public class Item extends Entity {
 
     @Override
     public void encountered(Player p, GameEngine ge) {
-        //line below is quite hacky but not sure i know how else to do it
+        //line below is quite hacky and not following OOP. I am aware. but not sure i know how else to do it
         setTempLocation(p.getInput());
         setAnswered(false);
         System.out.println("\nYou have found a " + getNameOfEntity() + " " + getDescOfEntity());

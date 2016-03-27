@@ -6,10 +6,7 @@ import anonymous.Entities.Items.Item;
 import anonymous.Mechanics.GameEngine;
 import anonymous.Room.Room;
 
-import java.util.HashMap;
-import java.util.Scanner;
-import java.util.TreeMap;
-import java.util.Vector;
+import java.util.*;
 
 /**
  * Created by joelvalentine on 01/03/2016.
@@ -80,20 +77,13 @@ public class Player{
     }
 
     public void putItemInInventory(String key, Item itm){
-//        int itemIndex = 0;
-//        if(getInventory().containsKey(key)) {
-//            boolean duplicate = true;
-//            while (duplicate) {
-//                if (getInventory().containsKey(key)) {
-//                    itemIndex++;
-//                } else {
-//                    getInventory().put((key + "(" + itemIndex + ")"), itm);
-//                    duplicate = false;
-//                }
-//            }
-//        }else{
-            getInventory().put(key, itm);
-//        }
+        String initKey = key;
+        for(int i = 1; i<getInventory().size()+1; i++){
+            if(getInventory().containsKey(key) || getInventory().containsKey(key + i)){
+                key = initKey + i;
+            }
+        }
+        getInventory().put(key, itm);
     }
 
     public void removeItemFromInventory(String key){
@@ -108,10 +98,9 @@ public class Player{
         }else{
             System.out.println("\nYour inventory items are:");
             System.out.println(getInventory().keySet().toString().replaceAll("[\\[\\]]",""));
-            System.out.println();
         }
+        System.out.println("\nType the name of the item as you see it to interact with it\nType 'leave' to stop looking in your inventory\n");
         while(!isAnswered()){
-            System.out.println("Type 'leave' to stop looking in your inventory\nType the name of the item as you see it to interact with it\n");
             input();
             if(getInput().equals("leave")){
                 System.out.println("\nYou decide to stop looking in your inventory\n");
@@ -122,7 +111,7 @@ public class Player{
                 item.interact(this, ge);
                 setAnswered(true);
             }else{
-                System.out.println("\nType 'leave' to stop looking in your inventory\nType name of item AS YOU SEE IT to interact with item\n");
+                System.out.println("\nType the name of the item as you see it to interact with it\nType 'leave' to stop looking in your inventory\n");
             }
         }
     }

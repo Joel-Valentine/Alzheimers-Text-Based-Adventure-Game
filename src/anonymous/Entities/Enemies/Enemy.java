@@ -1,11 +1,8 @@
 package anonymous.Entities.Enemies;
 
 import anonymous.Entities.Entity;
-import anonymous.Entities.Items.Item;
 import anonymous.Mechanics.GameEngine;
 import anonymous.Player.Player;
-
-import java.util.Vector;
 
 /**
  * Created by joelvalentine on 13/03/2016.
@@ -27,7 +24,7 @@ public class Enemy extends Entity {
 
     @Override
     public void encountered(Player p, GameEngine ge){
-        //line below is quite hacky but not sure i know how else to do it
+        //line below is quite hacky and not following OOP. I am aware. but not sure i know how else to do it
         setTempLocation(p.getInput());
         setAnswered(false);
         System.out.println("\nYou encounter a " + getNameOfEntity() + "!\n" + getDescOfEntity() + "\nThe " + getNameOfEntity() + " will deal " + getDamage() + " damage and has "  + getHealth() +" health\n\n" + getNameOfEntity() + ": " + getEncounterText() + "\n" + getInstructs());
