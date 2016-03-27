@@ -1,6 +1,7 @@
 package anonymous.Entities.Items;
 
 import anonymous.Entities.Entity;
+import anonymous.Entities.Nothing;
 import anonymous.Mechanics.GameEngine;
 import anonymous.Player.Player;
 
@@ -11,7 +12,15 @@ public class Item extends Entity {
 
     private int healthRegen;
     private int damage;
-    private String itemText;
+    private String memoryText;
+    private int energyRegen;
+
+//// TODO: implement memories
+    public Item(String name, String descrip, String memory){
+        setNameOfEntity(name);
+        setDescOfEntity(descrip);
+        setMemoryText(memory);
+    }
 
     public Item(String name, String descrip, int room, GameEngine ge){
         setNameOfEntity(name);
@@ -19,6 +28,13 @@ public class Item extends Entity {
         setRoom(room);
         setInstructs("\nType 'pickup' to pick the " + getNameOfEntity() + " up\nType 'leave' to go somewhere else\n");
         ge.addItemToGame(this);
+    }
+
+    public Item(String name, String descrip, int energyRegen){
+        setEnergyRegen(energyRegen);
+        setNameOfEntity(name);
+        setDescOfEntity(descrip);
+        setInstructs("\nType 'pickup' to pick the " + getNameOfEntity() + " up\nType 'leave' to go somewhere else\n");
     }
 
     public Item(String name, String descrip, int healthRegen, int damage, GameEngine ge){
@@ -36,10 +52,14 @@ public class Item extends Entity {
         setTempLocation(p.getInput());
         setAnswered(false);
         System.out.println("\nYou have found a " + getNameOfEntity() + " " + getDescOfEntity());
+        if(getEnergyRegen() > 0){
+            System.out.println("This " + getNameOfEntity() + " will regenerate" + getEnergyRegen() + " energy");
+        }
         if(getDamage() > 0){
             System.out.println("This " + getNameOfEntity() + " will deal " + getDamage() + " damage");
-        }else if(getHealthRegen() > 0){
-            System.out.println("This " + getNameOfEntity() + " will heal " + getHealthRegen() + " health points");
+        }
+        if(getHealthRegen() > 0){
+            System.out.println("This " + getNameOfEntity() + " will heal " + getHealthRegen() + " health points and will give you " + getEnergyRegen() + " energy points");
         }
         System.out.println(getInstructs());
         while (!isAnswered()) {
@@ -60,22 +80,26 @@ public class Item extends Entity {
     }
 
 
-    private void mapItem(Player p, GameEngine ge) {
+    private void mapItem(GameEngine ge) {
         System.out.println();
-        for(int i = 0; i<ge.getAllRooms().get(getRoom()).getPointsInRoom().size(); i++){
-            if(ge.getAllRooms().get(getRoom()).getPointsInRoom().get(ge.getAllRooms().get(getRoom()).getAllPossibleIndexs()[i]).getNameOfEntity() != null){
-                System.out.println("to the " + ge.getAllRooms().get(getRoom()).getAllPossibleIndexs()[i] + " there is a/an " + ge.getAllRooms().get(getRoom()).getPointsInRoom().get(ge.getAllRooms().get(getRoom()).getAllPossibleIndexs()[i]).getNameOfEntity());
+            for(int i = 0; i<ge.getAllRooms().get(getRoom()).getPointsInRoom().size(); i++){
+                if(ge.getAllRooms().get(getRoom()).getPointsInRoom().get(ge.getAllRooms().get(getRoom()).getAllPossibleIndexs()[i]).getNameOfEntity() != null){
+                    System.out.println("to the " + ge.getAllRooms().get(getRoom()).getAllPossibleIndexs()[i] + " there is a/an " + ge.getAllRooms().get(getRoom()).getPointsInRoom().get(ge.getAllRooms().get(getRoom()).getAllPossibleIndexs()[i]).getNameOfEntity());
+                }else{
+                     //// TODO: 27/03/2016 if map is empty figure it out
+                }
             }
-        }
         System.out.println();
         setAnswered(true);
     }
 
     public void interact(Player p, GameEngine ge) {
         setAnswered(false);
-        while(!isAnswered()){
-            if(getHealthRegen() == 0 && getDamage() == 0){
-                mapItem(p, ge);
+        while(!isAnswered()) {
+            if(getEnergyRegen() > 0){
+                regenEnergy(p);
+            }else if(getHealthRegen() == 0 && getDamage() == 0){
+                mapItem(ge);
             }else if (getHealthRegen() == 0) {
                 if(p.getCurrentlyEquipped().isEmpty()){
                     equipItem(p);
@@ -86,6 +110,11 @@ public class Item extends Entity {
                 eatItem(p);
             }
         }
+    }
+
+    public void regenEnergy(Player p){
+        System.out.println("this will be ok");
+        setAnswered(true);
     }
 
     public void removeFromEquipped(Player p){
@@ -134,9 +163,10 @@ public class Item extends Entity {
         p.input();
         if(p.getInput().equals("eat")){
             if(p.getHealth() + getHealthRegen() >= p.getStandardHealth()){
-                System.out.println("\nYour current health is " + p.getHealth() + " if you eat this " + getNameOfEntity() + " you will be wasting " + ((p.getHealth() + getHealthRegen()) - p.getStandardHealth()) + " points of health as the max health is 100\nAre you sure you want to eat it?\n'yes' or 'no'\n");
+                System.out.println("\nYour current health is " + p.getHealth() + " if you eat this " + getNameOfEntity() + " you will be wasting " + ((p.getHealth() + getHealthRegen()) - p.getStandardHealth()) + " points of health as the max health is " + p.getStandardHealth() +"\nAre you sure you want to eat it?\n'yes' or 'no'\n");
                 p.input();
                 if(p.getInput().equals("yes")){
+                    //TODO: make energy regenerate
                     p.setHealth(p.getStandardHealth());
                     System.out.println("\nYou eat the " + getNameOfEntity() + " your health is now " + p.getHealth() + "\n");
                     p.removeItemFromInventory(getNameOfEntity());
@@ -172,11 +202,19 @@ public class Item extends Entity {
         this.healthRegen = healthRegen;
     }
 
-    public String getItemText() {
-        return itemText;
+    public String getMemoryText() {
+        return memoryText;
     }
 
-    public void setItemText(String itemText) {
-        this.itemText = itemText;
+    public void setMemoryText(String memoryText) {
+        this.memoryText = memoryText;
+    }
+
+    public int getEnergyRegen() {
+        return energyRegen;
+    }
+
+    public void setEnergyRegen(int energyRegen) {
+        this.energyRegen = energyRegen;
     }
 }

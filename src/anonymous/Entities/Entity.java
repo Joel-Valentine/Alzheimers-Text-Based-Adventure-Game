@@ -41,7 +41,7 @@ public abstract class Entity {
         boolean on = true;
         do{
             int randomNum = (int)(Math.random() * ge.getAllItemsInGame().size() + 0);
-            if(ge.getAllItemsInGame().get(randomNum).getDamage() <= 0){
+            if(ge.getAllItemsInGame().get(randomNum).getHealthRegen() > 0){
                 on = false;
                 System.out.println("The " + getNameOfEntity() + " has dropped a/an " + ge.getAllItemsInGame().get(randomNum).getNameOfEntity() + " is is now in your inventory\n");
                 p.putItemInInventory(ge.getAllItemsInGame().get(randomNum).getNameOfEntity(), ge.getAllItemsInGame().get(randomNum));

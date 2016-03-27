@@ -8,10 +8,10 @@ import anonymous.Mechanics.GameEngine;
  */
 public class Exits extends Entity{
 
-    public Exits(String s, String s1, int tr) {
-        setRoom(tr);
-        setNameOfEntity(s);
-        setDescOfEntity(s1);
+    public Exits(String nameOfEntity, String descOfEntity, int roomNo) {
+        setRoom(roomNo);
+        setNameOfEntity(nameOfEntity);
+        setDescOfEntity(descOfEntity);
         setInstructs("\nType 'yes' to go through the " + getNameOfEntity() + "\n" + "Type 'no' to move somewhere else\n");
     }
 
@@ -27,7 +27,7 @@ public class Exits extends Entity{
                 p.energyDepletion();
                 System.out.println("Your energy is now " + p.getEnergy() + "\n");
                 p.setGlobalLocation(ge.getAllRooms().get(getRoom()));
-                System.out.println(p.getGlobalLocation().getContext().toString());
+                System.out.println("This is the " + p.getGlobalLocation().getNameOfRoom() + "\n" + p.getGlobalLocation().getContext().toString());
                 setAnswered(true);
             } else if (p.getInput().equals("no")) {
                 leave();

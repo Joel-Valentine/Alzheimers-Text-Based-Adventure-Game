@@ -37,15 +37,16 @@ public class main {
         Item fork = new Item("fork", "this is an fork", 0, 2, ge);
         Item apple = new Item("apple", "this is a scrumptious apple", 10, 0, ge);
         Item potatop = new Item("potato", "this is a silly little potato", 20, 0, ge);
+        Item energyDrink = new Item("energy drink", "this is drink will restore energy", 1);
 
         //creating quest reward items
         Item excalibur = new Item("excalibur", "This sword is very mighty", 0, 100, ge);
-        Item map = new Item("brain room map", "this map shows everything in the room", 0, ge);
+        Item sRmap = new Item("Starting room map", "This map will show you everything in the starting room", 0, ge);
 
         //Creating rooms
-        Room sR = new Room("You wake up on a smooth, clean floor. All you can see is a blinding white light.\nThere doesn't seem to be an end to the walls and a start to the ceiling or floor.\nYou see a small silhouette figure in the corner of the room wearing what seems to be a tophat..\n");
-        Room bR = new Room("The room has strange flesh looking walls, ceiling and floor. Every time you take a step you hear a squelching noise.\nYou are faced with a huge flesh door to the north, with a sign above it that says 'Brain Entrance'\n");
-        Room cR = new Room("The room has a huge staircase to the north.");
+        Room sR = new Room("Starting room", "You wake up on a smooth, clean floor. All you can see is a blinding white light.\nThere doesn't seem to be an end to the walls and a start to the ceiling or floor.\nYou see a small silhouette figure in the corner of the room wearing what seems to be a tophat..\n");
+        Room bR = new Room("Brain room", "The room has strange flesh looking walls, ceiling and floor. Every time you take a step you hear a squelching noise.\nYou are faced with a huge flesh door to the north, with a sign above it that says 'Brain Entrance'\n");
+        Room cR = new Room("celery room", "The room has a huge staircase to the north.");
 
         //creating friendlies
         Friendly wizzy = new Friendly("Wizard", "This is an ancient wizard trained in the dark arts", "Good evening peasant..", troll, 10, excalibur);
@@ -63,22 +64,21 @@ public class main {
         ge.addToRooms(cR);
 
         //adding entities to locations in the sR room
-        sR.addEntity("n", sRExit1);
-        sR.addEntity("c", troll);
-        sR.addEntity("e", troll);
-//        sR.addEntity("e", troll);
-//        sR.addEntity("s", troll);
-//        sR.addEntity("w", troll);
-//        sR.addEntity("nw", troll);
-//
+        sR.addEntity("n", energyDrink);
+        sR.addEntity("s", candleStick);
+        sR.addEntity("e", apple);
+        sR.addEntity("w", sRmap);
 
         //adding entities to locations in the bR room
-        bR.addEntity("e", troll);
-        bR.addEntity("s", bRExit1);
+
 
         //adding items to furniture
-        draws.putItemsInFurniture(fork);
-        draws.putItemsInFurniture(candleStick);
+
+//TODO: need to add maps for every room
+//        for(int i = 0; i<ge.getAllRooms().size(); i++) {
+//            Item map = new Item(ge.getAllRooms().get(i).getNameOfRoom() + " map", "shows everything that is in the " + ge.getAllRooms().get(i).getNameOfRoom(), i, ge);
+//            player.putItemInInventory(map.getNameOfEntity(), map);
+//        }
 
         //running the Game Engine
         ge.run(player);

@@ -39,7 +39,7 @@ public class GameEngine {
 
     public void run(Player player) {
         player.setGlobalLocation(allRooms.get(0));
-        System.out.println(player.getGlobalLocation().getContext());
+        System.out.println("This is the " + player.getGlobalLocation().getNameOfRoom() + "\n" + player.getGlobalLocation().getContext());
 //        player.getGlobalLocation().getPointsInRoom().get("C").encountered(player, this);
         while(!player.isAlive()){
             player.move(this);

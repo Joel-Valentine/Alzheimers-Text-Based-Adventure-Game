@@ -11,7 +11,8 @@ import java.util.*;
 /**
  * Created by joelvalentine on 01/03/2016.
  */
-
+////TODO: implement scoring system when game ends
+    //// TODO: implement story
 public class Player{
     private int energy;
     private int health;
@@ -23,7 +24,7 @@ public class Player{
     private Room globalLocation;
     private int damage;
     private Scanner sc = new Scanner(System.in);
-    private HashMap<String, Entity> inventory = new HashMap<>();
+    Map<String, Item> inventory = new TreeMap<>();
     private boolean Answered;
     private TreeMap<String, Entity> currentlyEquipped = new TreeMap<>();
 
@@ -67,8 +68,8 @@ public class Player{
         }
     }
 
-    public void attack(Enemy e){
-        e.takeDamage(getDamage(), this);
+    public void attack(Enemy enemy){
+        enemy.takeDamage(getDamage(), this);
     }
 
     public void takeDamage(int damage){
@@ -132,7 +133,7 @@ public class Player{
         return globalLocation;
     }
 
-    public HashMap<String, Entity> getInventory() {
+    public Map<String, Item> getInventory() {
         return inventory;
     }
 
@@ -213,11 +214,17 @@ public class Player{
         return "Player{" +
                 "energy=" + energy +
                 ", health=" + health +
+                ", questPoints=" + questPoints +
+                ", standardHealth=" + standardHealth +
+                ", standardDamage=" + standardDamage +
+                ", standardEnergy=" + standardEnergy +
                 ", input='" + input + '\'' +
                 ", globalLocation=" + globalLocation +
                 ", damage=" + damage +
                 ", sc=" + sc +
                 ", inventory=" + inventory +
+                ", Answered=" + Answered +
+                ", currentlyEquipped=" + currentlyEquipped +
                 '}';
     }
 }
