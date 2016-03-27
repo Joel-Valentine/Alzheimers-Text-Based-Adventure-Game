@@ -12,6 +12,7 @@ public class Enemy extends Entity {
     private int health;
     private int damage;
     private String encounterText;
+    private boolean alive;
 
     public Enemy(String s, String s1, int dam, int health, String encounterText){
         setNameOfEntity(s);
@@ -27,6 +28,7 @@ public class Enemy extends Entity {
         //line below is quite hacky and not following OOP. I am aware. but not sure i know how else to do it
         setTempLocation(p.getInput());
         setAnswered(false);
+        setAlive(true);
         System.out.println("\nYou encounter a " + getNameOfEntity() + "!\n" + getDescOfEntity() + "\nThe " + getNameOfEntity() + " will deal " + getDamage() + " damage and has "  + getHealth() +" health\n\n" + getNameOfEntity() + ": " + getEncounterText() + "\n" + getInstructs());
         while (isAlive() && !isAnswered()) {
             p.input();
@@ -49,19 +51,12 @@ public class Enemy extends Entity {
             }else{
                 System.out.println(getInstructs());
             }
-            if (!isAlive()) {
+            if (getHealth() <= 0) {
                 System.out.println("You have killed the " + getNameOfEntity() + " your health is now " + p.getHealth());
                 removeEntityFromRoom(p, this);
                 randomDrop(ge, p);
+                setAlive(false);
             }
-        }
-    }
-
-    public boolean isAlive(){
-        if(getHealth() <= 0){
-            return false;
-        }else{
-            return true;
         }
     }
 
@@ -72,6 +67,14 @@ public class Enemy extends Entity {
     public void takeDamage(int result, Player p){
         result = getHealth() - p.getDamage();
         setHealth(result);
+    }
+
+    public boolean isAlive() {
+        return alive;
+    }
+
+    public void setAlive(boolean alive) {
+        this.alive = alive;
     }
 
     public int getDamage() {

@@ -38,9 +38,16 @@ public abstract class Entity {
     }
 
     public void randomDrop(GameEngine ge, Player p){
-        int randomNum = (int)(Math.random() * ge.getAllItemsInGame().size() + 0);
-        p.putItemInInventory(ge.getAllItemsInGame().get(randomNum).getNameOfEntity(), ge.getAllItemsInGame().get(randomNum));
-        System.out.println("The " + getNameOfEntity() + " has dropped a/an " + ge.getAllItemsInGame().get(randomNum).getNameOfEntity() + " is is now in your inventory\n");
+        boolean on = true;
+        do{
+            int randomNum = (int)(Math.random() * ge.getAllItemsInGame().size() + 0);
+            if(ge.getAllItemsInGame().get(randomNum).getDamage() <= 0){
+                on = false;
+                System.out.println("The " + getNameOfEntity() + " has dropped a/an " + ge.getAllItemsInGame().get(randomNum).getNameOfEntity() + " is is now in your inventory\n");
+                p.putItemInInventory(ge.getAllItemsInGame().get(randomNum).getNameOfEntity(), ge.getAllItemsInGame().get(randomNum));
+            }
+        }while(on);
+
     }
 
     public void instructions(String i){
@@ -48,7 +55,6 @@ public abstract class Entity {
     }
 
     public void encountered(Player p, GameEngine ge){
-//        System.out.println("\nThis is the: " + getNameOfEntity() + "\nIts description: " + getDescOfEntity());
         System.out.println("There is nothing here.\n");
     }
 

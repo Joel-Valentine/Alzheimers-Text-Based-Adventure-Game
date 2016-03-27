@@ -28,8 +28,8 @@ public class Player{
     private TreeMap<String, Entity> currentlyEquipped = new TreeMap<>();
 
     public Player() {
-        setStandardHealth(100);
-        setStandardDamage(3);
+        setStandardHealth(600);
+        setStandardDamage(20);
         setStandardEnergy(2);
         setQuestPoints(0);
         setDamage(getStandardDamage());

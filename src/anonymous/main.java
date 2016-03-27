@@ -63,29 +63,18 @@ public class main {
         ge.addToRooms(cR);
 
         //adding entities to locations in the sR room
-//        sR.addEntity("n", sRExit1);
-//        sR.addEntity("c", henry);
-//        sR.addEntity("c", map);
+        sR.addEntity("n", sRExit1);
+        sR.addEntity("c", troll);
+        sR.addEntity("e", troll);
+//        sR.addEntity("e", troll);
+//        sR.addEntity("s", troll);
 //        sR.addEntity("w", troll);
-//        sR.addEntity("s", potato);
-        sR.addEntity("se", candleStick);
-        sR.addEntity("sw", candleStick);
-        sR.addEntity("nw", candleStick);
-        sR.addEntity("ne", candleStick);
-//        sR.addEntity("se", fork);
-        sR.addEntity("w", apple);
-        sR.addEntity("e", apple);
-        sR.addEntity("s", apple);
-        sR.addEntity("n", apple);
-//        sR.addEntity("sw", draws);
-//        sR.addEntity("e", wizzy);
-//        sR.addEntity("n", plop);
+//        sR.addEntity("nw", troll);
+//
 
         //adding entities to locations in the bR room
-        bR.addEntity("w", troll);
+        bR.addEntity("e", troll);
         bR.addEntity("s", bRExit1);
-        bR.addEntity("n", bRExit2);
-        bR.addEntity("e", potatop);
 
         //adding items to furniture
         draws.putItemsInFurniture(fork);
