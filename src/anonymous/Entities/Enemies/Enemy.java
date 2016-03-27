@@ -51,25 +51,11 @@ public class Enemy extends Entity {
                 System.out.println(getInstructs());
             }
             if (!isAlive()) {
-                System.out.println("You have killed the " + getNameOfEntity() + " your health is now " + p.getHealth() + "\n");
+                System.out.println("You have killed the " + getNameOfEntity() + " your health is now " + p.getHealth());
                 removeEntityFromRoom(p);
                 randomDrop(ge, p);
             }
         }
-    }
-
-    private void randomDrop(GameEngine ge, Player p) {
-        Vector<Entity> itemsInGame = new Vector<>();
-        for(int k = 0; k<ge.getAllRooms().size(); k++){
-            for(int i = 0; i<ge.getAllRooms().get(k).getAllPossibleIndexs().length; i++){
-                if(ge.getAllRooms().get(k).getPointsInRoom().get(ge.getAllRooms().get(k).getAllPossibleIndexs()[i]).getClass().getName().contains("Item")) {
-                    itemsInGame.add(k, ge.getAllRooms().get(k).getPointsInRoom().get(ge.getAllRooms().get(k).getAllPossibleIndexs()[i]));
-                }
-            }
-        }
-        int randomNum = (int)(Math.random() * itemsInGame.size() + 0);
-        Item item = (Item) itemsInGame.get(randomNum);
-        p.putItemInInventory(item.getNameOfEntity(), item);
     }
 
     public boolean isAlive(){

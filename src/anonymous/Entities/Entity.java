@@ -37,6 +37,12 @@ public abstract class Entity {
         }
     }
 
+    public void randomDrop(GameEngine ge, Player p){
+        int randomNum = (int)(Math.random() * ge.getAllItemsInGame().size() + 0);
+        p.putItemInInventory(ge.getAllItemsInGame().get(randomNum).getNameOfEntity(), ge.getAllItemsInGame().get(randomNum));
+        System.out.println("The " + getNameOfEntity() + " has dropped a/an " + ge.getAllItemsInGame().get(randomNum).getNameOfEntity() + " is is now in your inventory\n");
+    }
+
     public void instructions(String i){
         System.out.println(getInstructs().toString());
     }

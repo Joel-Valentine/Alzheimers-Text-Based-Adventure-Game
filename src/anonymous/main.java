@@ -84,12 +84,7 @@ public class main {
         draws.putItemsInFurniture(fork);
         draws.putItemsInFurniture(candleStick);
 
-        System.out.println(ge.getAllItemsInGame());
-
         //running the Game Engine
         ge.run(player);
-
-        //debugging
-        //System.out.println(player.getGlobalLocation());
     }
 }
