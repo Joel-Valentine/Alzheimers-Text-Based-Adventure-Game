@@ -17,6 +17,7 @@ public class Room {
     private HashMap<String, Entity> pointsInRoom = new HashMap<>();
     private String context;
     private String nameOfRoom;
+    private int roomNo;
     private String[] allPossibleIndexs = {"nw", "n", "ne", "w", "c", "e", "sw", "s", "se"};
 
 
@@ -34,8 +35,10 @@ public class Room {
         getPointsInRoom().put(i, new Nothing());
     }
 
-    public void addEntity(String i, Entity e){
+    public void addEntity(String i, Entity e, GameEngine ge){
         getPointsInRoom().put(i,e);
+        e.setTempLocation(i);
+        e.setRoomName(ge.getAllRooms().get(getRoomNo()).getNameOfRoom());
     }
 
     public void fillingHashmapWithNull(){
@@ -62,6 +65,14 @@ public class Room {
 
     public void setNameOfRoom(String nameOfRoom) {
         this.nameOfRoom = nameOfRoom;
+    }
+
+    public int getRoomNo() {
+        return roomNo;
+    }
+
+    public void setRoomNo(int roomNo) {
+        this.roomNo = roomNo;
     }
 
     @Override

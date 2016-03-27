@@ -12,7 +12,8 @@ import java.util.Vector;
  */
 public abstract class Entity {
 
-    private Integer room;
+    private int room;
+    private String roomName;
     private String nameOfEntity;
     private String descOfEntity;
     private String instructs;
@@ -55,7 +56,7 @@ public abstract class Entity {
     }
 
     public void encountered(Player p, GameEngine ge){
-        System.out.println("There is nothing here.\n");
+        System.out.println("\nThere is nothing here.\n");
     }
 
     public void leave(){
@@ -109,6 +110,14 @@ public abstract class Entity {
 
     public void setTempLocation(String tempLocation) {
         this.tempLocation = tempLocation;
+    }
+
+    public String getRoomName() {
+        return roomName;
+    }
+
+    public void setRoomName(String roomName) {
+        this.roomName = roomName;
     }
 
     @Override

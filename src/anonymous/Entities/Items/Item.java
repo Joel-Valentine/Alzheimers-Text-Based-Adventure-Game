@@ -48,8 +48,6 @@ public class Item extends Entity {
 
     @Override
     public void encountered(Player p, GameEngine ge) {
-        //line below is quite hacky and not following OOP. I am aware. but not sure i know how else to do it
-        setTempLocation(p.getInput());
         setAnswered(false);
         System.out.println("\nYou have found a " + getNameOfEntity() + " " + getDescOfEntity());
         if(getEnergyRegen() > 0){
@@ -126,7 +124,7 @@ public class Item extends Entity {
     }
 
     public void equipItem(Player p){
-        System.out.println("\nType 'equip' to equip this " + getNameOfEntity() + "\nType 'leave' to leave the inventory\n");
+        System.out.println("\nthis " + getNameOfEntity() + " will deal " + getDamage() + " damage\nType 'equip' to equip this " + getNameOfEntity() + "\nType 'leave' to leave the inventory\n");
         p.input();
         if (p.getInput().equals("equip")) {
             p.setDamage(getDamage());
@@ -159,7 +157,8 @@ public class Item extends Entity {
     }
 
     public void eatItem(Player p){
-        System.out.println("\nType 'eat' to eat this " + getNameOfEntity() + "\n");
+        System.out.println("\nThis " + getNameOfEntity() + " will heal " + getHealthRegen() + " health points\nType 'eat' to eat this " + getNameOfEntity() + "\n");
+        System.out.println();
         p.input();
         if(p.getInput().equals("eat")){
             if(p.getHealth() + getHealthRegen() >= p.getStandardHealth()){

@@ -29,9 +29,9 @@ public class Player{
     private TreeMap<String, Entity> currentlyEquipped = new TreeMap<>();
 
     public Player() {
-        setStandardHealth(600);
-        setStandardDamage(20);
-        setStandardEnergy(2);
+        setStandardHealth(100);
+        setStandardDamage(3);
+        setStandardEnergy(8);
         setQuestPoints(0);
         setDamage(getStandardDamage());
         setHealth(getStandardHealth());
@@ -63,6 +63,10 @@ public class Player{
             ge.instructions();
         }else if(getInput().equals("inventory")){
             viewInventoryItems(ge);
+        }else if(getInput().equals("get current room")){
+            System.out.println("\nYou are currently in the " +  getGlobalLocation().getNameOfRoom() + "\n" + getGlobalLocation().getContext());
+        }else if(getInput().equals("get player status")){
+            System.out.println("\nHere are you current states:\nequipped item: " + getCurrentlyEquipped().firstKey() + "\ndamage: " + getDamage() + " \nhealth points: " + getHealth() + " \nenergy points: " + getEnergy() + "\nquest points: " + getQuestPoints() + " \n");
         }else{
             System.out.println("\nThat isn't an allowed command try again. Try typing 'instructions' to get available commands\n");
         }

@@ -64,7 +64,7 @@ public class Friendly extends Entity {
 
     private void interact(Player p) {
         if(getQuestEntity().getClass().getName().contains("Enemy")){
-            System.out.println(getNameOfEntity() + ": If you kill the " + getQuestEntity().getNameOfEntity() + " i shall give you a reward\n\nDo you accept type 'yes' or 'no'\n");
+            System.out.println(getNameOfEntity() + ": If you kill the " + getQuestEntity().getNameOfEntity() + ", which is to the '" + getQuestEntity().getTempLocation() + "' of the '" + getQuestEntity().getRoomName() + "', i shall give you a reward\n\nDo you accept type 'yes' or 'no'\n");
             p.input();
             if(p.getInput().equals("yes")){
                 questInvolvingEnemy(p);
@@ -97,7 +97,7 @@ public class Friendly extends Entity {
             System.out.println("\nWell done you have slain the " + getQuestEntity().getNameOfEntity() + ", the " + getNameOfEntity() + " rewards you with " + getQuestPointsRecieved() + " quest points!\nThe " + getNameOfEntity() + " also gives you an item: " + getRewardItem().getNameOfEntity() + "\nYou now have " + p.getQuestPoints() + " total quest points!\n");
             setAnswered(true);
         }else{
-            System.out.println("\nYou must kill the " + getQuestEntity().getNameOfEntity() + " once you have done this return to me for your reward.. Now go..\n");
+            System.out.println("\n" + getNameOfEntity() +": You must kill the " + getQuestEntity().getNameOfEntity() + ", which is to the " + getQuestEntity().getTempLocation() + " of the " + getQuestEntity().getRoomName() + ", once you have done this return to me for your reward.. Now go..\n");
             setAnswered(true);
         }
     }

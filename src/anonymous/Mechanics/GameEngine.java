@@ -18,11 +18,12 @@ public class GameEngine {
     }
 
     public void instructions(){
-        System.out.println("\nTo move around rooms type any of the directions to a compass (e.g. 'n' 'e' 'swn')\nWhen you encounter an enemy you can type 'leave' to leave, 'attack' to attack the enemy and 'auto attack' to bypass manual attack\nTo access your inventory type 'inventory' once in your inventory you can type the name of the item to interact with it or type 'leave' to leave the inventory\n");
+        System.out.println("\nTo move around inside of a room type any of the following " + getAllRooms().get(0).getPointsInRoom().keySet() + " 'c' being the centre\nWhen you encounter an exit you will have the choice to go through to another room with 'yes' pr 'no', this is how you move between rooms\nTo access your inventory type 'inventory'\nTo get your current room information type 'get current room'\nTo get your current player stats type 'get player status'\nAll other instructions will be told to you when you encounter something, now go play the game!\n");
     }
 
     public void addToRooms(Room tr){
-        allRooms.put(allRooms.size(), tr);
+        getAllRooms().put(getAllRooms().size(), tr);
+        tr.setRoomNo(getAllRooms().size()-1);
     }
 
     public void addItemToGame(Item item){
@@ -38,6 +39,7 @@ public class GameEngine {
     }
 
     public void run(Player player) {
+        System.out.println("\nPlease play game with terminal/cmd window maximised/as large as it goes\n");
         player.setGlobalLocation(allRooms.get(0));
         System.out.println("This is the " + player.getGlobalLocation().getNameOfRoom() + "\n" + player.getGlobalLocation().getContext());
 //        player.getGlobalLocation().getPointsInRoom().get("C").encountered(player, this);

@@ -26,6 +26,7 @@ public class main {
 
         //creating enemies
         Enemy troll = new Enemy("Troll", "The troll has a somewhat recognizable face but you can't seem to remember where from.\nHis skin is pale grey and his breath stinks of rotting flesh.\nHe looks aggressive and as if he will attack you", 8, 20, "ME NO LIKE LOOK OF YOU");
+        Enemy troll2 = new Enemy("Troll", "The troll has a somewhat recognizable face but you can't seem to remember where from.\nHis skin is pale grey and his breath stinks of rotting flesh.\nHe looks aggressive and as if he will attack you", 8, 20, "ME NO LIKE LOOK OF YOU");
         Enemy potato = new Enemy("Potato", "This is just some random potato BUT YOU MUST KILLS IT", 1, 10, "WHAT ARE YOU DOING HERE HOOMAN");
 
         //creating furniture
@@ -36,6 +37,7 @@ public class main {
         Item candleStick = new Item("candlestick", "This candlestick seems to be ble to talk.. it has a strange smile on its... face?", 0, 10, ge);
         Item fork = new Item("fork", "this is an fork", 0, 2, ge);
         Item apple = new Item("apple", "this is a scrumptious apple", 10, 0, ge);
+        Item appleNo2 = new Item("apple", "this is a scrumptious apple", 10, 0, ge);
         Item potatop = new Item("potato", "this is a silly little potato", 20, 0, ge);
         Item energyDrink = new Item("energy drink", "this is drink will restore energy", 1);
 
@@ -49,7 +51,7 @@ public class main {
         Room cR = new Room("celery room", "The room has a huge staircase to the north.");
 
         //creating friendlies
-        Friendly wizzy = new Friendly("Wizard", "This is an ancient wizard trained in the dark arts", "Good evening peasant..", troll, 10, excalibur);
+        Friendly wizzy = new Friendly("Wizard", "This is an ancient wizard trained in the dark arts", "Good evening peasant..", apple, 10, excalibur);
 
         //Exits for sR
         Exits sRExit1 = new Exits("North Exit", "There doesn't seem to be an end to this exit but merely the absence of matter behind it.", 1);
@@ -64,16 +66,16 @@ public class main {
         ge.addToRooms(cR);
 
         //adding entities to locations in the sR room
-        sR.addEntity("n", energyDrink);
-        sR.addEntity("s", candleStick);
-        sR.addEntity("e", apple);
-        sR.addEntity("w", sRmap);
+        sR.addEntity("n", sRExit1, ge);
+        sR.addEntity("e", troll, ge);
+        sR.addEntity("w", wizzy, ge);
+        sR.addEntity("s", apple, ge);
 
         //adding entities to locations in the bR room
-
+        bR.addEntity("s", bRExit1, ge);
+        bR.addEntity("sw", troll2, ge);
 
         //adding items to furniture
-
 //TODO: need to add maps for every room
 //        for(int i = 0; i<ge.getAllRooms().size(); i++) {
 //            Item map = new Item(ge.getAllRooms().get(i).getNameOfRoom() + " map", "shows everything that is in the " + ge.getAllRooms().get(i).getNameOfRoom(), i, ge);
