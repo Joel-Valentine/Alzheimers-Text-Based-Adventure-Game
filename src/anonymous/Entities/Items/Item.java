@@ -32,6 +32,8 @@ public class Item extends Entity {
 
     @Override
     public void encountered(Player p, GameEngine ge) {
+        //line below is quite hacky but not sure i know how else to do it
+        setTempLocation(p.getInput());
         setAnswered(false);
         System.out.println("\nYou have found a " + getNameOfEntity() + " " + getDescOfEntity());
         if(getDamage() > 0){
@@ -46,7 +48,7 @@ public class Item extends Entity {
                 setAnswered(true);
                 p.putItemInInventory(getNameOfEntity(), this);
                 System.out.println("\nYou decide to pickup the " + getNameOfEntity() + "\n");
-                removeEntityFromRoom(p);
+                removeEntityFromRoom(p, this);
             } else if (p.getInput().equals("leave")) {
                 setAnswered(true);
                 System.out.println("\nYou decide to leave the item and go somewhere else\n");

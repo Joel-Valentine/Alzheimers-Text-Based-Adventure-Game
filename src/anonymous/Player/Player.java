@@ -80,7 +80,20 @@ public class Player{
     }
 
     public void putItemInInventory(String key, Item itm){
-        getInventory().put(key, itm);
+//        int itemIndex = 0;
+//        if(getInventory().containsKey(key)) {
+//            boolean duplicate = true;
+//            while (duplicate) {
+//                if (getInventory().containsKey(key)) {
+//                    itemIndex++;
+//                } else {
+//                    getInventory().put((key + "(" + itemIndex + ")"), itm);
+//                    duplicate = false;
+//                }
+//            }
+//        }else{
+            getInventory().put(key, itm);
+//        }
     }
 
     public void removeItemFromInventory(String key){

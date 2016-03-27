@@ -3,6 +3,10 @@ package anonymous.Entities;
 import anonymous.Player.Player;
 import anonymous.Mechanics.GameEngine;
 
+import java.util.Iterator;
+import java.util.Scanner;
+import java.util.Vector;
+
 /**
  * Created by joelvalentine on 11/03/2016.
  */
@@ -13,6 +17,7 @@ public abstract class Entity {
     private String descOfEntity;
     private String instructs;
     private boolean answered;
+    private String tempLocation;
 
     public Entity(){
     }
@@ -28,13 +33,8 @@ public abstract class Entity {
         setRoom(tr);
     }
 
-    public void removeEntityFromRoom(Player p){
-        for(int i = 0; i<p.getGlobalLocation().getAllPossibleIndexs().length; i++){
-            Entity val = p.getGlobalLocation().getPointsInRoom().get(p.getGlobalLocation().getAllPossibleIndexs()[i]);
-            if(val.getNameOfEntity() == getNameOfEntity()){
-                p.getGlobalLocation().removeEntity(p.getGlobalLocation().getAllPossibleIndexs()[i]);
-            }
-        }
+    public void removeEntityFromRoom(Player p, Entity e){
+        p.getGlobalLocation().removeEntity(e.getTempLocation());
     }
 
     public void randomDrop(GameEngine ge, Player p){
@@ -95,6 +95,14 @@ public abstract class Entity {
 
     public void setAnswered(boolean answered) {
         this.answered = answered;
+    }
+
+    public String getTempLocation() {
+        return tempLocation;
+    }
+
+    public void setTempLocation(String tempLocation) {
+        this.tempLocation = tempLocation;
     }
 
     @Override

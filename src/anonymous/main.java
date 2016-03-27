@@ -63,19 +63,21 @@ public class main {
         ge.addToRooms(cR);
 
         //adding entities to locations in the sR room
-        sR.addEntity("n", sRExit1);
+//        sR.addEntity("n", sRExit1);
 //        sR.addEntity("c", henry);
         sR.addEntity("c", map);
         sR.addEntity("w", troll);
 //        sR.addEntity("s", potato);
 //        sR.addEntity("w", candleStick);
 //        sR.addEntity("se", fork);
-        sR.addEntity("ne", apple);
-        sR.addEntity("s", draws);
-        sR.addEntity("e", wizzy);
+        sR.addEntity("s", apple);
+        sR.addEntity("n", apple);
+        sR.addEntity("sw", draws);
+//        sR.addEntity("e", wizzy);
 //        sR.addEntity("n", plop);
 
         //adding entities to locations in the bR room
+        bR.addEntity("w", troll);
         bR.addEntity("s", bRExit1);
         bR.addEntity("n", bRExit2);
         bR.addEntity("e", potatop);
