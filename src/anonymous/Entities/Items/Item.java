@@ -15,6 +15,13 @@ public class Item extends Entity {
     private String memoryText;
     private int energyRegen;
 
+    public Item(String name, String descrip, int room){
+        setRoom(room);
+        setNameOfEntity(name);
+        setDescOfEntity(descrip);
+        setInstructs("\nType 'pickup' to pick the " + getNameOfEntity() + " up\nType 'leave' to go somewhere else\n");
+    }
+
     public Item(String name, String descrip, String memory, GameEngine ge){
         setNameOfEntity(name);
         setDescOfEntity(descrip);
@@ -46,6 +53,14 @@ public class Item extends Entity {
         setDescOfEntity(descrip);
         setInstructs("\nType 'pickup' to pick the " + getNameOfEntity() + " up\nType 'leave' to go somewhere else\n");
         ge.addItemToGame(this);
+    }
+
+    public Item(String name, String descrip, int healthRegen, int damage){
+        setDamage(damage);
+        setHealthRegen(healthRegen);
+        setNameOfEntity(name);
+        setDescOfEntity(descrip);
+        setInstructs("\nType 'pickup' to pick the " + getNameOfEntity() + " up\nType 'leave' to go somewhere else\n");
     }
 
     @Override
@@ -87,7 +102,12 @@ public class Item extends Entity {
     }
 
     private void memoryItem(){
-        System.out.println("\nThe memory is as follows:\n" + getMemoryText() + "\n\nsince this is only information you can't interact and return back to whatever you were doing\n");
+        System.out.println("\nThe memory is as follows:\n" + getMemoryText() + "\nsince this is only information you can't interact and return back to whatever you were doing\n");
+        setAnswered(true);
+    }
+
+    private void keyItem(GameEngine ge){
+        System.out.println("\n" + getDescOfEntity() + " in the " + ge.getAllRooms().get(getRoom()).getNameOfRoom() + "\nsince this is only information you can't interact and return back to whatever you were doing\n");
         setAnswered(true);
     }
 
@@ -96,8 +116,6 @@ public class Item extends Entity {
             for(int i = 0; i<ge.getAllRooms().get(getRoom()).getPointsInRoom().size(); i++){
                 if(ge.getAllRooms().get(getRoom()).getPointsInRoom().get(ge.getAllRooms().get(getRoom()).getAllPossibleIndexs()[i]).getNameOfEntity() != null){
                     System.out.println("to the " + ge.getAllRooms().get(getRoom()).getAllPossibleIndexs()[i] + " there is a/an " + ge.getAllRooms().get(getRoom()).getPointsInRoom().get(ge.getAllRooms().get(getRoom()).getAllPossibleIndexs()[i]).getNameOfEntity());
-                }else{
-                     //// TODO: 27/03/2016 if map is empty figure it out
                 }
             }
         System.out.println("\nsince this is only information you can't interact and return back to whatever you were doing\n");
@@ -114,6 +132,8 @@ public class Item extends Entity {
                     mapItem(ge);
                 }else if(getNameOfEntity().contains("memory")){
                     memoryItem();
+                }else if(getNameOfEntity().contains("key")){
+                    keyItem(ge);
                 }
             }else if (getHealthRegen() == 0) {
                 if(p.getCurrentlyEquipped().isEmpty()){

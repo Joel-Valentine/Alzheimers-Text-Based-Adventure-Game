@@ -68,7 +68,7 @@ public class Room {
     }
 
     public void setNameOfRoom(String nameOfRoom) {
-        this.nameOfRoom = nameOfRoom;
+        this.nameOfRoom = nameOfRoom.toLowerCase();
     }
 
     public int getRoomNo() {

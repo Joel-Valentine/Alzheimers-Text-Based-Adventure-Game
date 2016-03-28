@@ -78,7 +78,7 @@ public class Player{
 
     public String input(){
         System.out.println("What are you going to do?");
-        setInput(sc.nextLine());
+        setInput(sc.nextLine().toLowerCase());
         return getInput();
     }
 
@@ -114,6 +114,9 @@ public class Player{
             if(getInventory().containsKey(key) || getInventory().containsKey(key + i)){
                 key = initKey + i;
             }
+        }
+        if(itm.getNameOfEntity().contains("memory")){
+            setMemoriesCollected(getMemoriesCollected() + 1);
         }
         getInventory().put(key, itm);
     }

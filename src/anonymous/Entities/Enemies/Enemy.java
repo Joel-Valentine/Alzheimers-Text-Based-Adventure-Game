@@ -1,6 +1,7 @@
 package anonymous.Entities.Enemies;
 
 import anonymous.Entities.Entity;
+import anonymous.Entities.Items.Item;
 import anonymous.Mechanics.GameEngine;
 import anonymous.Player.Player;
 
@@ -10,15 +11,28 @@ import anonymous.Player.Player;
 public class Enemy extends Entity {
 
     private int health;
+    private int initialHealth;
     private int damage;
     private String encounterText;
-    private String location;
+    private Item rewardItem;
 
     public Enemy(String s, String s1, int dam, int health, String encounterText){
         setNameOfEntity(s);
         setDescOfEntity(s1);
         setDamage(dam);
         setHealth(health);
+        setInitialHealth(health);
+        setEncounterText(encounterText);
+        setInstructs("\nType 'attack' to attack the " + getNameOfEntity() + "\n" + "Type 'leave' to move somewhere else\nType 'auto attack' if you feel confident enough that you will kill the " + getNameOfEntity() + " without dying\n");
+    }
+
+    public Enemy(String s, String s1, int dam, int health, String encounterText, Item reward){
+        setRewardItem(reward);
+        setNameOfEntity(s);
+        setDescOfEntity(s1);
+        setDamage(dam);
+        setHealth(health);
+        setInitialHealth(health);
         setEncounterText(encounterText);
         setInstructs("\nType 'attack' to attack the " + getNameOfEntity() + "\n" + "Type 'leave' to move somewhere else\nType 'auto attack' if you feel confident enough that you will kill the " + getNameOfEntity() + " without dying\n");
     }
@@ -37,7 +51,7 @@ public class Enemy extends Entity {
             }else if(p.getInput().equals("leave")){
                 leave();
             }else if(p.getInput().equals("auto attack")) {
-                System.out.println("");
+                System.out.println();
                 while (isAlive()) {
                     p.attack(this);
                     attack(p);
@@ -49,9 +63,16 @@ public class Enemy extends Entity {
                 System.out.println(getInstructs());
             }
             if (!isAlive()) {
-                System.out.println("You have killed the " + getNameOfEntity() + " your health is now " + p.getHealth());
+                System.out.println("You have killed the " + getNameOfEntity() + " your health is now " + p.getHealth() + " you can now move elsewhere");
                 removeEntityFromRoom(p, this);
-                randomDrop(ge, p);
+                if(getRewardItem() == null && getInitialHealth() >= 26){
+                    randomDrop(ge, p);
+                }else if(getRewardItem() != null){
+                    p.putItemInInventory(getRewardItem().getNameOfEntity(), getRewardItem());
+                    System.out.println("The " + getNameOfEntity() + " has dropped a/an " + getRewardItem().getNameOfEntity() + " is is now in your inventory\n");
+                }else{
+                    System.out.println();
+                }
             }
         }
     }
@@ -96,11 +117,19 @@ public class Enemy extends Entity {
         this.encounterText = encounterText;
     }
 
-    public String getLocation() {
-        return location;
+    public Item getRewardItem() {
+        return rewardItem;
     }
 
-    public void setLocation(String location) {
-        this.location = location;
+    public void setRewardItem(Item rewardItem) {
+        this.rewardItem = rewardItem;
+    }
+
+    public int getInitialHealth() {
+        return initialHealth;
+    }
+
+    public void setInitialHealth(int initialHealth) {
+        this.initialHealth = initialHealth;
     }
 }

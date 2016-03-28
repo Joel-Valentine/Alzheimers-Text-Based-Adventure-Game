@@ -48,7 +48,6 @@ public abstract class Entity {
                 p.putItemInInventory(ge.getAllItemsInGame().get(randomNum).getNameOfEntity(), ge.getAllItemsInGame().get(randomNum));
             }
         }while(on);
-
     }
 
     public void instructions(String i){
@@ -56,7 +55,7 @@ public abstract class Entity {
     }
 
     public void encountered(Player p, GameEngine ge){
-        System.out.println("\nThere is nothing here.\n");
+        System.out.println("There is nothing here.\n");
     }
 
     public void leave(){
