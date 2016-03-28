@@ -15,11 +15,12 @@ public class Item extends Entity {
     private String memoryText;
     private int energyRegen;
 
-//// TODO: implement memories
-    public Item(String name, String descrip, String memory){
+    public Item(String name, String descrip, String memory, GameEngine ge){
         setNameOfEntity(name);
         setDescOfEntity(descrip);
         setMemoryText(memory);
+        setInstructs("\nType 'pickup' to pick the " + getNameOfEntity() + " up\nType 'leave' to go somewhere else\n");
+        ge.addMemoriesToGame(this);
     }
 
     public Item(String name, String descrip, int room, GameEngine ge){
@@ -30,11 +31,12 @@ public class Item extends Entity {
         ge.addItemToGame(this);
     }
 
-    public Item(String name, String descrip, int energyRegen){
+    public Item(String name, String descrip, GameEngine ge, int energyRegen){
         setEnergyRegen(energyRegen);
         setNameOfEntity(name);
         setDescOfEntity(descrip);
         setInstructs("\nType 'pickup' to pick the " + getNameOfEntity() + " up\nType 'leave' to go somewhere else\n");
+        ge.addItemToGame(this);
     }
 
     public Item(String name, String descrip, int healthRegen, int damage, GameEngine ge){
@@ -64,9 +66,16 @@ public class Item extends Entity {
             p.input();
             if (p.getInput().equals("pickup")) {
                 setAnswered(true);
-                p.putItemInInventory(getNameOfEntity(), this);
-                System.out.println("\nYou decide to pickup the " + getNameOfEntity() + "\n");
-                removeEntityFromRoom(p, this);
+                if(getNameOfEntity().contains("memory")){
+                    p.putItemInInventory(getNameOfEntity(), this);
+                    System.out.println("\nYou decide to pickup the " + getNameOfEntity() + "\n");
+                    removeEntityFromRoom(p, this);
+                    p.setMemoriesCollected(p.getMemoriesCollected() + 1);
+                }else{
+                    p.putItemInInventory(getNameOfEntity(), this);
+                    System.out.println("\nYou decide to pickup the " + getNameOfEntity() + "\n");
+                    removeEntityFromRoom(p, this);
+                }
             } else if (p.getInput().equals("leave")) {
                 setAnswered(true);
                 System.out.println("\nYou decide to leave the item and go somewhere else\n");
@@ -77,6 +86,10 @@ public class Item extends Entity {
         }
     }
 
+    private void memoryItem(){
+        System.out.println("\nThe memory is as follows:\n" + getMemoryText() + "\n\nsince this is only information you can't interact and return back to whatever you were doing\n");
+        setAnswered(true);
+    }
 
     private void mapItem(GameEngine ge) {
         System.out.println();
@@ -87,7 +100,7 @@ public class Item extends Entity {
                      //// TODO: 27/03/2016 if map is empty figure it out
                 }
             }
-        System.out.println();
+        System.out.println("\nsince this is only information you can't interact and return back to whatever you were doing\n");
         setAnswered(true);
     }
 
@@ -96,8 +109,12 @@ public class Item extends Entity {
         while(!isAnswered()) {
             if(getEnergyRegen() > 0){
                 regenEnergy(p);
-            }else if(getHealthRegen() == 0 && getDamage() == 0){
-                mapItem(ge);
+            }else if(getHealthRegen() == 0 && getDamage() == 0 && getEnergyRegen() == 0){
+                if(getNameOfEntity().contains("map")){
+                    mapItem(ge);
+                }else if(getNameOfEntity().contains("memory")){
+                    memoryItem();
+                }
             }else if (getHealthRegen() == 0) {
                 if(p.getCurrentlyEquipped().isEmpty()){
                     equipItem(p);
@@ -111,8 +128,30 @@ public class Item extends Entity {
     }
 
     public void regenEnergy(Player p){
-        System.out.println("this will be ok");
-        setAnswered(true);
+        System.out.println("\nthis " + getNameOfEntity() + " will regenerate " + getEnergyRegen() + " energy points\nType 'eat' to eat this " + getNameOfEntity() + "\n");
+        p.input();
+        if(p.getInput().equals("eat")){
+            if(p.getEnergy() + getEnergyRegen() > p.getStandardEnergy()){
+                System.out.println("\nYour current energy is " + p.getEnergy() + " if you eat this " + getNameOfEntity() + " you will be wasting " + ((p.getEnergy() + getEnergyRegen()) - p.getStandardEnergy()) + " points of energy as the max energy is " + p.getStandardEnergy() +"\nAre you sure you want to eat it?\n'yes' or 'no'\n");
+                p.input();
+                if(p.getInput().equals("yes")){
+                    p.setEnergy(p.getStandardEnergy());
+                    System.out.println("\nYou eat the " + getNameOfEntity() + " your energy is now " + p.getEnergy() + "\n");
+                    p.removeItemFromInventory(getNameOfEntity());
+                    setAnswered(true);
+                }else if(p.getInput().equals("no")){
+                    System.out.println("\nYou decide not to waste the energy points for no reason. Good job.\n");
+                    setAnswered(true);
+                }else{
+                    System.out.println("Type 'yes' or 'no'");
+                }
+            }else{
+                p.setEnergy(p.getEnergy() + getEnergyRegen());
+                System.out.println("\nYou eat the " + getNameOfEntity() + " your energy is now " + p.getEnergy() + "\n");
+                p.removeItemFromInventory(getNameOfEntity());
+                setAnswered(true);
+            }
+        }
     }
 
     public void removeFromEquipped(Player p){
@@ -130,7 +169,7 @@ public class Item extends Entity {
             p.setDamage(getDamage());
             setAnswered(true);
             p.getCurrentlyEquipped().put(getNameOfEntity(), this);
-            System.out.println("your damage is now " + p.getDamage() + "\n");
+            System.out.println("\nYou equip the " + getNameOfEntity() + " your damage is now " + p.getDamage() + "\n");
         }else if(p.getInput().equals("leave")){
             leave();
         }
@@ -161,7 +200,7 @@ public class Item extends Entity {
         System.out.println();
         p.input();
         if(p.getInput().equals("eat")){
-            if(p.getHealth() + getHealthRegen() >= p.getStandardHealth()){
+            if(p.getHealth() + getHealthRegen() > p.getStandardHealth()){
                 System.out.println("\nYour current health is " + p.getHealth() + " if you eat this " + getNameOfEntity() + " you will be wasting " + ((p.getHealth() + getHealthRegen()) - p.getStandardHealth()) + " points of health as the max health is " + p.getStandardHealth() +"\nAre you sure you want to eat it?\n'yes' or 'no'\n");
                 p.input();
                 if(p.getInput().equals("yes")){

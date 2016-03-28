@@ -20,6 +20,7 @@ public class Player{
     private int standardHealth;
     private int standardDamage;
     private int standardEnergy;
+    private int memoriesCollected;
     private String input;
     private Room globalLocation;
     private int damage;
@@ -28,10 +29,10 @@ public class Player{
     private boolean Answered;
     private TreeMap<String, Entity> currentlyEquipped = new TreeMap<>();
 
-    public Player() {
-        setStandardHealth(100);
-        setStandardDamage(3);
-        setStandardEnergy(8);
+    public Player(int maxHealthPoints, int maxDefaultDamageValue, int maxEnergyPoints) {
+        setStandardHealth(maxHealthPoints);
+        setStandardDamage(maxDefaultDamageValue);
+        setStandardEnergy(maxEnergyPoints);
         setQuestPoints(0);
         setDamage(getStandardDamage());
         setHealth(getStandardHealth());
@@ -40,13 +41,40 @@ public class Player{
 
     public boolean isAlive() {
         for(int i = 0; i<getHealth(); i++) {
-            if (getHealth() <= 0 || getEnergy() <= 0) {
+            if (getHealth() <= 0) {
+                System.out.println("\nyou ran out of health and died!\n");
                 return true;
-            }else {
+            }else if(getEnergy() <= 0){
+                System.out.println("\nyou ran out of energy and died!\n");
+                return true;
+            } else {
                 return false;
             }
         }
         return true;
+    }
+
+
+    public boolean hasWon(GameEngine ge){
+        if(getMemoriesCollected() == ge.getAllMemoriesInGame().size()){
+            System.out.println("You have won the game as you collected all your lost memories from your brain\nIf you would like to continue playing type 'yes' if not type 'no'\n");
+            input();
+            if(getInput().equals("yes")){
+                System.out.println("\nYou decide to continue playing until you get bored.. a wise move as this game is incredible\n");
+                setMemoriesCollected(getMemoriesCollected() - 1);
+                return false;
+            }else if(getInput().equals("no")){
+                System.out.println("\nYou decide enough is enough I have battled hard for this win, thanks for playing!");
+                return true;
+            }
+        }else{
+            return false;
+        }
+        return false;
+    }
+
+    public void currentStatus(GameEngine ge){
+        System.out.println("\nHere are your current states:\nequipped item: " + getCurrentlyEquipped().keySet().toString().replaceAll("\\[\\]", "nothing") + "\ndamage: " + getDamage() + " \nhealth points: " + getHealth() + " \nenergy points: " + getEnergy() + "\nquest points: " + getQuestPoints() + " \nmemories collected: " + getMemoriesCollected() + "/" + ge.getAllMemoriesInGame().size() + "\n");
     }
 
     public String input(){
@@ -66,7 +94,7 @@ public class Player{
         }else if(getInput().equals("get current room")){
             System.out.println("\nYou are currently in the " +  getGlobalLocation().getNameOfRoom() + "\n" + getGlobalLocation().getContext());
         }else if(getInput().equals("get player status")){
-            System.out.println("\nHere are you current states:\nequipped item: " + getCurrentlyEquipped().firstKey() + "\ndamage: " + getDamage() + " \nhealth points: " + getHealth() + " \nenergy points: " + getEnergy() + "\nquest points: " + getQuestPoints() + " \n");
+            currentStatus(ge);
         }else{
             System.out.println("\nThat isn't an allowed command try again. Try typing 'instructions' to get available commands\n");
         }
@@ -213,6 +241,14 @@ public class Player{
         this.questPoints = questPoints;
     }
 
+    public int getMemoriesCollected() {
+        return memoriesCollected;
+    }
+
+    public void setMemoriesCollected(int memoriesCollected) {
+        this.memoriesCollected = memoriesCollected;
+    }
+
     @Override
     public String toString() {
         return "Player{" +
@@ -231,4 +267,5 @@ public class Player{
                 ", currentlyEquipped=" + currentlyEquipped +
                 '}';
     }
+
 }

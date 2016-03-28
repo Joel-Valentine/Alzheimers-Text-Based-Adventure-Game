@@ -18,7 +18,7 @@ public class main {
     public static void main(String args[]) {
 
         //Constants
-        Player player = new Player();
+        Player player = new Player(100, 3, 10);
         GameEngine ge = new GameEngine(player);
         Henry henry = new Henry("Henry", "is a bright pink bunny wearing a tophat and a monocle.");
 
@@ -37,9 +37,9 @@ public class main {
         Item candleStick = new Item("candlestick", "This candlestick seems to be ble to talk.. it has a strange smile on its... face?", 0, 10, ge);
         Item fork = new Item("fork", "this is an fork", 0, 2, ge);
         Item apple = new Item("apple", "this is a scrumptious apple", 10, 0, ge);
-        Item appleNo2 = new Item("apple", "this is a scrumptious apple", 10, 0, ge);
         Item potatop = new Item("potato", "this is a silly little potato", 20, 0, ge);
-        Item energyDrink = new Item("energy drink", "this is drink will restore energy", 1);
+        Item energyDrink = new Item("energy drink", "this is drink will restore energy",ge ,1);
+        Item memory = new Item("Troll memory", "This is a memory fragment from your past", "The troll was once one of your friends from university, after finding this a part of your memory has been restored", ge);
 
         //creating quest reward items
         Item excalibur = new Item("excalibur", "This sword is very mighty", 0, 100, ge);
@@ -67,9 +67,14 @@ public class main {
 
         //adding entities to locations in the sR room
         sR.addEntity("n", sRExit1, ge);
+        sR.addEntity("c", henry, ge);
         sR.addEntity("e", troll, ge);
         sR.addEntity("w", wizzy, ge);
         sR.addEntity("s", apple, ge);
+        sR.addEntity("ne", memory, ge);
+        sR.addEntity("se", sRmap, ge);
+        sR.addEntity("nw", energyDrink, ge);
+        sR.addEntity("sw", excalibur, ge);
 
         //adding entities to locations in the bR room
         bR.addEntity("s", bRExit1, ge);
