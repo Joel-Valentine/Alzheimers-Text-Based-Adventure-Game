@@ -12,7 +12,7 @@ public class Exits extends Entity{
         setRoom(roomNo);
         setNameOfEntity(nameOfEntity);
         setDescOfEntity(descOfEntity);
-        setInstructs("\nType 'yes' to go through the " + getNameOfEntity() + "\n" + "Type 'no' to move somewhere else\n");
+        setInstructs("\nType 'yes' to go through the " + getNameOfEntity() + "\n" + "Type 'no' to move somewhere else\nOnce you go through you will be placed in the 'c' position of the room.. be careful\n");
     }
 
     @Override
