@@ -8,7 +8,7 @@ import anonymous.Player.Player;
 import java.util.HashMap;
 
 /**
- * Created by joelvalentine on 22/03/2016.
+ * Created by anonymous on 22/03/2016.
  */
 public class Furniture extends Entity{
 

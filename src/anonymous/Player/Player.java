@@ -9,10 +9,9 @@ import anonymous.Room.Room;
 import java.util.*;
 
 /**
- * Created by joelvalentine on 01/03/2016.
+ * Created by anonymous on 01/03/2016.
  */
-////TODO: implement scoring system when game ends
-    //// TODO: implement story
+
 public class Player{
     private int energy;
     private int health;

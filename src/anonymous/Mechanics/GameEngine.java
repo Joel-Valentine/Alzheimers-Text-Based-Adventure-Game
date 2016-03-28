@@ -7,7 +7,7 @@ import anonymous.Player.Player;
 import java.util.HashMap;
 
 /**
- * Created by joelvalentine on 11/03/2016.
+ * Created by anonymous on 11/03/2016.
  */
 public class GameEngine {
 
@@ -16,6 +16,7 @@ public class GameEngine {
     private HashMap<Integer, Item> allMemoriesInGame = new HashMap<>();
 
     public GameEngine(Player player) {
+        System.out.println("\nPlease play game with terminal/cmd window maximised/as large as it goes\n");
     }
 
     public void instructions(){
@@ -48,10 +49,6 @@ public class GameEngine {
     }
 
     public void run(Player player) {
-        System.out.println("\nPlease play game with terminal/cmd window maximised/as large as it goes\n");
-        player.setGlobalLocation(allRooms.get(0));
-        System.out.println("This is the " + player.getGlobalLocation().getNameOfRoom() + "\n" + player.getGlobalLocation().getContext());
-        player.getGlobalLocation().getPointsInRoom().get("c").encountered(player, this);
         while(!player.isAlive() && !player.hasWon(this)){
             player.move(this);
         }

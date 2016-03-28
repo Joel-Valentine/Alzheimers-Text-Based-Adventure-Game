@@ -8,7 +8,7 @@ import java.util.Scanner;
 import java.util.Vector;
 
 /**
- * Created by joelvalentine on 11/03/2016.
+ * Created by anonymous on 11/03/2016.
  */
 public abstract class Entity {
 

@@ -10,7 +10,7 @@ import java.util.Set;
 import java.util.Vector;
 
 /**
- * Created by joelvalentine on 16/03/2016.
+ * Created by anonymous on 16/03/2016.
  */
 public class Friendly extends Entity {
 

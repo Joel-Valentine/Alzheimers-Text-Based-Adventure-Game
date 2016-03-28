@@ -1,7 +1,7 @@
 package anonymous.Mechanics;
 
 /**
- * Created by joelvalentine on 07/03/2016.
+ * Created by anonymous on 07/03/2016.
  */
 public class ScrollingText {
 

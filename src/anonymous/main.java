@@ -11,7 +11,7 @@ import anonymous.Mechanics.GameEngine;
 import anonymous.Room.Room;
 
 /**
- * Created by joelvalentine on 16/02/2016.
+ * Created by anonymous on 16/02/2016.
  */
 public class main {
 
@@ -81,11 +81,11 @@ public class main {
         bR.addEntity("sw", troll2, ge);
 
         //adding items to furniture
-//TODO: need to add maps for every room
-//        for(int i = 0; i<ge.getAllRooms().size(); i++) {
-//            Item map = new Item(ge.getAllRooms().get(i).getNameOfRoom() + " map", "shows everything that is in the " + ge.getAllRooms().get(i).getNameOfRoom(), i, ge);
-//            player.putItemInInventory(map.getNameOfEntity(), map);
-//        }
+
+        //setting players location globally(the room) and location within that room
+        player.setGlobalLocation(ge.getAllRooms().get(0));
+        player.getGlobalLocation().encounterRoom();
+        player.getGlobalLocation().getPointsInRoom().get("c").encountered(player, ge);
 
         //running the Game Engine
         ge.run(player);

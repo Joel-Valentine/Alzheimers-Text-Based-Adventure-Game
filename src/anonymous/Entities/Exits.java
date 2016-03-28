@@ -4,7 +4,7 @@ import anonymous.Player.Player;
 import anonymous.Mechanics.GameEngine;
 
 /**
- * Created by joelvalentine on 11/03/2016.
+ * Created by anonymous on 11/03/2016.
  */
 public class Exits extends Entity{
 
@@ -27,7 +27,9 @@ public class Exits extends Entity{
                 p.energyDepletion();
                 System.out.println("Your energy is now " + p.getEnergy() + "\n");
                 p.setGlobalLocation(ge.getAllRooms().get(getRoom()));
-                System.out.println("This is the " + p.getGlobalLocation().getNameOfRoom() + "\n" + p.getGlobalLocation().getContext().toString());
+                p.getGlobalLocation().encounterRoom();
+                System.out.println("You go to the centre of the room");
+                p.getGlobalLocation().getPointsInRoom().get("c").encountered(p, ge);
                 setAnswered(true);
             } else if (p.getInput().equals("no")) {
                 leave();

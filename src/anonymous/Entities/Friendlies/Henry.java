@@ -6,7 +6,7 @@ import anonymous.Mechanics.ScrollingText;
 import anonymous.Player.Player;
 
 /**
- * Created by joelvalentine on 16/02/2016.
+ * Created by anonymous on 16/02/2016.
  */
 public class Henry extends Entity{
 

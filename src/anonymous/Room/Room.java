@@ -8,7 +8,7 @@ import anonymous.Mechanics.GameEngine;
 import java.util.HashMap;
 
 /**
- * Created by joelvalentine on 04/03/2016.
+ * Created by anonymous on 04/03/2016.
  */
 public class Room {
 
@@ -25,6 +25,10 @@ public class Room {
         setNameOfRoom(roomName);
         setContext(roomContext);
         fillingHashmapWithNull();
+    }
+
+    public void encounterRoom(){
+        System.out.println("This is the " + getNameOfRoom() + "\n" + getContext());
     }
 
     public String getContext() {

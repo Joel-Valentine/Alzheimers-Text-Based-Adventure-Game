@@ -5,7 +5,7 @@ import anonymous.Mechanics.GameEngine;
 import anonymous.Player.Player;
 
 /**
- * Created by joelvalentine on 13/03/2016.
+ * Created by anonymous on 13/03/2016.
  */
 public class Enemy extends Entity {
 
