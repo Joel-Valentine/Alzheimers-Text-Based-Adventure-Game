@@ -18,7 +18,7 @@ public class main {
     public static void main(String args[]) {
 
         //Constants
-        Player player = new Player(100, 3, 10);
+        Player player = new Player(100, 3, 100);
         GameEngine ge = new GameEngine(player);
         Henry henry = new Henry("Henry", "is a bright pink bunny wearing a tophat and a monocle.");
 
@@ -43,11 +43,12 @@ public class main {
 //        Item sRmap = new Item("Starting room map", "This map will show you everything in the starting room", 0);
 
         //creating keys these wont be included in random drops
+        Item brainStemRoomKeyEW = new Item("pink key", "this key opens the east exit", 3);
 //        Item sRExit1Key = new Item("key", "this key opens the north exit", 0);
 
         //Creating rooms
         Room startingRoom = new Room("Starting room", "You wake up on a smooth, clean floor. All you can see is a blinding white light.\nThere doesn't seem to be an end to the walls and a start to the ceiling or floor.\nYou see a small silhouette figure in the corner of the room wearing what seems to be a tophat..\n");
-        Room brainRoomEntrance = new Room("Brain room", "The room has strange flesh looking walls, ceiling and floor. Every time you take a step you hear a squelching noise.\nYou are faced with a huge flesh door to the north, with a sign above it that says 'Brain Entrance'\n");
+        Room brainEntranceRoom = new Room("Brain entrance room", "The room has strange flesh looking walls, ceiling and floor. Every time you take a step you hear a squelching noise.\nYou are faced with a huge flesh door to the north, with a sign above it that says 'Brain Entrance'\n");
         Room brainStemRoom = new Room("Brain stem room", "This room has thick columns strutting from the ceiling to the floor.. The floor is made of what looks like hard bone..\n");
         Room brainDatabase = new Room("Brain database room", "This room seems to have lots of servers racks containing broken servers...\nIts as if the database is corrupted and missing parts all over\n");
         Room cerebralCortexRoom = new Room("Cerebral cortex room", "This room is grey all over.. a nice change from the flesh walls and floor..\nA strange feeling comes over me.. am i conscious?.. get it? because this room is responsible for consciousness.. get it? I am here all day\n");
@@ -56,12 +57,41 @@ public class main {
         Room homunculusRoom = new Room("homunculus room", "Some say brains are run by small people controlling us.. There should be a small man somewhere in this room\n");
         Room brainLibraryRoom = new Room("Brain library room", "This libraries books have all been torn up and thrown all over the floor.. its hard to concentrate in here\n");
 
-        //Exits for sR
-//        Exits sRExit1 = new Exits("North Exit", "There doesn't seem to be an end to this exit but merely the absence of matter behind it.", 1, sRExit1Key);
+        //Exits for starting room
+        Exits startingRoomExitN = new Exits("North Exit", "There doesn't seem to be an end to this exit but merely the absence of matter behind it.", 1);
 
-        //Exits for bR
-//        Exits bRExit1 = new Exits("South Exit", "There doesn't seem to be an end to this exit but merely the absence of matter behind it.", 0);
-//        Exits bRExit2 = new Exits("North Exit", "The north exit leads up the staircase", 2);
+        //Exits for brain entrance room
+        Exits brainEntranceRoomExitS = new Exits("South exit", "There doesn't seem to be an end to this exit but merely the absence of matter behind it.", 0);
+        Exits brainEntranceRoomExitN = new Exits("North exit", "The north exit has a large sign above it saying 'brain entrance'", 2);
+
+        //Exits for brain stem room
+        Exits brainStemRoomExitN = new Exits("North exit", "This exit is a large metal door", 4);
+        Exits brainStemRoomExitW = new Exits("West exit", "This exit is a small dining room door..", 5);
+        Exits brainStemRoomExitE = new Exits("East exit", "This exit is comprised of flesh but it wont budge.. it seems to have a slot for a key", 3, brainStemRoomKeyEW);
+        Exits brainStemRoomExitS = new Exits("South exit", "This exit has a large sign above it saying 'brain exit'", 1 );
+
+        //Exits for brain database room
+        Exits brainDatabaseRoomExitW = new Exits("West exit", "This exit is comprised of flesh but it wont budge.. it seems to have a slot for a key", 2, brainStemRoomKeyEW);
+        Exits brainDatabaseRoomExitE = new Exits("east exit", "This is a large wooden door with a sign saying 'library please be quiet'", 8);
+
+        //Exits for cerebral cortex room
+        Exits cerebralCortexRoomExitS = new Exits("South Exit", "This exit is a large metal door", 2);
+        Exits cerebralCortexRoomExitW = new Exits("west Exit", "This is a sturdy dusty metal door it doesn't look like it is used very often", 6);
+        Exits cerebralCortexRoomExitN = new Exits("north Exit", "There is no door to this exit simply a door frame", 7);
+
+        //Exits for brain dining room
+        Exits brainDiningRoomExitE = new Exits("East exit", "This exit is a small dining room door..", 2);
+        Exits brainDiningRoomExitN = new Exits("north exit", "This exit is a very small metal swinging kitchen door..", 6);
+
+        //Exits for brain kitchen room
+        Exits brainKitchenRoomExitS = new Exits("south exit", "This exit is a very small metal swinging kitchen door..", 5);
+        Exits brainKitchenRoomExitE = new Exits("east exit", "This is a sturdy dusty metal door it doesn't look like it is used very often", 4);
+
+        //Exits for brain library room
+        Exits brainLibraryRoomExitW = new Exits("west exit", "This is a large wooden door with a sign saying 'thank you for being quiet'", 3);
+
+        //Exits for homunculus room
+        Exits homunculusRoomExitS = new Exits("south exit", "There is no door to this exit simply a door frame", 4);
 
         //creating enemies
         Enemy troll = new Enemy("Troll", "The troll has a somewhat recognizable face but you can't seem to remember where from.\nHis skin is pale grey and his breath stinks of rotting flesh.\nHe looks aggressive and as if he will attack you", 8, 20, "ME NO LIKE LOOK OF YOU");
@@ -74,30 +104,53 @@ public class main {
 //        Friendly wizzy = new Friendly("Wizard", "This is an ancient wizard trained in the dark arts", "Good evening peasant..", apple, 10, excalibur);
 
         //Adding rooms to rooms hashmap
-        ge.addToRooms(startingRoom);
-        ge.addToRooms(brainRoomEntrance);
-        ge.addToRooms(brainStemRoom);
-        ge.addToRooms(brainDatabase);
-        ge.addToRooms(cerebralCortexRoom);
-        ge.addToRooms(brainDiningRoom);
-        ge.addToRooms(brainKitchenRoom);
-        ge.addToRooms(homunculusRoom);
-        ge.addToRooms(brainLibraryRoom);
+        ge.addToRooms(startingRoom); //room 0
+        ge.addToRooms(brainEntranceRoom); //room 1
+        ge.addToRooms(brainStemRoom); //room 2
+        ge.addToRooms(brainDatabase); //room 3
+        ge.addToRooms(cerebralCortexRoom); //room 4
+        ge.addToRooms(brainDiningRoom); //room 5
+        ge.addToRooms(brainKitchenRoom); //room 6
+        ge.addToRooms(homunculusRoom); //room 7
+        ge.addToRooms(brainLibraryRoom); //room 8
 
         //adding entities to locations in the starting room
-        startingRoom.addEntity("c", henry, ge);
-        startingRoom.addEntity("e", josh, ge);
-        startingRoom.addEntity("w", troll, ge);
+        startingRoom.addEntity("ne", henry, ge);
+        startingRoom.addEntity("n", startingRoomExitN, ge);
 
         //adding entities to locations in the brain entrance room
+        brainEntranceRoom.addEntity("n", brainEntranceRoomExitN, ge);
+        brainEntranceRoom.addEntity("s", brainEntranceRoomExitS, ge);
 
-        //adding entities to locations in the brain entrance room
+        //adding entities to locations in the brain stem room
+        brainStemRoom.addEntity("n", brainStemRoomExitN, ge);
+        brainStemRoom.addEntity("s", brainStemRoomExitS, ge);
+        brainStemRoom.addEntity("w", brainStemRoomExitW, ge);
+        brainStemRoom.addEntity("e", brainStemRoomExitE, ge);
+//        brainStemRoom.addEntity("w", brainStemRoomKeyEW, ge);
 
-        //adding entities to locations in the brain entrance room
+        //adding entities to locations in the brain database room
+        brainDatabase.addEntity("w", brainDatabaseRoomExitW, ge);
+        brainDatabase.addEntity("e", brainDatabaseRoomExitE, ge);
 
-        //adding entities to locations in the brain entrance room
+        //adding entities to locations in the cerebral cortex room
+        cerebralCortexRoom.addEntity("s" ,cerebralCortexRoomExitS, ge);
+        cerebralCortexRoom.addEntity("w" ,cerebralCortexRoomExitW, ge);
+        cerebralCortexRoom.addEntity("n" ,cerebralCortexRoomExitN, ge);
 
-        //adding entities to locations in the brain entrance room
+        //adding entities to locations in the brain dining room
+        brainDiningRoom.addEntity("e", brainDiningRoomExitE, ge);
+        brainDiningRoom.addEntity("n", brainDiningRoomExitN, ge);
+
+        //adding entities to locations in the brain kitchen room
+        brainKitchenRoom.addEntity("s", brainKitchenRoomExitS, ge);
+        brainKitchenRoom.addEntity("e", brainKitchenRoomExitE, ge);
+
+        //adding entities to locations in the brain library room
+        brainLibraryRoom.addEntity("w", brainLibraryRoomExitW, ge);
+
+        //adding entities to locations in the homunculus room
+        homunculusRoom.addEntity("s", homunculusRoomExitS, ge);
 
         //adding items to furniture
 

@@ -9,7 +9,7 @@ import anonymous.Mechanics.GameEngine;
  */
 public class Exits extends Entity{
 
-    private boolean keyRequired = false;
+    private boolean keyRequired;
     private Item key;
 
     public Exits(String nameOfEntity, String descOfEntity, int roomNo) {
@@ -33,6 +33,11 @@ public class Exits extends Entity{
     public void askingUserForInput(Player p, GameEngine ge){
         p.input();
         if (p.getInput().equals("yes")) {
+            if(isKeyRequired()){
+//                p.removeItemFromInventory(getKey().getNameOfEntity());
+                setInstructs("\nType 'yes' to go through the " + getNameOfEntity() + "\n" + "Type 'no' to move somewhere else\nOnce you go through you will be placed in the 'c' position of the room.. be careful\n");
+//                setKeyRequired(false);
+            }
             System.out.println("\nYou step through the " + getNameOfEntity());
             p.energyDepletion();
             System.out.println("Your energy is now " + p.getEnergy() + "\n");
@@ -53,7 +58,6 @@ public class Exits extends Entity{
         System.out.println("\nThis is the " + getNameOfEntity() + "\n" + getDescOfEntity());
         setAnswered(false);
         while(!isAnswered()) {
-//            askingUserForInput(p, ge);
             if (!isKeyRequired()) {
                 System.out.println(getInstructs());
                 askingUserForInput(p, ge);
@@ -61,9 +65,6 @@ public class Exits extends Entity{
             if (isKeyRequired() && p.getInventory().containsKey(getKey().getNameOfEntity())) {
                 System.out.println(getInstructs());
                 askingUserForInput(p, ge);
-                setKeyRequired(false);
-                setInstructs("\nType 'yes' to go through the " + getNameOfEntity() + "\n" + "Type 'no' to move somewhere else\nOnce you go through you will be placed in the 'c' position of the room.. be careful\n");
-                p.removeItemFromInventory(key.getNameOfEntity());
             }
             if (isKeyRequired() && !p.getInventory().containsKey(getKey().getNameOfEntity())) {
                 System.out.println("\nYou require a " + getKey().getNameOfEntity() + " to go through this " + getNameOfEntity() + " go find one and then try to go through this door!!\n");
