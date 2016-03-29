@@ -24,7 +24,7 @@ public class Player{
     private Room globalLocation;
     private int damage;
     private Scanner sc = new Scanner(System.in);
-    Map<String, Item> inventory = new TreeMap<>();
+    private Map<String, Item> inventory = new TreeMap<>();
     private boolean Answered;
     private TreeMap<String, Entity> currentlyEquipped = new TreeMap<>();
 
@@ -38,7 +38,7 @@ public class Player{
         setEnergy(getStandardEnergy());
     }
 
-    public boolean isAlive() {
+    public boolean isAlive(GameEngine ge) {
         for(int i = 0; i<getHealth(); i++) {
             if (getHealth() <= 0) {
                 System.out.println("\nyou ran out of health and died!\n");
@@ -73,7 +73,7 @@ public class Player{
     }
 
     public void currentStatus(GameEngine ge){
-        System.out.println("\nHere are your current states:\nequipped item: " + getCurrentlyEquipped().keySet().toString().replaceAll("\\[\\]", "nothing") + "\ndamage: " + getDamage() + " \nhealth points: " + getHealth() + " \nenergy points: " + getEnergy() + "\nquest points: " + getQuestPoints() + " \nmemories collected: " + getMemoriesCollected() + "/" + ge.getAllMemoriesInGame().size() + "\n");
+         System.out.println("\nequipped item: " + getCurrentlyEquipped().keySet().toString().replaceAll("\\[\\]", "nothing") + "\ndamage: " + getDamage() + " \nhealth points: " + getHealth() + " \nenergy points: " + getEnergy() + "\nquest points: " + getQuestPoints() + " \nmemories collected: " + getMemoriesCollected() + "/" + ge.getAllMemoriesInGame().size() + "\nitems collected: " + getInventory().size() + "\n");
     }
 
     public String input(){
@@ -93,6 +93,7 @@ public class Player{
         }else if(getInput().equals("get current room")){
             System.out.println("\nYou are currently in the " +  getGlobalLocation().getNameOfRoom() + "\n" + getGlobalLocation().getContext());
         }else if(getInput().equals("get player status")){
+            System.out.print("\nHere are your current states: ");
             currentStatus(ge);
         }else{
             System.out.println("\nThat isn't an allowed command try again. Try typing 'instructions' to get available commands\n");
@@ -134,8 +135,8 @@ public class Player{
             System.out.println("\nYour inventory items are:");
             System.out.println(getInventory().keySet().toString().replaceAll("[\\[\\]]",""));
         }
-        System.out.println("\nType the name of the item as you see it to interact with it\nType 'leave' to stop looking in your inventory\n");
         while(!isAnswered()){
+            System.out.println("\nType the name of the item as you see it to interact with it\nType 'leave' to stop looking in your inventory\n");
             input();
             if(getInput().equals("leave")){
                 System.out.println("\nYou decide to stop looking in your inventory\n");
@@ -145,8 +146,6 @@ public class Player{
                 Item item = (Item) entityItem;
                 item.interact(this, ge);
                 setAnswered(true);
-            }else{
-                System.out.println("\nType the name of the item as you see it to interact with it\nType 'leave' to stop looking in your inventory\n");
             }
         }
     }
@@ -257,17 +256,11 @@ public class Player{
                 "energy=" + energy +
                 ", health=" + health +
                 ", questPoints=" + questPoints +
-                ", standardHealth=" + standardHealth +
-                ", standardDamage=" + standardDamage +
-                ", standardEnergy=" + standardEnergy +
-                ", input='" + input + '\'' +
+                ", memoriesCollected=" + memoriesCollected +
                 ", globalLocation=" + globalLocation +
                 ", damage=" + damage +
-                ", sc=" + sc +
                 ", inventory=" + inventory +
-                ", Answered=" + Answered +
                 ", currentlyEquipped=" + currentlyEquipped +
                 '}';
     }
-
 }

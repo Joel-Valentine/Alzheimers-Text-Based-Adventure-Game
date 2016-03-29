@@ -18,23 +18,34 @@ public class main {
     public static void main(String args[]) {
 
         //Constants
-        Player player = new Player(100, 3, 100);
-        GameEngine ge = new GameEngine(player);
+        Player player = new Player(100, 3, 2);
+        GameEngine ge = new GameEngine();
         Henry henry = new Henry("Henry", "is a bright pink bunny wearing a tophat and a monocle.");
 
         //creation of everything else in the game
 
         //creating furniture
-//        Furniture draws = new Furniture("chest of draws", "This chest of draws looks like it has a mouth");
-//        Furniture plop = new Furniture("noicee", "test");
+        Furniture draws = new Furniture("chest of draws", "This chest of draws looks like it has a mouth");
+        Furniture cupboard = new Furniture("cupboard", "This cupboard smells of rotting flesh");
+        Furniture desk = new Furniture("a desk", "This desk is made from glass and is the only clean thing in this place");
+        Furniture chair = new Furniture("a miniature chair", "This chair is very small.. I guess the people who use this are also small?");
 
         //creating items to go in rooms/furniture these will be included in random drops
-//        Item candleStick = new Item("candlestick", "This candlestick seems to be ble to talk.. it has a strange smile on its... face?", 0, 10, ge);
+        Item candleStick = new Item("candlestick", "This candlestick seems to be ble to talk.. it has a strange smile on its... face?", 0, 5, ge);
+        Item knife = new Item("Knife", "this knife ", 0, 8, ge);
+        Item bat = new Item("baseball bat", "This candlestick seems to be ble to talk.. it has a strange smile on its... face?", 0, 7, ge);
         Item apple = new Item("apple", "this is a scrumptious apple", 10, 0, ge);
-//        Item energyDrink = new Item("energy drink", "this is drink will restore energy",ge ,1);
+        Item turnip = new Item("turnip", "like an orange but white", 3, 0, ge);
+        Item rottingApple = new Item("rotting apple", "This apple is smelly and decomposing", 1, 0, ge);
+        Item bannana = new Item("banana", "a fresh banana", 6, 0, ge);
+        Item carrot = new Item("carrot", "a orange, crunchy vegetable", 8, 0, ge);
+        Item cake = new Item("slice of cake", "a sweet slice of cake", 11, 0, ge);
+        Item energyBar = new Item("energy bar", "this energy bar will restore energy",ge ,1);
 
         //creating memories this wont be included in random drops
-        Item memory = new Item("Troll memory", "This is a memory fragment from your past", "The troll was once one of your friends from university, after finding this a part of your memory has been restored", ge);
+        Item wifeMemory = new Item("wife memory", "this is a memory fragment from your past", "I remember now that i have a wife", ge);
+        Item childrenMemory = new Item("children memory", "this is a memory fragment from your past", "I remember that i have two children, a boy named Charlie and a girl named Stephanie", ge);
+        Item peanutMemory = new Item("peanut memory", "this is a memory fragment from your past", "I used to keep a peanut in my pocket for good luck.. peanuts are small..\nI found this in a small chair. it all makes sense ", ge);
         Item joshMemory = new Item("Josh memory", "This is a memory fragment from your past", "Josh used to go to my old school he was one of my best friends but was still really annoying.. I liked that guy\nI should get back in touch", ge);
         Item diggerMemory = new Item("digger memory", "This is a memory fragment from your past", "Wow, i used to work in this thing 9 till 5 everyday for 8 years...", ge);
 
@@ -95,10 +106,8 @@ public class main {
 
         //creating enemies
         Enemy troll = new Enemy("Troll", "The troll has a somewhat recognizable face but you can't seem to remember where from.\nHis skin is pale grey and his breath stinks of rotting flesh.\nHe looks aggressive and as if he will attack you", 8, 20, "ME NO LIKE LOOK OF YOU");
-        Enemy josh = new Enemy("Josh", "This is josh.. we used to go to school together.. i think... He was annoying..\n He doesn't look happy with me.. and looks like he will attack me", 3, 20, "Hey man remember me?");
+        Enemy josh = new Enemy("Josh", "This is josh.. we used to go to school together.. i think... He was annoying..\n He doesn't look happy with me.. and looks like he will attack me", 3, 20, "Hey man remember me?", joshMemory);
         Enemy digger = new Enemy("digger", "This digger looks familiar.. i feel like i might have worked with diggers but its all so hazy", 7, 30, "MWAHAHA YOU ALWAYS HATED ME", diggerMemory);
-//        Enemy troll2 = new Enemy("Troll", "The troll has a somewhat recognizable face but you can't seem to remember where from.\nHis skin is pale grey and his breath stinks of rotting flesh.\nHe looks aggressive and as if he will attack you", 8, 20, "ME NO LIKE LOOK OF YOU");
-//        Enemy potato = new Enemy("Potato", "This is just some random potato BUT YOU MUST KILLS IT", 1, 10, "WHAT ARE YOU DOING HERE HOOMAN");
 
         //creating friendlies
 //        Friendly wizzy = new Friendly("Wizard", "This is an ancient wizard trained in the dark arts", "Good evening peasant..", apple, 10, excalibur);
@@ -153,6 +162,17 @@ public class main {
         homunculusRoom.addEntity("s", homunculusRoomExitS, ge);
 
         //adding items to furniture
+        desk.putItemsInFurniture(cake);
+        desk.putItemsInFurniture(carrot);
+
+        draws.putItemsInFurniture(knife);
+        draws.putItemsInFurniture(turnip);
+
+        cupboard.putItemsInFurniture(bat);
+        cupboard.putItemsInFurniture(rottingApple);
+        cupboard.putItemsInFurniture(rottingApple);
+
+        chair.putItemsInFurniture(peanutMemory);
 
         //setting players location globally(the room) and location within that room
         player.setGlobalLocation(ge.getAllRooms().get(0));

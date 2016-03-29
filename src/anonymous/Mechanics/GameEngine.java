@@ -14,8 +14,11 @@ public class GameEngine {
     private HashMap<Integer, Room> allRooms = new HashMap<>();
     private HashMap<Integer, Item> allItemsInGame = new HashMap<>();
     private HashMap<Integer, Item> allMemoriesInGame = new HashMap<>();
+    private long stopTime;
+    private long startTime;
+    private long totalTime;
 
-    public GameEngine(Player player) {
+    public GameEngine() {
         System.out.println("\nPlease play game with terminal/cmd window maximised/as large as it goes\n");
     }
 
@@ -48,9 +51,38 @@ public class GameEngine {
         return allMemoriesInGame;
     }
 
+    public long getStopTime() {
+        return stopTime;
+    }
+
+    public void setStopTime(long stopTime) {
+        this.stopTime = stopTime;
+    }
+
+    public long getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(long startTime) {
+        this.startTime = startTime;
+    }
+
+    public long getTotalTime() {
+        return totalTime;
+    }
+
+    public void setTotalTime(long totalTime) {
+        this.totalTime = totalTime;
+    }
+
     public void run(Player player) {
-        while(!player.isAlive() && !player.hasWon(this)){
+        setStartTime(System.currentTimeMillis());
+        while(!player.isAlive(this) && !player.hasWon(this)){
             player.move(this);
         }
+        setStopTime(System.currentTimeMillis());
+        setTotalTime((getStopTime() - getStartTime())/1000);
+        System.out.print("\nyou survived for " + getTotalTime() + " seconds, your final stats were: ");
+        player.currentStatus(this);
     }
 }

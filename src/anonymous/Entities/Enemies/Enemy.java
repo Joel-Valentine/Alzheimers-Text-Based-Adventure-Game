@@ -65,7 +65,7 @@ public class Enemy extends Entity {
             if (!isAlive()) {
                 System.out.println("You have killed the " + getNameOfEntity() + " your health is now " + p.getHealth() + " you can now move elsewhere");
                 removeEntityFromRoom(p, this);
-                if(getRewardItem() == null && getInitialHealth() >= 26){
+                if(getRewardItem() == null){
                     randomDrop(ge, p);
                 }else if(getRewardItem() != null){
                     p.putItemInInventory(getRewardItem().getNameOfEntity(), getRewardItem());
