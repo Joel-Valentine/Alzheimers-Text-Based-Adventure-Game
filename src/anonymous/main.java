@@ -19,7 +19,7 @@ public class main {
 
         //Constants
         Player player = new Player(100, 3, 10);
-        GameEngine ge = new GameEngine();
+        GameEngine ge = new GameEngine(player);
         Henry henry = new Henry("Henry", "is a bright pink bunny wearing a tophat and a monocle.");
 
         //creation of everything else in the game
@@ -246,7 +246,7 @@ public class main {
 
         //setting players location globally(the room) and location within that room
         player.setGlobalLocation(ge.getAllRooms().get(0));
-        player.getGlobalLocation().encounterRoom();
+        player.getGlobalLocation().encounterRoom(ge);
         player.getGlobalLocation().getPointsInRoom().get("ne").encountered(player, ge);
 
         //running the Game Engine

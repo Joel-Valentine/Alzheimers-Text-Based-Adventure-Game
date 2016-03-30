@@ -14,13 +14,14 @@ public class GameEngine {
     private HashMap<Integer, Room> allRooms = new HashMap<>();
     private HashMap<Integer, Item> allItemsInGame = new HashMap<>();
     private HashMap<Integer, Item> allMemoriesInGame = new HashMap<>();
-    private String difficulty;
+    private String difficultySetting;
     private long stopTime;
     private long startTime;
     private long totalTime;
 
-    public GameEngine() {
+    public GameEngine(Player player) {
         System.out.println("\nPlease play game with terminal/cmd window maximised/as large as it goes\n");
+        difficultySetting(player);
     }
 
     public void instructions(){
@@ -76,12 +77,28 @@ public class GameEngine {
         this.totalTime = totalTime;
     }
 
-    public String getDifficulty() {
-        return difficulty;
+    public String getDifficultySetting() {
+        return difficultySetting;
     }
 
-    public void setDifficulty(String difficulty) {
-        this.difficulty = difficulty;
+    public void setDifficultySetting(String difficultySetting) {
+        this.difficultySetting = difficultySetting;
+    }
+
+    public void difficultySetting(Player player){
+        boolean answered = false;
+        while(!answered){
+            System.out.println("What difficulty would you like? choose 'normal' or 'easy'");
+            player.input();
+            if(player.getInput().equals("easy")){
+                setDifficultySetting(player.getInput());
+                answered = true;
+            }else if(player.getInput().equals("normal")){
+                setDifficultySetting(player.getInput());
+                answered = true;
+            }
+        }
+        System.out.println();
     }
 
     public void run(Player player) {

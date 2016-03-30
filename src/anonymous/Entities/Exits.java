@@ -42,7 +42,7 @@ public class Exits extends Entity{
             p.energyDepletion();
             System.out.println("Your energy is now " + p.getEnergy() + "\n");
             p.setGlobalLocation(ge.getAllRooms().get(getRoom()));
-            p.getGlobalLocation().encounterRoom();
+            p.getGlobalLocation().encounterRoom(ge);
             System.out.println("You go to the centre of the room");
             p.getGlobalLocation().getPointsInRoom().get("c").encountered(p, ge);
             setAnswered(true);

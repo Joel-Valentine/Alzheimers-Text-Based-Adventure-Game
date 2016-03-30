@@ -4,6 +4,7 @@ import anonymous.Entities.Entity;
 import anonymous.Entities.Items.Item;
 import anonymous.Entities.Nothing;
 import anonymous.Mechanics.GameEngine;
+import anonymous.Player.Player;
 
 import java.util.HashMap;
 
@@ -12,11 +13,10 @@ import java.util.HashMap;
  */
 public class Room {
 
-
-
     private HashMap<String, Entity> pointsInRoom = new HashMap<>();
     private String context;
     private String nameOfRoom;
+    private String easyMode;
     private int roomNo;
     private String[] allPossibleIndexs = {"nw", "n", "ne", "w", "c", "e", "sw", "s", "se"};
 
@@ -27,8 +27,13 @@ public class Room {
         fillingHashmapWithNull();
     }
 
-    public void encounterRoom(){
-        System.out.println("This is the " + getNameOfRoom() + "\n" + getContext());
+    public void encounterRoom(GameEngine ge){
+        if(ge.getDifficultySetting().equals("easy")){
+            easySetting();
+            System.out.println("This is the " + getNameOfRoom() + "\n" + getContext() + getEasyMode());
+        }else {
+            System.out.println("This is the " + getNameOfRoom() + "\n" + getContext());
+        }
     }
 
     public String getContext() {
@@ -63,6 +68,18 @@ public class Room {
         this.context = context;
     }
 
+    public void easySetting(){
+        for(int i = 0; i < getPointsInRoom().size(); i++){
+            if(getPointsInRoom().get(getAllPossibleIndexs()[i]).getNameOfEntity() != null){
+                if(getEasyMode() == null){
+                    setEasyMode("\nto the " + getAllPossibleIndexs()[i] + " there is a/an " + getPointsInRoom().get(getAllPossibleIndexs()[i]).getNameOfEntity() + "\n");
+                }else{
+                    setEasyMode(getEasyMode() + "to the " + getAllPossibleIndexs()[i] + " there is a/an " + getPointsInRoom().get(getAllPossibleIndexs()[i]).getNameOfEntity() + "\n");
+                }
+            }
+        }
+    }
+
     public String getNameOfRoom() {
         return nameOfRoom;
     }
@@ -77,6 +94,14 @@ public class Room {
 
     public void setRoomNo(int roomNo) {
         this.roomNo = roomNo;
+    }
+
+    public String getEasyMode() {
+        return easyMode;
+    }
+
+    public void setEasyMode(String easyMode) {
+        this.easyMode = easyMode;
     }
 
     @Override
