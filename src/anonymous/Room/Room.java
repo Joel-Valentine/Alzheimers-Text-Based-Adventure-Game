@@ -69,6 +69,7 @@ public class Room {
     }
 
     public void easySetting(){
+        setEasyMode(null);
         for(int i = 0; i < getPointsInRoom().size(); i++){
             if(getPointsInRoom().get(getAllPossibleIndexs()[i]).getNameOfEntity() != null){
                 if(getEasyMode() == null){

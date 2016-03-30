@@ -91,7 +91,8 @@ public class Player{
         }else if(getInput().equals("inventory")){
             viewInventoryItems(ge);
         }else if(getInput().equals("get current room")){
-            System.out.println("\nYou are currently in the " +  getGlobalLocation().getNameOfRoom() + "\n" + getGlobalLocation().getContext());
+            System.out.println();
+            getGlobalLocation().encounterRoom(ge);
         }else if(getInput().equals("get player status")){
             System.out.print("\nHere are your current states: ");
             currentStatus(ge);
