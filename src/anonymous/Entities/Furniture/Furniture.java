@@ -84,7 +84,7 @@ public class Furniture extends Entity{
     }
 
     public void putItemsInFurniture(Entity item){
-        getItemsInFurniture().put(item.getNameOfEntity().toString(), item);
+        getItemsInFurniture().put(item.getNameOfEntity(), item);
     }
 
     public void checkIfPickedUpEveryItem(Player p){
@@ -95,6 +95,7 @@ public class Furniture extends Entity{
     }
 
     public void searchItemsInFurniture(){
+        //randomizing the wait when searching for items, could improve this by multiplying it by how many items in the furniture there are.. but this is fine for now
             int randomNum = (int)(Math.random() * 7000 + 3000);
             try {
                 Thread.sleep(randomNum);

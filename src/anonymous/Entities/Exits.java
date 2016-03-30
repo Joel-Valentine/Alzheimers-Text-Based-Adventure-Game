@@ -34,9 +34,7 @@ public class Exits extends Entity{
         p.input();
         if (p.getInput().equals("yes")) {
             if(isKeyRequired()){
-//                p.removeItemFromInventory(getKey().getNameOfEntity());
                 setInstructs("\nType 'yes' to go through the " + getNameOfEntity() + "\n" + "Type 'no' to move somewhere else\nOnce you go through you will be placed in the 'c' position of the room.. be careful\n");
-//                setKeyRequired(false);
             }
             System.out.println("\nYou step through the " + getNameOfEntity());
             p.energyDepletion();

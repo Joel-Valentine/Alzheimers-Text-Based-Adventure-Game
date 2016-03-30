@@ -22,6 +22,7 @@ public class Friendly extends Entity {
     private boolean questInProgress;
     private Item rewardItem;
 
+    //constructor for friendlies without a quest
     public Friendly(String nameOfEntity, String descOfEntity, String encounterText, String additionalText){
         setNameOfEntity(nameOfEntity);
         setDescOfEntity(descOfEntity);
@@ -29,6 +30,7 @@ public class Friendly extends Entity {
         setAdditionalText(additionalText);
     }
 
+    //constructor for friendlies with a quest
     public Friendly(String nameOfEntity, String descOfEntity, String encounterText, Entity quest, int questPointsRecieved, Item rewardItem){
         setNameOfEntity(nameOfEntity);
         setDescOfEntity(descOfEntity);
@@ -43,6 +45,7 @@ public class Friendly extends Entity {
         System.out.println("\nYou encounter a " + getNameOfEntity() + "!\n" +  getDescOfEntity() + "\n\n" + getNameOfEntity() + ": " + getEncounterText());
         setAnswered(false);
         while(!isAnswered()){
+            //not sure if this is the correct way to check what type the class is.. but it works
             if(isQuestInProgress() && getQuestEntity().getClass().getName().contains("Enemy")){
                 questInvolvingEnemy(p);
                 setAnswered(true);

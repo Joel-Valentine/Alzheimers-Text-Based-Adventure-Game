@@ -2,7 +2,6 @@ package anonymous.Entities.Friendlies;
 
 import anonymous.Entities.Entity;
 import anonymous.Mechanics.GameEngine;
-import anonymous.Mechanics.ScrollingText;
 import anonymous.Player.Player;
 
 /**
@@ -31,7 +30,7 @@ public class Henry extends Entity{
             System.out.println("\nOh... i see... fine... i shall leave then\n" + "He hops away back to the corner of the room\n");
             answered = true;
         }else{
-            instructions(getInstructs());
+            instructions();
             p.input();
         }
     }

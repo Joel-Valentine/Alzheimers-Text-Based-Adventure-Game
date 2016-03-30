@@ -11,7 +11,6 @@ import anonymous.Player.Player;
 public class Enemy extends Entity {
 
     private int health;
-    private int initialHealth;
     private int damage;
     private String encounterText;
     private Item rewardItem;
@@ -21,7 +20,6 @@ public class Enemy extends Entity {
         setDescOfEntity(s1);
         setDamage(dam);
         setHealth(health);
-        setInitialHealth(health);
         setEncounterText(encounterText);
         setInstructs("\nType 'attack' to attack the " + getNameOfEntity() + "\n" + "Type 'leave' to move somewhere else\nType 'auto attack' if you feel confident enough that you will kill the " + getNameOfEntity() + " without dying\n");
     }
@@ -32,7 +30,6 @@ public class Enemy extends Entity {
         setDescOfEntity(s1);
         setDamage(dam);
         setHealth(health);
-        setInitialHealth(health);
         setEncounterText(encounterText);
         setInstructs("\nType 'attack' to attack the " + getNameOfEntity() + "\n" + "Type 'leave' to move somewhere else\nType 'auto attack' if you feel confident enough that you will kill the " + getNameOfEntity() + " without dying\n");
     }
@@ -125,11 +122,4 @@ public class Enemy extends Entity {
         this.rewardItem = rewardItem;
     }
 
-    public int getInitialHealth() {
-        return initialHealth;
-    }
-
-    public void setInitialHealth(int initialHealth) {
-        this.initialHealth = initialHealth;
-    }
 }

@@ -20,6 +20,7 @@ public class main {
         //Constants
         Player player = new Player(100, 3, 10);
         GameEngine ge = new GameEngine(player);
+        //Henry is simply a tutorial object to help you understand how to play
         Henry henry = new Henry("Henry", "is a bright pink bunny wearing a tophat and a monocle.");
 
         //creation of everything else in the game

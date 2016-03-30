@@ -10,18 +10,25 @@ import anonymous.Player.Player;
  */
 public class Item extends Entity {
 
+    /*  not very proud of this class on a whole. However i have made it in a way that works for what i want it for.
+        In future i could make each different type of item a separate class to stop some of the mess when trying to figure
+        out what type of item this instance is. Would love to get feedback on whether this is a valid way to achieve what i
+        was trying to achieve
+    */
+
     private int healthRegen;
     private int damage;
     private String memoryText;
     private int energyRegen;
 
+    //constructor for keys that you don't want to be in random drops
     public Item(String name, String descrip, int room){
         setRoom(room);
         setNameOfEntity(name);
         setDescOfEntity(descrip);
         setInstructs("\nType 'pickup' to pick the " + getNameOfEntity() + " up\nType 'leave' to go somewhere else\n");
     }
-
+    //constructor for memories
     public Item(String name, String descrip, String memory, GameEngine ge){
         setNameOfEntity(name);
         setDescOfEntity(descrip);
@@ -30,6 +37,7 @@ public class Item extends Entity {
         ge.addMemoriesToGame(this);
     }
 
+    //constructor for keys that can go into random drops
     public Item(String name, String descrip, int room, GameEngine ge){
         setNameOfEntity(name);
         setDescOfEntity(descrip);
@@ -38,6 +46,7 @@ public class Item extends Entity {
         ge.addItemToGame(this);
     }
 
+    //constructor for energy regeneration items
     public Item(String name, String descrip, GameEngine ge, int energyRegen){
         setEnergyRegen(energyRegen);
         setNameOfEntity(name);
@@ -46,6 +55,7 @@ public class Item extends Entity {
         ge.addItemToGame(this);
     }
 
+    //constructor for either weapons or food that will go into random drops
     public Item(String name, String descrip, int healthRegen, int damage, GameEngine ge){
         setDamage(damage);
         setHealthRegen(healthRegen);
@@ -55,6 +65,7 @@ public class Item extends Entity {
         ge.addItemToGame(this);
     }
 
+    //constructor for either weapons or food that wont go into random drops
     public Item(String name, String descrip, int healthRegen, int damage){
         setDamage(damage);
         setHealthRegen(healthRegen);

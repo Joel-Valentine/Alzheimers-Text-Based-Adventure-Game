@@ -69,6 +69,7 @@ public class Room {
     }
 
     public void easySetting(){
+        //setting it to null initially like this will stop it from duplicating itself over and over.
         setEasyMode(null);
         for(int i = 0; i < getPointsInRoom().size(); i++){
             if(getPointsInRoom().get(getAllPossibleIndexs()[i]).getNameOfEntity() != null){
@@ -103,14 +104,6 @@ public class Room {
 
     public void setEasyMode(String easyMode) {
         this.easyMode = easyMode;
-    }
-
-    @Override
-    public String toString() {
-        return "Room{" +
-                "pointsInRoom=" + pointsInRoom +
-                ", context='" + context + '\'' +
-                '}';
     }
 
 }

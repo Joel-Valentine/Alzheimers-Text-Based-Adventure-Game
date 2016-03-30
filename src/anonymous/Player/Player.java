@@ -24,21 +24,24 @@ public class Player{
     private Room globalLocation;
     private int damage;
     private Scanner sc = new Scanner(System.in);
+    //using a this here as it sorts alphabetically meaning any duplicates of items in inventory will sort nicely
     private Map<String, Item> inventory = new TreeMap<>();
     private boolean Answered;
+    //using a treemap as i can get the first item in this.. since there will only ever be one of something in here it works
     private TreeMap<String, Entity> currentlyEquipped = new TreeMap<>();
 
     public Player(int maxHealthPoints, int maxDefaultDamageValue, int maxEnergyPoints) {
         setStandardHealth(maxHealthPoints);
         setStandardDamage(maxDefaultDamageValue);
         setStandardEnergy(maxEnergyPoints);
+        //could potentially allow users to set quest points however i feel 0 is fine
         setQuestPoints(0);
         setDamage(getStandardDamage());
         setHealth(getStandardHealth());
         setEnergy(getStandardEnergy());
     }
 
-    public boolean isAlive(GameEngine ge) {
+    public boolean isAlive() {
         for(int i = 0; i<getHealth(); i++) {
             if (getHealth() <= 0) {
                 System.out.println("\nyou ran out of health and died!\n");
@@ -253,17 +256,4 @@ public class Player{
         this.memoriesCollected = memoriesCollected;
     }
 
-    @Override
-    public String toString() {
-        return "Player{" +
-                "energy=" + energy +
-                ", health=" + health +
-                ", questPoints=" + questPoints +
-                ", memoriesCollected=" + memoriesCollected +
-                ", globalLocation=" + globalLocation +
-                ", damage=" + damage +
-                ", inventory=" + inventory +
-                ", currentlyEquipped=" + currentlyEquipped +
-                '}';
-    }
 }

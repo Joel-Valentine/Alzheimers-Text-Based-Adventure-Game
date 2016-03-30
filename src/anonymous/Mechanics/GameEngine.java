@@ -24,6 +24,7 @@ public class GameEngine {
         difficultySetting(player);
     }
 
+    //could make this method be able to be changed by someone in main so someone can make their own version of the game?
     public void instructions(){
         System.out.println("\nTo win the game collect all " + getAllMemoriesInGame().size() + " of the memories. You will loose if your health hits 0 and if your energy hits 0\nTo move around inside of a room type any of the following " + getAllRooms().get(0).getPointsInRoom().keySet() + " 'c' being the centre\nWhen you encounter an exit you will have the choice to go through to another room with 'yes' or 'no', this is how you move between rooms\nTo access your inventory type 'inventory'\nTo get your current room information type 'get current room'\nTo get your current player stats type 'get player status'\nAll other instructions will be told to you when you encounter something, now go play the game!\n");
     }
@@ -102,8 +103,9 @@ public class GameEngine {
     }
 
     public void run(Player player) {
+        //not entirely sure if the time survived belongs here but it works!
         setStartTime(System.currentTimeMillis());
-        while(!player.isAlive(this) && !player.hasWon(this)){
+        while(!player.isAlive() && !player.hasWon(this)){
             player.move(this);
         }
         setStopTime(System.currentTimeMillis());

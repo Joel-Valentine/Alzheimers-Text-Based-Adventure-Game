@@ -17,21 +17,11 @@ public abstract class Entity {
     private String nameOfEntity;
     private String descOfEntity;
     private String instructs;
+    //this boolean is heavily used for 'breaking' out of while loops
     private boolean answered;
     private String tempLocation;
 
     public Entity(){
-    }
-
-    public Entity(String noe, String doe){
-        setDescOfEntity(doe);
-        setNameOfEntity(noe);
-    }
-
-    public Entity(String noe, String doe, int tr){
-        setNameOfEntity(noe);
-        setDescOfEntity(doe);
-        setRoom(tr);
     }
 
     public void removeEntityFromRoom(Player p, Entity e){
@@ -50,8 +40,8 @@ public abstract class Entity {
         }while (on);
     }
 
-    public void instructions(String i){
-        System.out.println(getInstructs().toString());
+    public void instructions(){
+        System.out.println(getInstructs());
     }
 
     public void encountered(Player p, GameEngine ge){
@@ -117,16 +107,5 @@ public abstract class Entity {
 
     public void setRoomName(String roomName) {
         this.roomName = roomName;
-    }
-
-    @Override
-    public String toString() {
-        return "Entity{" +
-                "tr=" + room +
-                ", nameOfEntity='" + nameOfEntity + '\'' +
-                ", descOfEntity='" + descOfEntity + '\'' +
-                ", instructs='" + instructs + '\'' +
-                ", answered=" + answered +
-                '}';
     }
 }
