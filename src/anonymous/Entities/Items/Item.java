@@ -216,7 +216,7 @@ public class Item extends Entity {
     }
 
     public void eatItem(Player p){
-        System.out.println("\nThis " + getNameOfEntity() + " will heal " + getHealthRegen() + " health points\nType 'eat' to eat this " + getNameOfEntity() + "\n");
+        System.out.println("\nThis " + getNameOfEntity() + " will heal " + getHealthRegen() + " health points\nType 'eat' to eat this " + getNameOfEntity());
         System.out.println();
         p.input();
         if(p.getInput().equals("eat")){
@@ -224,7 +224,6 @@ public class Item extends Entity {
                 System.out.println("\nYour current health is " + p.getHealth() + " if you eat this " + getNameOfEntity() + " you will be wasting " + ((p.getHealth() + getHealthRegen()) - p.getStandardHealth()) + " points of health as the max health is " + p.getStandardHealth() +"\nAre you sure you want to eat it?\n'yes' or 'no'\n");
                 p.input();
                 if(p.getInput().equals("yes")){
-                    //TODO: make energy regenerate
                     p.setHealth(p.getStandardHealth());
                     System.out.println("\nYou eat the " + getNameOfEntity() + " your health is now " + p.getHealth() + "\n");
                     p.removeItemFromInventory(getNameOfEntity());

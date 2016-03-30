@@ -38,16 +38,16 @@ public abstract class Entity {
         p.getGlobalLocation().removeEntity(e.getTempLocation());
     }
 
-    public void randomDrop(GameEngine ge, Player p){
+    public void randomDrop(GameEngine ge, Player p) {
         boolean on = true;
-        do{
-            int randomNum = (int)(Math.random() * ge.getAllItemsInGame().size() + 0);
-            if(ge.getAllItemsInGame().get(randomNum).getHealthRegen() > 0){
+        do {
+            int randomNum = (int) (Math.random() * ge.getAllItemsInGame().size() + 0);
+            if (ge.getAllItemsInGame().get(randomNum).getHealthRegen() > 0) {
                 on = false;
                 System.out.println("The " + getNameOfEntity() + " has dropped a/an " + ge.getAllItemsInGame().get(randomNum).getNameOfEntity() + " is is now in your inventory\n");
                 p.putItemInInventory(ge.getAllItemsInGame().get(randomNum).getNameOfEntity(), ge.getAllItemsInGame().get(randomNum));
             }
-        }while(on);
+        }while (on);
     }
 
     public void instructions(String i){

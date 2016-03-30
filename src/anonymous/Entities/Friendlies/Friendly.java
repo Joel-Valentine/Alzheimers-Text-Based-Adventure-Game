@@ -67,9 +67,9 @@ public class Friendly extends Entity {
             System.out.println(getNameOfEntity() + ": If you kill the " + getQuestEntity().getNameOfEntity() + ", which is to the '" + getQuestEntity().getTempLocation() + "' of the '" + getQuestEntity().getRoomName() + "', i shall give you a reward\n\nDo you accept type 'yes' or 'no'\n");
             p.input();
             if(p.getInput().equals("yes")){
+                setQuestInProgress(true);
                 questInvolvingEnemy(p);
                 setAnswered(true);
-                setQuestInProgress(true);
             }else if(p.getInput().equals("no")){
                 leave();
             }
@@ -77,8 +77,8 @@ public class Friendly extends Entity {
             System.out.println(getNameOfEntity() + ": If you give me a/an " + getQuestEntity().getNameOfEntity() + " i shall give you a reward\n\nDo you accept type 'yes' or 'no'\n");
             p.input();
             if(p.getInput().equals("yes")) {
-                questInvolvingItem(p);
                 setQuestInProgress(true);
+                questInvolvingItem(p);
                 setAnswered(true);
             }else if(p.getInput().equals("no")){
                 leave();
@@ -120,7 +120,6 @@ public class Friendly extends Entity {
         }else{
             System.out.println("\nYou do not have a/an " + getQuestEntity().getNameOfEntity() + " in your inventory.. go find one and come back to complete the quest\n");
             setAnswered(true);
-            setQuestInProgress(true);
         }
 
     }

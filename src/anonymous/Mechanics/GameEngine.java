@@ -14,6 +14,7 @@ public class GameEngine {
     private HashMap<Integer, Room> allRooms = new HashMap<>();
     private HashMap<Integer, Item> allItemsInGame = new HashMap<>();
     private HashMap<Integer, Item> allMemoriesInGame = new HashMap<>();
+    private String difficulty;
     private long stopTime;
     private long startTime;
     private long totalTime;
@@ -73,6 +74,14 @@ public class GameEngine {
 
     public void setTotalTime(long totalTime) {
         this.totalTime = totalTime;
+    }
+
+    public String getDifficulty() {
+        return difficulty;
+    }
+
+    public void setDifficulty(String difficulty) {
+        this.difficulty = difficulty;
     }
 
     public void run(Player player) {

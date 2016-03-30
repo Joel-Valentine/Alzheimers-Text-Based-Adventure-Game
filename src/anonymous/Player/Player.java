@@ -114,10 +114,12 @@ public class Player{
         for(int i = 1; i<getInventory().size()+1; i++){
             if(getInventory().containsKey(key) || getInventory().containsKey(key + i)){
                 key = initKey + i;
+                itm = new Item(key, itm.getDescOfEntity(), itm.getHealthRegen(), itm.getDamage());
             }
         }
         if(itm.getNameOfEntity().contains("memory")){
             setMemoriesCollected(getMemoriesCollected() + 1);
+//            System.out.println("you just collected a memory you now have " + getMemoriesCollected() + " memories");
         }
         getInventory().put(key, itm);
     }

@@ -19,7 +19,7 @@ public class Henry extends Entity{
     @Override
     public void encountered(Player p, GameEngine ge){
         boolean answered = false;
-        System.out.println("He begins to hop towards you\n" + "Hi i am " + getNameOfEntity() + "\n" + getNameOfEntity() + " " + getDescOfEntity() + "\n" + "You're not from around here, are you?\n" + getInstructs());
+        System.out.println("He begins to hop towards you\n" + "Hi i am " + getNameOfEntity() + "\n" + getNameOfEntity() + " " + getDescOfEntity() + "\n" + "have you played before?\n" + getInstructs());
         p.input();
         while(!answered)
         if(p.getInput().equals("no")){

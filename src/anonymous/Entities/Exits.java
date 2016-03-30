@@ -48,8 +48,6 @@ public class Exits extends Entity{
             setAnswered(true);
         } else if (p.getInput().equals("no")) {
             leave();
-        } else {
-            System.out.println(getInstructs());
         }
     }
 

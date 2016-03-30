@@ -40,7 +40,7 @@ public class Enemy extends Entity {
     @Override
     public void encountered(Player p, GameEngine ge){
         setAnswered(false);
-        System.out.println("\nYou encounter a " + getNameOfEntity() + "!\n" + getDescOfEntity() + "\nThe " + getNameOfEntity() + " will deal " + getDamage() + " damage and has "  + getHealth() +" health\n\n" + getNameOfEntity() + ": " + getEncounterText() + "\n" + getInstructs());
+        System.out.println("\nYou encounter a " + getNameOfEntity() + "!\n" + getDescOfEntity() + "\nThe " + getNameOfEntity() + " will deal " + getDamage() + " damage and has "  + getHealth() +" health\nyou currently have " + p.getHealth() + " health and deal " + p.getDamage() +  " damage\n\n" + getNameOfEntity() + ": " + getEncounterText() + "\n" + getInstructs());
         while (isAlive() && !isAnswered()) {
             p.input();
             if (p.getInput().equals("attack")) {
