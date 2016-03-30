@@ -148,8 +148,7 @@ public class Player{
                 System.out.println("\nYou decide to stop looking in your inventory\n");
                 setAnswered(true);
             }else if(getInventory().containsKey(getInput())){
-                Entity entityItem = getInventory().get(getInput());
-                Item item = (Item) entityItem;
+                Item item = getInventory().get(getInput());
                 item.interact(this, ge);
                 setAnswered(true);
             }

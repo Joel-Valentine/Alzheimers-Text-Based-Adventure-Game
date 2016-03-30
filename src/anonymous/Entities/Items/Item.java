@@ -79,7 +79,7 @@ public class Item extends Entity {
         setAnswered(false);
         System.out.println("\nYou have found a " + getNameOfEntity() + " " + getDescOfEntity());
         if(getEnergyRegen() > 0){
-            System.out.println("This " + getNameOfEntity() + " will regenerate" + getEnergyRegen() + " energy");
+            System.out.println("This " + getNameOfEntity() + " will regenerate " + getEnergyRegen() + " energy");
         }
         if(getDamage() > 0){
             System.out.println("This " + getNameOfEntity() + " will deal " + getDamage() + " damage");

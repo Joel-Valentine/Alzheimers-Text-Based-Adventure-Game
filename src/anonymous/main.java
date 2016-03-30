@@ -47,6 +47,8 @@ public class main {
         Item cake = new Item("cake", "a sweet slice of cake", 11, 0, ge);
         Item rottingCake = new Item("rotten cake", "a sweet slice of cake", 4, 0, ge);
         Item energyBar = new Item("energy bar", "this energy bar will restore energy",ge ,1);
+        Item energyBar2 = new Item("energy crisps", "these energy crisps will restore energy",ge ,1);
+        Item energyBar3 = new Item("energy orange", "this energy orange will restore energy",ge ,2);
 
         //creating memories this wont be included in random drops
         Item wifeMemory = new Item("wife memory", "this is a memory fragment from your past", "I remember now that i have a wife and the person who gave it to me was my wife!", ge);
@@ -177,9 +179,9 @@ public class main {
         //adding entities to locations in the starting room
         startingRoom.addEntity("ne", henry, ge);
         startingRoom.addEntity("n", startingRoomExitN, ge);
-        startingRoom.addEntity("s", energyBar, ge);
         startingRoom.addEntity("se", bat, ge);
         startingRoom.addEntity("sw", apple, ge);
+        startingRoom.addEntity("s", energyBar, ge);
 
         //adding entities to locations in the brain entrance room
         brainEntranceRoom.addEntity("n", brainEntranceRoomExitN, ge);
@@ -187,7 +189,7 @@ public class main {
         brainEntranceRoom.addEntity("e", wizard, ge);
         brainEntranceRoom.addEntity("w", draws, ge);
         brainEntranceRoom.addEntity("nw", zombie2, ge);
-        brainEntranceRoom.addEntity("sw", energyBar, ge);
+        brainEntranceRoom.addEntity("sw", energyBar2, ge);
 
         //adding entities to locations in the brain stem room
         brainStemRoom.addEntity("n", brainStemRoomExitN, ge);
@@ -235,6 +237,7 @@ public class main {
         brainLibraryRoom.addEntity("s", bookshelf2, ge);
         brainLibraryRoom.addEntity("n", giantRat, ge);
         brainLibraryRoom.addEntity("nw", werewolf, ge);
+        brainLibraryRoom.addEntity("sw", energyBar3, ge);
 
         //adding entities to locations in the homunculus room
         homunculusRoom.addEntity("s", homunculusRoomExitS, ge);
